@@ -1,12 +1,17 @@
 # SYH_GoGoGo
 The following is the code for reproducing recently read papers and the work currently in progress.
 # Content
-1. [[Remote Sensing](#Remote_Sensing)]
-2. [[Classification](#classification)]
-3. [[Segmentation](#segmentation)]    
+1. [[Pilot Study](#PilotStudy)]
+2. [[Remote Sensing](#Remote_Sensing)]
+3. [[Classification](#classification)]
+4. [[Segmentation](#segmentation)]    
        
 -----------------------------------------------------------------------------------------------
-
+<a name="PilotStudy"></a>  
+## Pilot Study
+1. [2024 ICLR] **FeatUp: A Model-Agnostic Framework for Features at Any Resolution** [[paper]](https://openreview.net/pdf?id=GkJiNn2QDF) [[code]](https://github.com/mhamilton723/FeatUp)
+2. [2025 CVPR] **SegEarth-OV: Towards Training-Free Open-Vocabulary Segmentation for Remote Sensing Images** [[paper]](https://openaccess.thecvf.com/content/CVPR2025/papers/Li_SegEarth-OV_Towards_Training-Free_Open-Vocabulary_Segmentation_for_Remote_Sensing_Images_CVPR_2025_paper.pdf) [[code]](https://github.com/likyoo/SegEarth-OV)
+3. [2025 arXiv] **AnyUp: Universal Feature Upsampling** [[paper]](https://arxiv.org/abs/2510.12764) [[code]](https://github.com/wimmerth/anyup)
 
 <a name="Remote_Sensing"></a>  
 ## Remote Sensing
