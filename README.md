@@ -9,7 +9,7 @@ The following is the code for reproducing recently read papers and the work curr
 -----------------------------------------------------------------------------------------------
 <a name="PilotStudy"></a>  
 ## Pilot Study
-1. [2024 ICLR] **FeatUp: A Model-Agnostic Framework for Features at Any Resolution** [[paper]](https://openreview.net/pdf?id=GkJiNn2QDF) [[code]](https://github.com/mhamilton723/FeatUp)
+1. [2024 ICLR] **FeatUp: A Model-Agnostic Framework for Features at Any Resolution** [[paper]](https://openreview.net/pdf?id=GkJiNn2QDF) [[code]](https://github.com/mhamilton723/FeatUp)[[Notes](#FeatUpLearning)]   
 2. [2025 CVPR] **SegEarth-OV: Towards Training-Free Open-Vocabulary Segmentation for Remote Sensing Images** [[paper]](https://openaccess.thecvf.com/content/CVPR2025/papers/Li_SegEarth-OV_Towards_Training-Free_Open-Vocabulary_Segmentation_for_Remote_Sensing_Images_CVPR_2025_paper.pdf) [[code]](https://github.com/likyoo/SegEarth-OV)
 3. [2025 arXiv] **AnyUp: Universal Feature Upsampling** [[paper]](https://arxiv.org/abs/2510.12764) [[code]](https://github.com/wimmerth/anyup)
 
@@ -57,3 +57,42 @@ The following is the code for reproducing recently read papers and the work curr
 <a name="segmentation"></a>  
 ## Segmentation
 ...
+
+<a name="FeatUpLearning"></a>  
+## FeatUp
+**FeatUp的核心思想与方法**
+
+FeatUp的核心灵感来自NeRF的多视图一致性原理：通过观察同一图像经微小变换（如裁剪、翻转、缩放）后的多个低分辨率特征视图，学习高分辨率特征的空间一致性。具体包括以下关键设计：
+
+1. 多视图一致性损失（核心监督信号）
+对输入图像施加随机微小变换（如填充、缩放、水平翻转），得到多个“抖动”版本的低分辨率特征。FeatUp学习一个高分辨率特征图，使其经下采样后能匹配所有抖动视图的低分辨率特征，通过高斯似然损失（含自适应不确定性）监督这一过程，确保高分辨率特征的空间一致性。
+
+2. 两种下采样器（模拟模型池化行为）
+   
+为匹配不同模型的特征降采样机制，设计两种下采样器：
+
+简单下采样器：学习非负归一化模糊核，通过卷积实现特征平滑下采样，适用于固定感受野模型（如CNN）。
+
+注意力下采样器：通过1×1卷积预测显著性图，动态调整下采样核权重，适应动态感受野或对象显著性（如ViT的 patch 注意力机制）。
+3. 两种上采样器（核心创新）
+FeatUp提供两种即插即用的上采样变体，可直接替换现有特征：
+
+JBU FeatUp（通用前向传播上采样）
+基于联合双边滤波（JBU） 的改进，通过堆叠参数化JBU层，利用输入图像的高分辨率信号引导特征上采样。关键优化：
+
+设计高效CUDA内核，比标准PyTorch实现快10倍、内存占用低2个数量级；
+
+用MLP替代传统JBU的固定高斯核，学习特征与图像高频细节的关联，保留语义的同时恢复边缘信息。
+
+Implicit FeatUp（单图像隐式上采样）
+
+过拟合一个小型隐式网络到单图像特征，通过傅里叶特征编码（含颜色信息）实现任意分辨率的特征重建。优势：
+
+参数仅为显式特征存储的1/100，支持超高分辨率输出；
+
+结合总变差正则化避免噪声，适合需要精细细节的场景。
+关键贡献
+
+模型无关框架：适用于任意视觉 backbone（CNN、ViT、自监督模型如DINO等），无需修改原模型结构。
+高效JBU实现：提出首个高效CUDA版联合双边滤波，解决传统JBU计算瓶颈，支持大规模模型部署。
+即插即用提升：上采样特征可直接替换现有特征，在不重新训练下游模型的情况下提升性能（如分割mIoU、深度估计精度）。
