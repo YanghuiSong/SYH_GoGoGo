@@ -12,7 +12,7 @@ The following is the code for reproducing recently read papers and the work curr
 1. [2024 ICLR] **FeatUp: A Model-Agnostic Framework for Features at Any Resolution** [[paper]](https://openreview.net/pdf?id=GkJiNn2QDF) [[code]](https://github.com/mhamilton723/FeatUp)[[Notes](#FeatUpLearning)]   
 2. [2025 CVPR] **SegEarth-OV: Towards Training-Free Open-Vocabulary Segmentation for Remote Sensing Images** [[paper]](https://openaccess.thecvf.com/content/CVPR2025/papers/Li_SegEarth-OV_Towards_Training-Free_Open-Vocabulary_Segmentation_for_Remote_Sensing_Images_CVPR_2025_paper.pdf) [[code]](https://github.com/likyoo/SegEarth-OV)
 3. [2025 NIPS] **InstructSAM: A Training-Free Framework for Instruction-Oriented Remote Sensing Object Recognition** [[paper]](https://arxiv.org/pdf/2505.15818) [[code]](https://github.com/VoyagerXvoyagerx/InstructSAM?tab=readme-ov-file)
-4. [2025 arXiv] **AnyUp: Universal Feature Upsampling** [[paper]](https://arxiv.org/abs/2510.12764) [[code]](https://github.com/wimmerth/anyup)
+4. [2025 arXiv] **AnyUp: Universal Feature Upsampling** [[paper]](https://arxiv.org/abs/2510.12764) [[code]](https://github.com/wimmerth/anyup)[[Notes](#AnyUp)] 
 5. [2025 ICME] **LG-CD: Enhancing Language-Guided Change Detection through SAM2 Adaptation** [[paper]](https://arxiv.org/pdf/2509.21894)
 
 <a name="Remote_Sensing"></a>  
@@ -128,3 +128,54 @@ mplicit FeatUp是一种通过训练一个小型隐式网络来实现任意分辨
 高效JBU实现：提出首个高效CUDA版联合双边滤波，解决传统JBU计算瓶颈，支持大规模模型部署。
 
 即插即用提升：上采样特征可直接替换现有特征，在不重新训练下游模型的情况下提升性能（如分割mIoU、深度估计精度）。
+
+
+
+<a name="AnyUp"></a>  
+## AnyUp （Understand 10%）
+**AnyUp的核心思想与方法**
+
+这篇论文介绍了一种名为AnyUp的方法，用于对任何视觉特征在任意分辨率下进行上采样。现有的学习型上采样器需要针对每个特征提取器重新训练，而AnyUp则不需要，因此可以在不同特征类型之间通用，并且可以应用于各种下游任务。该方法采用一种推理时的特征非特定性上采样架构来提高上采样的质量，并在实验中达到了新的最佳水平。
+
+论文方法
+
+该论文提出了一种轻量级、低参数化的模型来实现特征上采样，旨在防止内存和计算瓶颈。该模型基于注意力机制，并使用自定义的特征无关卷积层（feature-agnostic convolution layer）来处理来自不同源模型的不同维度的特征图。此外，他们还通过限制注意力计算范围在像素周围的局部窗口内来简化任务，从而进一步提高了效率。
+
+方法改进
+
+与之前的注意力机制上采样模型相比，该模型的主要改进在于采用了特征无关卷积层和局部窗口注意力计算策略。这些改进使得模型更加高效且具有更好的泛化能力。
+
+解决的问题
+
+该论文解决了如何设计一种轻量级、低参数化的模型来进行特征上采样的问题。同时，通过使用特征无关卷积层和局部窗口注意力计算策略，该模型也有效地解决了全局注意力机制可能导致的过拟合和计算复杂度高的问题。
+
+论文实验
+
+本文主要介绍了作者提出的特征插值方法AnyUp，并进行了多项对比实验来验证其性能和优越性。以下是每个对比实验的详细介绍：
+
+质量比较实验（Sec. 5.1）：该实验主要与之前的工作进行比较，包括FeatuUp、LoftUp和JAFAR等方法。作者使用了COCO-Stuff、ADE20k和PASCAL VOC等数据集进行测试，并使用了像素准确率和交并比（IoU）作为评估指标。结果表明，AnyUp在语义分割任务中提供了最先进的上采样性能。
+
+功能迁移实验（Sec. 5.2）：该实验旨在验证AnyUp是否能够适应不同的功能，并且不需要重新训练。作者使用了DINOv2 ViT-S模型进行训练和测试，并在不同分辨率下对输入图像进行上采样。结果表明，AnyUp具有很好的泛化能力，在不同分辨率下的上采样效果都很好。
+
+特征空间保留实验（Sec. 5.3）：该实验旨在验证AnyUp是否能够在保持原始低分辨率特征分布的同时提高上采样的质量。作者使用了线性探针来检测特征空间的转移情况，并在深度估计和语义分割两个任务上进行了测试。结果表明，AnyUp能够很好地保留原始特征分布，并提高了上采样的质量。
+
+其他实验（Sec. 5.4）：该实验包括了其他一些对比实验，如不同分辨率下的上采样效果、数据采样方式的影响以及信息流的去除对性能的影响等。这些实验进一步证明了AnyUp的有效性和优越性。
+
+综上所述，通过多项对比实验，作者证明了AnyUp在特征插值方面具有很高的性能和优越性。
+
+
+论文总结
+
+该论文提出了一种名为AnyUp的方法，用于从任意分辨率到任意分辨率的特征上采样，并且能够应用于各种不同的特征类型和分辨率。该方法通过引入一个特征无关层来处理不同类型的特征，并使用窗口注意力和基于图像部分的损失训练模型以提高上采样质量。实验结果表明，AnyUp在各种下游任务中均取得了最先进的性能，并具有高度通用性和泛化能力。
+
+
+该论文的主要贡献在于提出了一种通用的特征上采样方法，可以应用于任何类型的特征和分辨率。其主要创新点包括：
+
+特征无关层：该层可以处理任何类型的特征，而不需要特定于某种特征的处理方式。
+
+窗口注意力：该方法可以在保持输入特征空间的同时有效地训练模型。
+
+基于图像部分的损失：该损失函数可以使模型更加关注重要的区域，从而提高上采样的质量。
+
+
+该论文提出的AnyUp方法为特征上采样提供了一个新的解决方案，但仍然存在一些挑战需要解决。例如，如何更好地利用更大的数据集和更复杂的模型来进一步提高上采样的质量。此外，该方法也可以扩展到其他计算机视觉任务中，如图像分割和目标检测等。因此，在未来的研究中，我们将继续探索这些方向并改进现有的方法。
