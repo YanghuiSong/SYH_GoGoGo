@@ -141,16 +141,16 @@ mplicit FeatUp是一种通过训练一个小型隐式网络来实现任意分辨
 [**基于已经开源的AnyUp初体验**](https://github.com/wimmerth/anyup)
 
 **原图**
-![FeatUp](https://raw.githubusercontent.com/YanghuiSong/SYH_GoGoGo/main/image1.png)
+![image](https://raw.githubusercontent.com/YanghuiSong/SYH_GoGoGo/main/image1.png)
 
 [**DINOV2**](https://huggingface.co/facebook/dinov2-base)
-![FeatUp](https://raw.githubusercontent.com/YanghuiSong/SYH_GoGoGo/main/dinov2.png)
+![dinov2](https://raw.githubusercontent.com/YanghuiSong/SYH_GoGoGo/main/dinov2.png)
 
 [**DINO**](https://huggingface.co/facebook/dino-vitb16)
-![FeatUp](https://raw.githubusercontent.com/YanghuiSong/SYH_GoGoGo/main/dino.png)
+![dino](https://raw.githubusercontent.com/YanghuiSong/SYH_GoGoGo/main/dino.png)
 
 [**CLIP**](https://huggingface.co/openai/clip-vit-base-patch32)
-![FeatUp](https://raw.githubusercontent.com/YanghuiSong/SYH_GoGoGo/main/clip.png)
+![clip](https://raw.githubusercontent.com/YanghuiSong/SYH_GoGoGo/main/clip.png)
 这篇论文介绍了一种名为AnyUp的方法，用于对任何视觉特征在任意分辨率下进行上采样。现有的学习型上采样器需要针对每个特征提取器重新训练，而AnyUp则不需要，因此可以在不同特征类型之间通用，并且可以应用于各种下游任务。该方法采用一种推理时的特征非特定性上采样架构来提高上采样的质量，并在实验中达到了新的最佳水平。
 
 与FeatUp相比，AnyUp的优点是可以应用于多种不同的特征类型，并且可以用于各种下游任务，具有较高的灵活性和可扩展性。然而，AnyUp需要手动调整超参数以获得最佳性能，这可能比较困难。另外，由于AnyUp是一个通用的上采样方法，因此其性能可能会受到特定任务的影响。
