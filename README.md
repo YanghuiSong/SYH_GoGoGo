@@ -4,7 +4,7 @@ The following is the code for reproducing recently read papers and the work curr
 1. [[Pilot Study](#PilotStudy)]
 2. [[Remote Sensing](#Remote_Sensing)]
 3. [[Classification](#classification)]
-4. [[Segmentation](#segmentation)]    
+4. [[Segmentation](#segmentation)]
        
 -----------------------------------------------------------------------------------------------
 <a name="PilotStudy"></a>  
@@ -46,7 +46,7 @@ The following is the code for reproducing recently read papers and the work curr
 27. [2025 Arxiv] **ATRNet-STAR: A Large Dataset and Benchmark Towards Remote Sensing Object Recognition in the Wild** [[paper]](https://arxiv.org/abs/2501.13354) [[code]](https://github.com/waterdisappear/ATRNet-STAR)
 28. [2025 Arxiv] **RSKT-Seg: Exploring Efficient Open-Vocabulary Segmentation in the Remote Sensing** [[paper]](https://arxiv.org/pdf/2509.12040) [[code]](https://github.com/LiBingyu01/RSKT-Seg)
 29. [2025 ISPRS]  **AdaptVFMs-RSCD: Advancing Remote Sensing Change Detection from binary to semantic with SAM and CLIP** [[paper]](https://doi.org/10.1016/j.isprsjprs.2025.09.010) [[data]](https://github.com/Jiang-CHD-YunNan/RS-VFMs-Fine-tuning-Dataset)
-30. **PeftCD: Leveraging Vision Foundation Models with Parameter-Efficient Fine-Tuning for Remote Sensing Change Detection** [[paper]](https://arxiv.org/pdf/2509.09572) [[code]](https://github.com/dyzy41/PeftCD)
+30. [2025 Arxiv]**PeftCD: Leveraging Vision Foundation Models with Parameter-Efficient Fine-Tuning for Remote Sensing Change Detection** [[paper]](https://arxiv.org/pdf/2509.09572) [[code]](https://github.com/dyzy41/PeftCD)
 31. [2025 Arxiv] **AlignCLIP: Self-Guided Alignment for Remote Sensing Open-Vocabulary Semantic Segmentation** [[paper]](https://openreview.net/forum?id=hpD3tn7Xbp) [[code]](https://openreview.net/attachment?id=hpD3tn7Xbp&name=supplementary_material)
 32. [2025 Arxiv] **Few-Shot Adaptation Benchmark for Remote Sensing Vision-Language Models** [[paper]](https://arxiv.org/pdf/2510.07135) [[code]](https://github.com/elkhouryk/fewshot_RSVLMs)
 33. [2025 RSE] **Strategic sampling for training a semantic segmentation model in operational mapping: Case studies on cropland parcel extraction** [[paper]](https://doi.org/10.1016/j.rse.2025.115034) [[data]](https://doi.org/10.5281/zenodo.16595511) [[code]](https://github.com/Remote-Sensing-of-Land-Resource-Lab/Training-Sample-Selection)
@@ -54,6 +54,9 @@ The following is the code for reproducing recently read papers and the work curr
 35. [2025 TIP] **SARATR-X: Towards Building A Foundation Model for SAR Target Recognition** [[paper]](https://ieeexplore.ieee.org/document/10856784) [[code]](https://github.com/waterdisappear/SARATR-X)
 36. [2025 TIP] **HSLabeling: Towards Efficient Labeling for Large-scale Remote Sensing Image Segmentation with Hybrid Sparse Labeling** [[paper]](https://ieeexplore.ieee.org/document/10829548) [[data]](https://drive.google.com/drive/folders/1CiYzJyBn1rV-xsrsYQ6o2HDQjdfnadHl) [[code]](https://github.com/linjiaxing99/HSLabeling)
 37. [2025 CVM] **Remote sensing tuning: A survey** [[paper]](https://ieeexplore.ieee.org/document/11119145) [[code]](https://github.com/DongshuoYin/Remote-Sensing-Tuning-A-Survey/tree/main)
+38. [2025 ISPRS]**Domain generalization for semantic segmentation of remote sensing images via vision foundation model fine-tuning**[[paper]](https://www.sciencedirect.com/science/article/pii/S0924271625003569)[[code]](https://github.com/mmmll23/GeoSA-BaSA)
+39. [2025 ISPRS]**Meta Feature Disentanglement under continuous-valued domain modeling for generalizable remote sensing image segmentation on unseen domains**[[paper]](https://www.sciencedirect.com/science/article/pii/S0924271625003879)[[code]](https://github.com/LCB1970/MetaFD)
+
 
 <a name="classification"></a>  
 ## Classification
@@ -65,7 +68,7 @@ The following is the code for reproducing recently read papers and the work curr
 <a name="FeatUpLearning"></a>  
 ## FeatUp （Understand 40%→60%）
 **FeatUp的核心思想与方法**
-
+![FeatUp](https://raw.githubusercontent.com/YanghuiSong/SYH_GoGoGo/main/FeatUp.png)
 FeatUp的核心灵感来自NeRF的多视图一致性原理：通过观察同一图像经微小变换（如裁剪、翻转、缩放）后的多个低分辨率特征视图，学习高分辨率特征的空间一致性。
 
 本文介绍了一个名为 FEATUP 的框架，它可以帮助深度学习模型恢复低分辨率特征的空间信息，从而提高模型在一些需要高分辨率特征的任务（如语义分割和深度估计）上的性能表现。这个框架有两个版本，一个是通过一次前向传播来引导特征，另一个则是通过拟合一个隐含模型来重建任意分辨率的特征。这两个方法都使用了多视一致性损失，并且可以直接替换到现有的应用程序中，而不需要重新训练模型。
@@ -132,10 +135,24 @@ mplicit FeatUp是一种通过训练一个小型隐式网络来实现任意分辨
 
 
 <a name="AnyUp"></a>  
-## AnyUp （Understand 10%）
+## AnyUp （Understand 60%）
 **AnyUp的核心思想与方法**
 
 这篇论文介绍了一种名为AnyUp的方法，用于对任何视觉特征在任意分辨率下进行上采样。现有的学习型上采样器需要针对每个特征提取器重新训练，而AnyUp则不需要，因此可以在不同特征类型之间通用，并且可以应用于各种下游任务。该方法采用一种推理时的特征非特定性上采样架构来提高上采样的质量，并在实验中达到了新的最佳水平。
+
+与FeatUp相比，AnyUp的优点是可以应用于多种不同的特征类型，并且可以用于各种下游任务，具有较高的灵活性和可扩展性。然而，AnyUp需要手动调整超参数以获得最佳性能，这可能比较困难。另外，由于AnyUp是一个通用的上采样方法，因此其性能可能会受到特定任务的影响。
+
+相比之下，FeatUp是一种基于深度神经网络的图像上采样方法，可以通过在低分辨率图像上进行训练来生成高分辨率图像。FeatUp的优点是在某些情况下可以获得更好的图像质量，特别是在对细节要求较高的任务中。然而，FeatUp需要大量的计算资源和时间来进行训练，并且需要针对每个任务进行微调，因此其适用范围相对较窄。
+
+总的来说，AnyUp和FeatUp都是有效的图像上采样方法，但它们的适用场景略有不同。如果需要在多个任务之间共享模型，则AnyUp可能是更好的选择；如果需要在特定任务中获得更好的图像质量，则FeatUp可能更适合。
+
+AnyUp和FeatUp是两种不同的图像上采样方法，它们的原理有所不同。
+
+AnyUp使用了一种基于卷积神经网络的方法，通过将低分辨率图像作为输入，在卷积层中逐步增加特征图的空间维度，最终得到高分辨率图像作为输出。具体来说，AnyUp使用了类似于图像放大（super-resolution）的技术，通过学习低分辨率图像到高分辨率图像之间的映射关系，从而实现图像上采样的目的。AnyUp还可以应用于多种不同的特征类型，并且可以用于各种下游任务，具有较高的灵活性和可扩展性。
+
+FeatUp则是一种基于深度神经网络的图像上采样方法，它通过在低分辨率图像上进行训练来生成高分辨率图像。FeatUp使用了一个类似于编码器-解码器（encoder-decoder）的结构，其中编码器部分用于提取低分辨率图像中的特征，而解码器部分则用于将这些特征映射回高分辨率图像。FeatUp的优点是在某些情况下可以获得更好的图像质量，特别是在对细节要求较高的任务中。然而，FeatUp需要大量的计算资源和时间来进行训练，并且需要针对每个任务进行微调，因此其适用范围相对较小。
+
+总的来说，AnyUp和FeatUp都是有效的图像上采样方法，但它们的原理和应用场景略有不同。
 
 论文方法
 
@@ -179,3 +196,15 @@ mplicit FeatUp是一种通过训练一个小型隐式网络来实现任意分辨
 
 
 该论文提出的AnyUp方法为特征上采样提供了一个新的解决方案，但仍然存在一些挑战需要解决。例如，如何更好地利用更大的数据集和更复杂的模型来进一步提高上采样的质量。此外，该方法也可以扩展到其他计算机视觉任务中，如图像分割和目标检测等。因此，在未来的研究中，我们将继续探索这些方向并改进现有的方法。
+
+<a name="AnyUp"></a>  
+## 上采样在遥感图像中的应用
+**AnyUp和FeatUp这两种图像上采样方法都可以应用于遥感图像处理领域，包括遥感图像分割、检测、分类以及变化检测等任务。**
+
+**对于遥感图像分割任务，这两种方法可以帮助提高分割精度和效率，特别是当原始图像分辨率较低或者存在噪声和遮挡等情况时。例如，可以通过将低分辨率的遥感图像上采样为高分辨率图像，然后利用深度学习模型进行像素级别的分类或语义分割，以获得更准确的结果。**
+
+**对于遥感图像检测和分类任务，这两种方法也可以帮助提高识别率和鲁棒性。例如，可以通过将低分辨率的遥感图像上采样为高分辨率图像，然后利用深度学习模型进行目标检测或分类，以获得更高的准确性和可靠性。**
+
+**对于遥感图像变化检测任务，这两种方法可以帮助捕捉地表的变化情况。例如，可以通过将历史遥感图像与当前遥感图像进行比较，利用图像上采样技术增强图像细节，然后利用深度学习模型进行变化检测，以发现地表的变化和演变趋势。**
+
+**综上所述，AnyUp和FeatUp这两种图像上采样方法在遥感图像处理领域有着广泛的应用前景，可以帮助提高遥感图像处理的效率和准确性。**
