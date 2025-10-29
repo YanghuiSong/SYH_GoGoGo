@@ -10,7 +10,7 @@ The following is the code for reproducing recently read papers and the work curr
 <a name="PilotStudy"></a>  
 ## Pilot Study
 1. [2024 ICLR] **FeatUp: A Model-Agnostic Framework for Features at Any Resolution** [[paper]](https://openreview.net/pdf?id=GkJiNn2QDF) [[code]](https://github.com/mhamilton723/FeatUp)[[Notes](#FeatUpLearning)]   
-2. [2025 CVPR] **SegEarth-OV: Towards Training-Free Open-Vocabulary Segmentation for Remote Sensing Images** [[paper]](https://openaccess.thecvf.com/content/CVPR2025/papers/Li_SegEarth-OV_Towards_Training-Free_Open-Vocabulary_Segmentation_for_Remote_Sensing_Images_CVPR_2025_paper.pdf) [[code]](https://github.com/likyoo/SegEarth-OV)
+2. [2025 CVPR] **SegEarth-OV: Towards Training-Free Open-Vocabulary Segmentation for Remote Sensing Images** [[paper]](https://openaccess.thecvf.com/content/CVPR2025/papers/Li_SegEarth-OV_Towards_Training-Free_Open-Vocabulary_Segmentation_for_Remote_Sensing_Images_CVPR_2025_paper.pdf) [[code]](https://github.com/likyoo/SegEarth-OV)[[Notes](#SegEarth)] 
 3. [2025 NIPS] **InstructSAM: A Training-Free Framework for Instruction-Oriented Remote Sensing Object Recognition** [[paper]](https://arxiv.org/pdf/2505.15818) [[code]](https://github.com/VoyagerXvoyagerx/InstructSAM?tab=readme-ov-file)
 4. [2025 arXiv] **AnyUp: Universal Feature Upsampling** [[paper]](https://arxiv.org/abs/2510.12764) [[code]](https://github.com/wimmerth/anyup)[[Notes](#AnyUp)] 
 5. [2025 ICME] **LG-CD: Enhancing Language-Guided Change Detection through SAM2 Adaptation** [[paper]](https://arxiv.org/pdf/2509.21894)
@@ -210,7 +210,7 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 
 该论文提出的AnyUp方法为特征上采样提供了一个新的解决方案，但仍然存在一些挑战需要解决。例如，如何更好地利用更大的数据集和更复杂的模型来进一步提高上采样的质量。此外，该方法也可以扩展到其他计算机视觉任务中，如图像分割和目标检测等。因此，在未来的研究中，我们将继续探索这些方向并改进现有的方法。
 
-<a name="AnyUp"></a>  
+<a name="上采样与遥感"></a>  
 ## 上采样在遥感图像中的应用
 **AnyUp和FeatUp这两种图像上采样方法都可以应用于遥感图像处理领域，包括遥感图像分割、检测、分类以及变化检测等任务。**
 
@@ -221,3 +221,74 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 **对于遥感图像变化检测任务，这两种方法可以帮助捕捉地表的变化情况。例如，可以通过将历史遥感图像与当前遥感图像进行比较，利用图像上采样技术增强图像细节，然后利用深度学习模型进行变化检测，以发现地表的变化和演变趋势。**
 
 **综上所述，AnyUp和FeatUp这两种图像上采样方法在遥感图像处理领域有着广泛的应用前景，可以帮助提高遥感图像处理的效率和准确性。**
+
+<a name="SegEarth"></a>  
+## SegEarth-OV （Understand 70%）
+**学习笔记**
+
+**方法描述**
+
+该论文提出了一个名为SimFeatUp的方法，用于在远程感知图像上进行高质量的超分辨率重建。该方法基于CLIP模型中的图像编码器，并使用FeatuUp模型进行学习无监督的超分辨率重建。具体来说，该方法采用了以下三个关键步骤：
+
+● 使用CLIP模型中图像编码器的最后一层作为输入，而不是传统的最后一层输出。
+
+● 在FeatuUp模型中引入了内容保留网络（CRN），以确保重构的高分辨率图像与原始图像保持一致。
+
+● 修改了FeatuUp模型中的卷积核大小，使其能够更好地适应远程感知图像的特点。
+
+**方法改进**
+
+与传统的FeatuUp模型相比，SimFeatUp模型具有以下两个主要改进：
+
+● 更好的图像内容保留：通过添加内容保留网络，SimFeatUp模型可以确保重构的高分辨率图像与原始图像保持一致，从而提高了图像的质量。
+
+● 更好的超分辨率重建效果：通过修改卷积核大小，SimFeatUp模型可以更好地适应远程感知图像的特点，从而实现了更好的超分辨率重建效果。
+
+**解决的问题**
+
+SimFeatUp方法的主要目的是为了解决远程感知图像上的高质量超分辨率重建问题。传统的FeatuUp模型虽然也可以实现超分辨率重建，但是在处理远程感知图像时存在一些局限性，例如图像内容保留不足、重建效果不佳等问题。因此，SimFeatUp方法通过对FeatuUp模型进行改进，解决了这些问题，实现了更好的超分辨率重建效果。
+
+
+**论文实验**
+
+本文主要介绍了作者在远程遥感图像场景下的多类语义分割和单类提取任务中所提出的SegEarth-OV方法，并与现有的自然图像OVSS模型进行了比较实验。具体来说，本文采用了以下对比实验：
+
+● 对比了SegEarth-OV与其他5种训练免费的OVSS模型（包括vanilla CLIP、MaskCLIP、SCLIP、GEM和ClearCLIP）在8个远程遥感图像语义分割数据集上的表现，结果表明SegEarth-OV在所有数据集上都取得了最佳性能，相比其他方法平均提高了5.8%的mIoU分数。
+
+● 在建筑提取任务中，将SegEarth-OV与其他4种训练免费的OVSS模型（包括CHN6-CUG、DeepGlobe、Massachusetts和SpaceNet）进行了比较实验，在四个数据集中SegEarth-OV的表现优于其他方法。
+
+● 在道路提取任务中，将SegEarth-OV与其他4种训练免费的OVSS模型（包括iSAID、Potsdam、UAVid和VDD）进行了比较实验，但该任务的整体表现不如其他任务，可能是因为道路形状特殊或者标签生成方式不够精确等原因。
+
+● 在洪水检测任务中，将SegEarth-OV与其他4种训练免费的OVSS模型（包括WHUAerial、WHUSat.II、Inria和xBED）进行了比较实验，结果表明SegEarth-OV在这项任务中的表现最好，提高了15.3%的IoU分数。
+
+此外，文章还对SegEarth-OV的组成部分进行了详细的分析和评估，包括插件式模块SimFeatUp和全局偏差缓解等。同时，作者还对SimFeatUp进行了进一步的测试，将其应用于三个自然图像数据集（PASCAL Context、COCOStuff和Cityscapes），证明了其在不同领域的通用性。最后，作者还评估了几种基于遥感数据的CLIP模型在遥感图像上的表现，发现SegEarth-OV的效果优于这些模型。
+
+**论文总结**
+
+文章优点
+
+本文提出了一种针对遥感图像的无监督视觉语言模型（OVSS）方法——SegEarth-OV。该方法通过使用SimFeatUp特征上采样器和全局偏移消除技术来提高遥感图像上的性能，并在17个遥感数据集上实现了显著的改进。此外，SegEarth-OV是第一个探索训练免费OVSS方法的遥感场景，证明了即使预训练在自然图像上的视觉语言模型也可以用于地球感知任务。
+
+方法创新点
+
+本文提出了两个关键思想：SimFeatUp和全局偏移消除。其中，SimFeatUp是一种通用的特征上采样器，可以在几个未标记的图像上训练以重建内容不变的高分辨率特征。全局偏移消除则是一种简单而直接的方法，可以通过执行局部和全局令牌之间的减法操作来有效地减少CLIP中的全局属性对局部特征的影响。
+
+**一些细节问题**
+
+CLS是CLIP模型中的特殊token，它在训练阶段被优化以包含整个图像的全局信息，并在推断阶段用于计算文本嵌入与图像特征之间的相似度。在本文中，CLS的作用是在训练阶段对整个图像进行优化，但在推断阶段却只关注局部区域，导致了“全局偏倚”的问题。因此，本文提出了一种简单的减法操作来消除这种全局偏倚。
+
+在本文中，他们通过观察到patch tokens对[CLS] token的异常响应来提出了一种简单的方法来减轻全局偏差。具体来说，他们在执行任何任务之前，从输入图像中提取了所有可能的局部区域，并计算每个区域的[CLS] token表示。然后，他们使用这些局部[CLS] token表示来减去全局[CLS] token表示，从而得到一个局部偏移量。最后，他们将这个局部偏移量应用于所有的patch tokens，以减轻全局偏差的影响。这种方法可以在训练过程中自动学习，不需要手动调整超参数或设计复杂的网络结构。
+
+自注意力机制（Self-Attention）是一种用于序列数据的神经网络模型，它能够对输入序列中的每个元素与其他所有元素进行交互，并根据这些交互结果计算出每个元素的重要性权重。自注意力机制在自然语言处理、语音识别等领域有广泛应用。
+
+而自自注意力机制（Self-Self Attention）是自注意力机制的一种变体，它是在同一层中同时应用了两次自注意力机制，即先通过一次自注意力机制计算出每个元素的重要性和其与其他元素的关系，然后再将得到的结果作为输入再次进行自注意力机制计算，以此来增强模型对输入序列的理解能力。自自注意力机制已经在图像分类、目标检测等计算机视觉任务中取得了很好的效果。
+
+在CLIP模型中，每个局部视觉标记都会关注整个图像中的许多位置，并且它们之间的注意力图案通常是相似的。这意味着在CLIP模型中，一些全局属性会附着在局部标记上。但在远程感测等应用中，这些全局属性可能会影响模型对局部特征变化的准确性，从而降低模型性能。这是因为当模型在处理具有复杂结构的对象时，例如建筑物或道路，它可能会受到全局属性的影响，导致预测结果不准确。因此，需要解决这个全局属性带来的问题，以提高模型在远程感测等领域的表现。
+
+当模型在处理具有复杂结构的对象时，例如建筑物或道路，它可能会受到全局属性的影响，导致预测结果不准确。这是因为全局属性可能会影响模型对局部特征变化的准确性，从而降低模型性能。例如，在处理具有复杂结构的建筑物时，模型可能会将某些区域错误地识别为其他类别，因为其受到全局属性的影响而无法正确区分不同的局部特征。
+
+
+减去全局偏置提升性能的原因
+
+● 减少干扰：通过减去全局偏差，可以减少全局信息对局部特征的干扰，使得局部图像块标记更专注于自身的局部特征信息。这样在后续基于局部特征的任务（如目标检测、图像分割等）中，模型能够更好地捕捉和利用真正的局部细节，而不是被全局信息所主导。
+● 增强特征区分度：去除全局偏差后，不同图像块之间的特征差异可能会更加明显，有助于提高模型对不同局部区域的区分能力，进而提升整体性能。例如，在目标检测任务中，能够更准确地定位和识别不同的目标物体，而不会因为全局信息的干扰导致误判或漏判。
