@@ -224,7 +224,9 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 
 <a name="SegEarth"></a>  
 ## SegEarth-OV （Understand 70%）
-**学习笔记**
+**框架流程**
+![SegEarth-OV框架流程图](https://raw.githubusercontent.com/YanghuiSong/SYH_GoGoGo/main/UploadImage/graphviz%20-%202025-10-29T222844.294.png)
+
 
 **方法描述**
 
