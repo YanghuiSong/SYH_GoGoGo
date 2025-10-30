@@ -27,7 +27,7 @@ The following is the code for reproducing recently read papers and the work curr
 8. [2025 ICCV] **When Large Vision-Language Model Meets Large Remote Sensing Imagery: Coarse-to-Fine Text-Guided Token Pruning.** [[paper]](https://arXiv.org/pdf/2503.07588) [[code]](https://github.com/VisionXLab/LRS-VQA)
 9. [2025 ICCV] **SMARTIES: Spectrum-Aware Multi-Sensor Auto-Encoder for Remote Sensing Images.** [[paper]](https://openaccess.thecvf.com/content/ICCV2025/papers/Sumbul_SMARTIES_Spectrum-Aware_Multi-Sensor_Auto-Encoder_for_Remote_Sensing_Images_ICCV_2025_paper.pdf) [[code]](https://github.com/gsumbul/SMARTIES)
 10. [2025 ICCV] **Continuous Remote Sensing Image Super-Resolution via Neural Operator Diffusion** [[paper]](https://openaccess.thecvf.com/content/ICCV2025/papers/Xu_NeurOp-Diff_Continuous_Remote_Sensing_Image_Super-Resolution_via_Neural_Operator_Diffusion_ICCV_2025_paper.pdf) [[code]](https://github.com/zerono000/NeurOp-Diff)
-11. [2025 ICCV] **HoliTracer: Holistic Vectorization of Geographic Objects from Large-Size Remote Sensing Imagery.** [[paper]](https://openaccess.thecvf.com/content/ICCV2025/papers/Wang_HoliTracer_Holistic_Vectorization_of_Geographic_Objects_from_Large-Size_Remote_Sensing_ICCV_2025_paper.pdf) [[code]](https://github.com/vvangfaye/HoliTracer)
+11. [2025 ICCV] **HoliTracer: Holistic Vectorization of Geographic Objects from Large-Size Remote Sensing Imagery.** [[paper]](https://openaccess.thecvf.com/content/ICCV2025/papers/Wang_HoliTracer_Holistic_Vectorization_of_Geographic_Objects_from_Large-Size_Remote_Sensing_ICCV_2025_paper.pdf) [[code]](https://github.com/vvangfaye/HoliTracer)[[Note]]
 12. [2025 arXiv] **SAR-KnowLIP: Towards Multimodal Foundation Models for Remote Sensing.** [[paper]](https://arxiv.org/pdf/2509.23927) [[code]](https://github.com/yangyifremad/SARKnowLIP)
 13. [2025 AAAI] **ZoRI: Towards discriminative zero-shot remote sensing instance segmentation.** [[paper]](https://arXiv.org/abs/2412.12798) [[code]](https://github.com/HuangShiqi128/ZoRI)
 14. [2024 NIPS] **Segment Any Change.** [[paper]](https://proceedings.NIPS.cc/paper_files/paper/2024/file/9415416201aa201902d1743c7e65787b-Paper-Conference.pdf) [[code]](https://github.com/Z-Zheng/pytorch-change-models)
@@ -293,4 +293,120 @@ CLS是CLIP模型中的特殊token，它在训练阶段被优化以包含整个�
 减去全局偏置提升性能的原因
 
 ● 减少干扰：通过减去全局偏差，可以减少全局信息对局部特征的干扰，使得局部图像块标记更专注于自身的局部特征信息。这样在后续基于局部特征的任务（如目标检测、图像分割等）中，模型能够更好地捕捉和利用真正的局部细节，而不是被全局信息所主导。
+
 ● 增强特征区分度：去除全局偏差后，不同图像块之间的特征差异可能会更加明显，有助于提高模型对不同局部区域的区分能力，进而提升整体性能。例如，在目标检测任务中，能够更准确地定位和识别不同的目标物体，而不会因为全局信息的干扰导致误判或漏判。
+
+
+<a name="Hi"></a>
+## HoliTracer
+该论文提出了HoliTracer框架，旨在解决大尺寸遥感影像（RSI）地理对象矢量化的核心挑战。以下是其核心创新与技术路径的深度解析：
+1. 问题背景与挑战
+
+当前主流方法受限于分块处理策略（512×512像素输入），导致：
+
+上下文丢失：无法区分需全局语义的相似地物（如建筑与停车场）
+几何碎片化：分块边界处矢量结果断裂，破坏拓扑完整性
+多类别尺度差异：连续水体与分散建筑等对象需不同密度顶点描述，传统方法缺乏统一处理能力
+
+2. 方法创新
+
+HoliTracer采用三阶段全流程架构（图2）：
+
+2.1 上下文注意力网络（CAN）
+
+多尺度金字塔构建：通过下采样率{1,3,6}或{1,5,10}生成多尺度影像金字塔，保留局部细节与全局语义
+跨尺度特征融合：采用Swin-L编码器提取特征，通过注意力机制融合底层特征与高层上下文信息（公式1-2）
+分割优化：使用UperNet解码器实现像素级预测，交叉熵损失监督（公式3）
+
+2.2 掩膜轮廓重构器（MCR）
+
+轮廓简化与重建：基于TC89-KCOS算法提取初始轮廓点，通过Douglas-Peucker算法简化后按固定间距插值，生成规则多边形
+双向匹配机制：训练阶段对齐简化轮廓与真实多边形，建立点对点对应关系以指导顶点分类
+
+2.3 多边形序列追踪器（PST）
+
+迭代坐标修正：基于Transformer的偏移回归器，通过Smooth L1损失优化顶点位置（公式5,7）
+角度特征增强：计算相邻点角度特征（公式6），结合BCE损失与角度惩罚损失（公式8-9），提升顶点检测鲁棒性
+
+
+3. 实验验证
+
+在**建筑（WHU）、水体（GLH）、道路（VHR）**三大数据集上验证：
+
+矢量指标显著提升：在PoLiS（几何相似度）与CIoU（轮廓交并比）指标上分别提升40-60%
+多尺度适应能力：大尺寸实例（APl指标）性能提升18.7%（建筑）、72.29%（水体）
+分割质量改善：IoU达91.6%（建筑）、85.68%（水体），超越现有分割方法5-15%
+
+
+4. 工程贡献
+
+首个大尺寸RSI矢量化框架：支持单张10,000×10,000像素以上影像直接处理
+开源数据集VHR-road：包含208张12,500×12,500像素道路影像，支持路宽属性提取
+代码开源：GitHub仓库提供完整实现（github.com/vvangfaye/HoliTracer）
+
+
+技术突破点
+
+局部-全局感知范式：通过多尺度金字塔实现跨层级上下文建模，解决分块策略的语义割裂问题
+几何驱动矢量化：将角度特征引入顶点检测，突破传统依赖图像特征的局限性
+端到端训练兼容性：MCR与PST模块支持梯度反向传播，实现分割-矢量化联合优化
+
+HoliTracer的训练流程采用多阶段联合优化策略，结合分割预训练与矢量化微调，具体技术实现如下：
+
+1. 数据准备与预处理
+
+多尺度金字塔构建：对输入影像进行不同下采样率处理（建筑：{1,3,6}，水体/道路：{1,5,10}）
+
+数据划分：WHU-building：320训练/40验证/40测试（10,000×10,000像素）
+
+GLH-water：200训练/25验证/25测试（12,800×12,800像素）
+
+VHR-road：166训练/21验证/21测试（12,500×12,500像素）
+
+2. 模型训练阶段
+
+阶段一：CAN分割网络训练
+
+编码器配置：采用Swin-L架构，仅训练底层编码器（其他层参数冻结）
+
+特征融合：通过公式(1)-(2)进行跨尺度注意力融合，使用UperNet解码器
+
+损失函数：交叉熵损失监督像素级分类（公式3）
+
+训练策略：初始学习率1e-4，AdamW优化器，batch size=8
+
+阶段二：MCR-PST矢量化联合训练
+
+数据流：CAN输出分割结果 → TC89-KCOS提取初始轮廓点
+
+Douglas-Peucker算法简化轮廓（ε=5） → 固定间距插值（建筑l=25，其他l=50）
+
+双向匹配生成顶点标签 → PST模块输入
+
+PST训练要点：坐标修正：Smooth L1损失监督偏移量（公式7）
+
+顶点分类：BCE损失优化顶点概率（公式8）
+
+角度约束：θthreshold=135°的角度惩罚损失（公式9）
+
+联合损失：λ1Loff + λ2Lvert + λ3Langle（λ1=λ2=λ3=1）
+
+训练策略：固定CAN编码器参数，学习率1e-5，迭代3次偏移回归
+
+3. 关键训练技术
+
+梯度传播机制：MCR的轮廓重建过程通过双向匹配实现可微分路径，支持端到端训练
+
+多任务平衡：通过损失权重λ控制坐标精度（λ1）、顶点分类（λ2）、几何规则（λ3）的优化强度
+
+硬件配置：8×NVIDIA A100 GPU，混合精度训练（FP16）
+
+4. 性能优化策略
+
+注意力热力图分析：可视化CAN多尺度注意力分布，验证局部-全局信息融合效果
+
+迭代终止条件：PST偏移量均方误差<0.1像素或达到3次迭代
+
+类别自适应参数：针对不同地物类型动态调整插值间距l，平衡细节保留与计算效率
+
+实验显示，完整训练周期约需72小时，在WHU-building数据集上达到91.6% IoU，代码已开源于GitHub。
