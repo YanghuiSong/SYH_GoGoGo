@@ -12,14 +12,15 @@ The following is the code for reproducing recently read papers and the work curr
 -----------------------------------------------------------------------------------------------
 <a name="PilotStudy"></a>  
 ## Pilot Study
-1. [2024 ICLR] **FeatUp: A Model-Agnostic Framework for Features at Any Resolution** [[paper]](https://openreview.net/pdf?id=GkJiNn2QDF) [[code]](https://github.com/mhamilton723/FeatUp)[[Notes](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/FeatUp.md)]
+1. [2024 ICLR] **FeatUp: A Model-Agnostic Framework for Features at Any Resolution** [[paper]](https://openreview.net/pdf?id=GkJiNn2QDF) [[code]](https://github.com/mhamilton723/FeatUp)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/FeatUp.md)
 2. [2024 CVPR] **EMCAD: Efficient Multi-scale Convolutional Attention Decoding for Medical Image Segmentation**[[paper]](https://openaccess.thecvf.com/content/CVPR2024/papers/Rahman_EMCAD_Efficient_Multi-scale_Convolutional_Attention_Decoding_for_Medical_Image_Segmentation_CVPR_2024_paper.pdf)[[code]](https://github.com/SLDGroup/EMCAD)   
-3. [2025 CVPR] **SegEarth-OV: Towards Training-Free Open-Vocabulary Segmentation for Remote Sensing Images** [[paper]](https://openaccess.thecvf.com/content/CVPR2025/papers/Li_SegEarth-OV_Towards_Training-Free_Open-Vocabulary_Segmentation_for_Remote_Sensing_Images_CVPR_2025_paper.pdf) [[code]](https://github.com/likyoo/SegEarth-OV)[[Notes](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SegEarth.md)] 
+3. [2025 CVPR] **SegEarth-OV: Towards Training-Free Open-Vocabulary Segmentation for Remote Sensing Images** [[paper]](https://openaccess.thecvf.com/content/CVPR2025/papers/Li_SegEarth-OV_Towards_Training-Free_Open-Vocabulary_Segmentation_for_Remote_Sensing_Images_CVPR_2025_paper.pdf) [[code]](https://github.com/likyoo/SegEarth-OV)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SegEarth.md)
 4. [2025 NIPS] **InstructSAM: A Training-Free Framework for Instruction-Oriented Remote Sensing Object Recognition** [[paper]](https://arxiv.org/pdf/2505.15818) [[code]](https://github.com/VoyagerXvoyagerx/InstructSAM?tab=readme-ov-file)
-5. [2025 arXiv] **AnyUp: Universal Feature Upsampling** [[paper]](https://arxiv.org/abs/2510.12764) [[code]](https://github.com/wimmerth/anyup)[[Notes](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/AnyUp.md)] 
+5. [2025 arXiv] **AnyUp: Universal Feature Upsampling** [[paper]](https://arxiv.org/abs/2510.12764) [[code]](https://github.com/wimmerth/anyup)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/AnyUp.md)
 6. [2025 ICME] **LG-CD: Enhancing Language-Guided Change Detection through SAM2 Adaptation** [[paper]](https://arxiv.org/pdf/2509.21894)
 7. [2025 ICCV] **LoftUp: Learning a Coordinate-Based Feature Upsampler for Vision Foundation Models**[[paper]](https://openaccess.thecvf.com/content/ICCV2025/papers/Huang_LoftUp_Learning_a_Coordinate-Based_Feature_Upsampler_for_Vision_Foundation_Models_ICCV_2025_paper.pdf)
 8. [2025 arXiv] **Benchmarking Feature Upsampling Methods for Vision Foundation Models using Interactive Segmentation(复现了LoftUp)** [[paper]](https://arxiv.org/pdf/2505.02075)[[code]](https://github.com/havrylovv/iSegProbe)
+9. [2025 ICML] **FeatSharp: Your Vision Model Features, Sharper**[[paper]](https://arxiv.org/pdf/2502.16025)[[code]](https://github.com/NVlabs/FeatSharp)
 
 <a name="上采样与遥感"></a>  
 ## 上采样在遥感图像中的应用
@@ -44,11 +45,12 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 
 <a name="OVSS"></a>  
 ## OVSS
-1. [2025 CVPR] **Distilling Spectral Graph for Object-Context Aware Open-Vocabulary Semantic Segmentation** [[paper]](https://arxiv.org/pdf/2411.17150)[[code]](https://github.com/MICV-yonsei/CASS)
-2. [2025 CVPR] **Distilling Spectral Graph for Object-Context Aware Open-Vocabulary Semantic Segmentation**[[paper]](https://arxiv.org/pdf/2411.17150)[[code]](https://github.com/MICV-yonsei/CASS?tab=readme-ov-file)
-3. [2025 ICCV]**LawDIS: Language-Window-based Controllable Dichotomous Image Segmentation**[[paper]](https://openaccess.thecvf.com/content/ICCV2025/papers/Yan_LawDIS_Language-Window-based_Controllable_Dichotomous_Image_Segmentation_ICCV_2025_paper.pdf)[[code]](https://github.com/XinyuYanTJU/LawDIS)
-4. [2025 ICCV]**CoralSRT: Revisiting Coral Reef Semantic Segmentation by Feature Rectification via Self-supervised Guidance**[[paper]](https://coralsrt.hkustvgd.com/papers/CoralSRT.pdf)[[code]](https://github.com/zhengziqiang/CoralSRT)
-5. [2025 ICCV]**CLIP-Adapted Region-to-Text Learning for Generative Open-Vocabulary Semantic Segmentation**[[paper]](https://openaccess.thecvf.com/content/ICCV2025/papers/Ge_CLIP-Adapted_Region-to-Text_Learning_for_Generative_Open-Vocabulary_Semantic_Segmentation_ICCV_2025_paper.pdf)
+1. [2025 CVPR] **Distilling Spectral Graph for Object-Context Aware Open-Vocabulary Semantic Segmentation** [[paper]](https://arxiv.org/pdf/2411.17150)[[code]](https://github.com/MICV-yonsei/CASS)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/CASS.md)
+2. [2025 CVPR] **Open-Canopy: Towards Very High Resolution Forest Monitoring**[[paper]](https://openaccess.thecvf.com/content/CVPR2025/papers/Fogel_Open-Canopy_Towards_Very_High_Resolution_Forest_Monitoring_CVPR_2025_paper.pdf)[[code]](https://github.com/fajwel/Open-Canopy)
+3. [2025 CVPR] **Hybrid Global-Local Representation with Augmented Spatial Guidance for Zero-Shot Referring Image Segmentation**[[paper]](https://openaccess.thecvf.com/content/CVPR2025/papers/Liu_Hybrid_Global-Local_Representation_with_Augmented_Spatial_Guidance_for_Zero-Shot_Referring_CVPR_2025_paper.pdf)[[code]](https://github.com/fhgyuanshen/HybridGL)
+4. [2025 ICCV]**LawDIS: Language-Window-based Controllable Dichotomous Image Segmentation**[[paper]](https://openaccess.thecvf.com/content/ICCV2025/papers/Yan_LawDIS_Language-Window-based_Controllable_Dichotomous_Image_Segmentation_ICCV_2025_paper.pdf)[[code]](https://github.com/XinyuYanTJU/LawDIS)
+5. [2025 ICCV]**CoralSRT: Revisiting Coral Reef Semantic Segmentation by Feature Rectification via Self-supervised Guidance**[[paper]](https://coralsrt.hkustvgd.com/papers/CoralSRT.pdf)[[code]](https://github.com/zhengziqiang/CoralSRT)
+6. [2025 ICCV]**CLIP-Adapted Region-to-Text Learning for Generative Open-Vocabulary Semantic Segmentation**[[paper]](https://openaccess.thecvf.com/content/ICCV2025/papers/Ge_CLIP-Adapted_Region-to-Text_Learning_for_Generative_Open-Vocabulary_Semantic_Segmentation_ICCV_2025_paper.pdf)
 
 <a name="About_Features"></a>  
 ## Features are vital
@@ -67,8 +69,8 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 9. [2025 ICCV] **When Large Vision-Language Model Meets Large Remote Sensing Imagery: Coarse-to-Fine Text-Guided Token Pruning.** [[paper]](https://arXiv.org/pdf/2503.07588) [[code]](https://github.com/VisionXLab/LRS-VQA)
 10. [2025 ICCV] **SMARTIES: Spectrum-Aware Multi-Sensor Auto-Encoder for Remote Sensing Images.** [[paper]](https://openaccess.thecvf.com/content/ICCV2025/papers/Sumbul_SMARTIES_Spectrum-Aware_Multi-Sensor_Auto-Encoder_for_Remote_Sensing_Images_ICCV_2025_paper.pdf) [[code]](https://github.com/gsumbul/SMARTIES)
 11. [2025 ICCV] **Continuous Remote Sensing Image Super-Resolution via Neural Operator Diffusion** [[paper]](https://openaccess.thecvf.com/content/ICCV2025/papers/Xu_NeurOp-Diff_Continuous_Remote_Sensing_Image_Super-Resolution_via_Neural_Operator_Diffusion_ICCV_2025_paper.pdf) [[code]](https://github.com/zerono000/NeurOp-Diff)
-12. [2025 ICCV] **HoliTracer: Holistic Vectorization of Geographic Objects from Large-Size Remote Sensing Imagery.** [[paper]](https://openaccess.thecvf.com/content/ICCV2025/papers/Wang_HoliTracer_Holistic_Vectorization_of_Geographic_Objects_from_Large-Size_Remote_Sensing_ICCV_2025_paper.pdf) [[code]](https://github.com/vvangfaye/HoliTracer)[[Notes](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/HoliTracer.md)
-13. [2025 ICCV] **RS-vHeat: Heat Conduction Guided Efficient Remote Sensing Foundation Model**[[paper]](https://openaccess.thecvf.com/content/ICCV2025/papers/Hu_RS-vHeat_Heat_Conduction_Guided_Efficient_Remote_Sensing_Foundation_Model_ICCV_2025_paper.pdf)该文章无开源代码，但是相同技术的代码链接为[[code]](https://github.com/MzeroMiko/vHeat)[[Notes](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/RS-vHeat.md)
+12. [2025 ICCV] **HoliTracer: Holistic Vectorization of Geographic Objects from Large-Size Remote Sensing Imagery.** [[paper]](https://openaccess.thecvf.com/content/ICCV2025/papers/Wang_HoliTracer_Holistic_Vectorization_of_Geographic_Objects_from_Large-Size_Remote_Sensing_ICCV_2025_paper.pdf) [[code]](https://github.com/vvangfaye/HoliTracer)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/HoliTracer.md)
+13. [2025 ICCV] **RS-vHeat: Heat Conduction Guided Efficient Remote Sensing Foundation Model**[[paper]](https://openaccess.thecvf.com/content/ICCV2025/papers/Hu_RS-vHeat_Heat_Conduction_Guided_Efficient_Remote_Sensing_Foundation_Model_ICCV_2025_paper.pdf)该文章无开源代码，但是相同技术的代码链接为[[code]](https://github.com/MzeroMiko/vHeat)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/RS-vHeat.md)
 14. [2025 ICCV] **OpenRSD: Towards Open-prompts for Object Detection in Remote Sensing Images**[[paper]](https://openaccess.thecvf.com/content/ICCV2025/papers/Huang_OpenRSD_Towards_Open-prompts_for_Object_Detection_in_Remote_Sensing_Images_ICCV_2025_paper.pdf)[[code(暂时没有开源代码)]](https://github.com/floatingstarZ/OpenRSD)
 15. [2025 arXiv] **SAR-KnowLIP: Towards Multimodal Foundation Models for Remote Sensing.** [[paper]](https://arxiv.org/pdf/2509.23927) [[code]](https://github.com/yangyifremad/SARKnowLIP)
 16. [2025 AAAI] **ZoRI: Towards discriminative zero-shot remote sensing instance segmentation.** [[paper]](https://arXiv.org/abs/2412.12798) [[code]](https://github.com/HuangShiqi128/ZoRI)
@@ -106,7 +108,6 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 <a name="segmentation"></a>  
 ## Segmentation
 1. [2025 ICCV] **Adapt Foundational Segmentation Models with Heterogeneous Searching Space**[[paper]](https://openaccess.thecvf.com/content/ICCV2025/papers/Yi_Adapt_Foundational_Segmentation_Models_with_Heterogeneous_Searching_Space_ICCV_2025_paper.pdf)[[code]](https://github.com/llipika/A2A-HSS)
-2. 
 
 
 
