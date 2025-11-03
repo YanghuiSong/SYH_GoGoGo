@@ -159,24 +159,27 @@ F_{\text{Mask-Bicubic}}[m]=\alpha*\overline{F_{\text{Bicubic}}}[m]+(1-\alpha)*F_
 
 ### 图1: 性能对比
 
-![LoftUp2](https://raw.githubusercontent.com/YanghuiSong/SYH_GoGoGo/main/LoftUp2.png)
+![LoftUp2](https://raw.githubusercontent.com/YanghuiSong/SYH_GoGoGo/main/UploadImage/LoftUp2.png)
 
 LoftUp在DINOv2-S骨干网络上显著优于现有方法，视频对象分割任务提升近50%。
 
 ### 图2: 特征可视化
 
-![image](https://raw.githubusercontent.com/YanghuiSong/SYH_GoGoGo/main/LoftUp3.png)
+![image](https://raw.githubusercontent.com/YanghuiSong/SYH_GoGoGo/main/UploadImage/LoftUp3.png)
 
 LoftUp生成的特征具有更清晰的物体边界，传统方法存在明显模糊和块状伪影。
 
 ### 图3: 架构设计
 
-![image](https://raw.githubusercontent.com/YanghuiSong/SYH_GoGoGo/main/LoftUp4.png)
+![image](https://raw.githubusercontent.com/YanghuiSong/SYH_GoGoGo/main/UploadImage/LoftUp4.png)
+
 展示基于坐标编码的交叉注意力机制，实现全局内容感知的特征上采样。
 
 
 ### 图8: 注意力可视化
-![image](https://raw.githubusercontent.com/YanghuiSong/SYH_GoGoGo/main/LoftUp5.png)
+
+![image](https://raw.githubusercontent.com/YanghuiSong/SYH_GoGoGo/main/UploadImage/LoftUp5.png)
+
 显示LoftUp能够从全局特征图中提取相关信息，提升语义一致性和边界细节。
 
 ## 7. 论文总结
