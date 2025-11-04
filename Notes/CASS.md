@@ -13,6 +13,9 @@
 - [关键概念解析](#关键概念解析)
 - [成本矩阵(Cost Matrix)深度解析](#成本矩阵深度解析)
 - [公式4-9深度解析与实例化分析](#公式4-9深度解析与实例化分析)
+- [三塔结构的体现](#三塔结构的体现)
+- [三塔结构的具体交互](#三塔结构的具体交互)
+- [三塔总结](#总结)
 
 ## 核心贡献
 
@@ -1593,3 +1596,103 @@ for 窗口 in 窗口列表:
 5. **全局-局部融合**：结合局部观察和全局理解
 
 这些技术的协同作用使CASS能够在训练免费的设定下实现准确的对象级语义分割，真正理解"对象"的完整概念。
+
+
+## 三塔结构的体现
+### 1. CLIP视觉塔
+```
+python
+# 在__init__方法中加载CLIP模型
+self.net, _ = clip.load(clip_path, device=device, jit=False)
+# 在forward_feature中使用CLIP视觉编码器
+image_features, x_last = self.net.encode_image(img, inv_image, self.dino_type, self.dino_model, self.dataset, return_all=True, return_cls=False)
+```
+### 2. CLIP文本塔
+```
+python
+# 在__init__方法中编码文本特征
+self.query_features = self._encode_text_features(self.query_words, self.net)
+# _encode_text_features方法中使用CLIP文本编码器
+def _encode_text_features(self, words, net):
+    features = []
+    with torch.no_grad():
+        for word in words:
+            query = clip.tokenize([temp(word) for temp in openai_imagenet_template]).to('cuda')
+            feature = net.encode_text(query)  # CLIP文本编码
+```
+### 3. VFM视觉塔 (DINO/DINOv2)
+```
+python
+# 在__init__方法中初始化DINO模型
+if self.dino_type == 'dino_vitb8':
+    self.dino_model = DinoSelfAttention(arch='vit_base', patch_size=8, image_size=(224, 224))
+elif self.dino_type == 'dinov2_vitb14':
+    model_path = 'dinov2_vitb14_reg4_pretrain.pth'
+    self.dino_model = Dinov2SelfAttention(arch='vit_base', model_path = model_path, patch_size=14, image_size=(518, 518))
+
+# 在forward_feature中传递给CLIP编码器使用
+image_features, x_last = self.net.encode_image(img, inv_image, self.dino_type, self.dino_model, self.dataset, return_all=True, return_cls=False)
+```
+## 三塔结构的具体交互
+### 视觉特征融合
+
+在 forward_feature 方法中体现了三塔的交互：
+```
+python
+# 1. CLIP视觉编码器提取基础特征
+image_features, x_last = self.net.encode_image(img, inv_image, self.dino_type, self.dino_model, self.dataset, return_all=True, return_cls=False)
+
+# 2. DINO模型作为注意力机制增强CLIP视觉特征
+# 这部分在CLIP的encode_image方法内部实现，DINO提供自注意力信息
+
+# 3. 文本特征与视觉特征进行匹配
+logits = image_features @ adjusted_text_features.T  # 视觉-文本匹配
+```
+### "蒸馏"的体现方式
+
+代码中并没有传统意义上的知识蒸馏（即通过损失函数强制一个模型模仿另一个模型），而是通过以下方式实现视觉特征的融合：
+
+特征级融合：在 self.net.encode_image 调用中，DINO模型的自注意力机制被用来增强CLIP视觉特征
+
+动态调整：通过 hierarchical_prompt 方法根据图像内容动态调整文本特征，使其更好地匹配视觉特征
+```
+python
+# hierarchical_prompt方法中体现了视觉-文本的动态匹配
+def hierarchical_prompt(self, image_features, image_class_similarities):
+    # 根据图像特征和全局相似度调整文本特征
+    # 这实际上是一种隐式的视觉指导文本表示的过程
+```
+### 全局语义信息融合
+```
+python
+# 融合局部和全局语义信息
+if whole_img is None and not self.scale_up:
+    global_clip_sim = x_last @ self.query_features.T  # 使用CLIP最后一层特征
+else:
+    # 使用指定网络编码完整图像获取全局特征向量
+    global_vector = net_to_use.encode_image(img_to_use, inv_image, self.dino_type, 
+                                          self.dino_model, self.dataset, 
+                                          return_all=False, return_cls=True)
+    global_clip_sim = global_vector @ query_features_to_use.T
+
+# 将局部和全局信息融合
+logits = logits * (1-self.global_semantics_weight) + global_clip_sim.reshape(1,1,logits.shape[-1]).repeat(1,logits.shape[1],1) * self.global_semantics_weight
+```
+## 总结
+### 这个三塔结构的体现：
+
+CLIP视觉塔：主视觉特征提取器
+
+CLIP文本塔：提供零样本分类能力
+
+VFM视觉塔（DINO）：提供更强的自注意力机制来增强CLIP视觉特征
+
+### "蒸馏"过程不是传统的模型蒸馏，而是：
+
+特征增强：DINO的注意力机制直接增强CLIP视觉特征
+
+动态匹配：通过hierarchical_prompt动态调整文本特征以更好地匹配视觉特征
+
+多尺度融合：融合局部patch特征和全局语义特征
+
+这种设计使得模型能够充分利用三种不同来源的视觉和文本信息，实现更强的零样本分割能力。
