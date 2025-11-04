@@ -17,10 +17,10 @@ The following is the code for reproducing recently read papers and the work curr
 3. [✨2025 CVPR] **SegEarth-OV: Towards Training-Free Open-Vocabulary Segmentation for Remote Sensing Images** [[paper]](https://openaccess.thecvf.com/content/CVPR2025/papers/Li_SegEarth-OV_Towards_Training-Free_Open-Vocabulary_Segmentation_for_Remote_Sensing_Images_CVPR_2025_paper.pdf) [[code]](https://github.com/likyoo/SegEarth-OV)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SegEarth.md)
 4. [2025 NIPS] **InstructSAM: A Training-Free Framework for Instruction-Oriented Remote Sensing Object Recognition** [[paper]](https://arxiv.org/pdf/2505.15818) [[code]](https://github.com/VoyagerXvoyagerx/InstructSAM?tab=readme-ov-file)
 5. [2025 arXiv] **AnyUp: Universal Feature Upsampling** [[paper]](https://arxiv.org/abs/2510.12764) [[code]](https://github.com/wimmerth/anyup)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/AnyUp.md)
-6. [2025 ICME] **LG-CD: Enhancing Language-Guided Change Detection through SAM2 Adaptation** [[paper]](https://arxiv.org/pdf/2509.21894)[[Note]](https://github.com/SLDGroup/EMCAD)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/LG.pdf)
+6. [2025 ICME] **LG-CD: Enhancing Language-Guided Change Detection through SAM2 Adaptation** [[paper]](https://arxiv.org/pdf/2509.21894)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/LG.pdf)
 7. [✨2025 ICCV] **LoftUp: Learning a Coordinate-Based Feature Upsampler for Vision Foundation Models**[[paper]](https://openaccess.thecvf.com/content/ICCV2025/papers/Huang_LoftUp_Learning_a_Coordinate-Based_Feature_Upsampler_for_Vision_Foundation_Models_ICCV_2025_paper.pdf)[[code]](https://github.com/andrehuang/loftup)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/LoftUp.md)
 8. [2025 arXiv] **Benchmarking Feature Upsampling Methods for Vision Foundation Models using Interactive Segmentation(复现了LoftUp)** [[paper]](https://arxiv.org/pdf/2505.02075)[[code]](https://github.com/havrylovv/iSegProbe)
-9. [✨2025 ICML] **FeatSharp: Your Vision Model Features, Sharper**[[paper]](https://arxiv.org/pdf/2502.16025)[[code]](https://github.com/NVlabs/FeatSharp)
+9. [✨2025 ICML] **FeatSharp: Your Vision Model Features, Sharper**[[paper]](https://arxiv.org/pdf/2502.16025)[[code]](https://github.com/NVlabs/FeatSharp)[[Notes]]()
 
 <a name="上采样与遥感"></a>  
 ## 上采样在遥感图像中的应用
@@ -41,6 +41,12 @@ AnyUp使用了一种基于卷积神经网络的方法，通过将低分辨率图
 FeatUp则是一种基于深度神经网络的图像上采样方法，它通过在低分辨率图像上进行训练来生成高分辨率图像。FeatUp使用了一个类似于编码器-解码器（encoder-decoder）的结构，其中编码器部分用于提取低分辨率图像中的特征，而解码器部分则用于将这些特征映射回高分辨率图像。FeatUp的优点是在某些情况下可以获得更好的图像质量，特别是在对细节要求较高的任务中。然而，FeatUp需要大量的计算资源和时间来进行训练，并且需要针对每个任务进行微调，因此其适用范围相对较小。
 
 总的来说，AnyUp和FeatUp都是有效的图像上采样方法，但它们的原理和应用场景略有不同。
+
+## 几种上采样器的综合对比分析（FeatUp & AnyUp & LoftUp & FeatSharp）
+[***以下是对四种特征上采样方法——AnyUp、FeatUp、LoftUp 和 FeatSharp 的详尽综合分析报告***](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/UpsamplerComparaiong.md)
+
+![Upsampler](https://raw.githubusercontent.com/YanghuiSong/SYH_GoGoGo/main/UploadImage/Upsampler.png)
+
 
 
 <a name="OVSS"></a>  
