@@ -6,7 +6,7 @@ The following is the code for reproducing recently read papers and the work curr
 3. [[OVSS](#OVSS)]
 4. [[Features are vital](#About_Features)]
 5. [[Remote Sensing](#Remote_Sensing)]
-6. [[Classification](#classification)]
+6. [[Classification](#Detection)]
 7. [[Segmentation](#segmentation)]
        
 -----------------------------------------------------------------------------------------------
@@ -16,9 +16,10 @@ The following is the code for reproducing recently read papers and the work curr
 2. [2024 TPAMI] **Frequency-aware Feature Fusion for Dense Image Prediction** [[paper]](https://www.arxiv.org/pdf/2408.12879)[[code]](https://github.com/Linwei-Chen/FreqFusion)
 3. [2025 arXiv] **AnyUp: Universal Feature Upsampling** [[paper]](https://arxiv.org/abs/2510.12764) [[code]](https://github.com/wimmerth/anyup)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/AnyUp.md)
 4. [✨2025 ICCV] **LoftUp: Learning a Coordinate-Based Feature Upsampler for Vision Foundation Models**[[paper]](https://openaccess.thecvf.com/content/ICCV2025/papers/Huang_LoftUp_Learning_a_Coordinate-Based_Feature_Upsampler_for_Vision_Foundation_Models_ICCV_2025_paper.pdf)[[code]](https://github.com/andrehuang/loftup)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/LoftUp.md)
-5. [2025 arXiv] **Benchmarking Feature Upsampling Methods for Vision Foundation Models using Interactive Segmentation(复现了LoftUp)** [[paper]](https://arxiv.org/pdf/2505.02075)[[code]](https://github.com/havrylovv/iSegProbe)
+5. [2025 arXiv] **Benchmarking Feature Upsampling Methods for Vision Foundation Models using Interactive Segmentation(一种评估方法)** [[paper]](https://arxiv.org/pdf/2505.02075)[[code]](https://github.com/havrylovv/iSegProbe)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/Benchmarking.md)
 6. [✨2025 ICML] **FeatSharp: Your Vision Model Features, Sharper** [[paper]](https://arxiv.org/pdf/2502.16025)[[code]](https://github.com/NVlabs/FeatSharp)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/FeatSharp.pdf)
-7. [2025 arXiv] **BasicAVSR: Arbitrary-Scale Video Super-Resolution via Image Priors and Enhanced Motion Compensation** [[paper]](https://arxiv.org/pdf/2510.26149)[[code]](https://github.com/shangwei5/BasicAVSR)
+7. [2025 arXiv] **BasicAVSR: Arbitrary-Scale Video Super-Resolution via Image Priors and Enhanced Motion Compensation** [[paper]](https://arxiv.org/pdf/2510.26149)[[code]](https://github.com/shangwei5/BasicAVSR)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/BasicAVSR.md)
+8. [2025 NeurIPS] **JAFAR: Jack up Any Feature at Any Resolution** [[paper]](https://arxiv.org/pdf/2506.11136) [[code]](https://github.com/PaulCouairon/JAFAR)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/JAFAR.md)
  
 <a name="上采样与遥感"></a>  
 ## 上采样在遥感图像中的应用
@@ -49,12 +50,13 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 
 <a name="OVSS"></a>  
 ## OVSS
-1. [✨2025 CVPR] **Distilling Spectral Graph for Object-Context Aware Open-Vocabulary Semantic Segmentation** [[paper]](https://arxiv.org/pdf/2411.17150)[[code]](https://github.com/MICV-yonsei/CASS)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/CASS.md)
+1. [✨2025 CVPR] **Distilling Spectral Graph for Object-Context Aware Open-Vocabulary Semantic Segmentation** [[paper]](https://arxiv.org/pdf/2411.17150)[[code]](https://github.com/MICV-yonsei/CASS)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/CASS.md)[[与遥感图像、特征上采样的联系]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/CASSinRemoteSensing.md)
 2. [2025 CVPR] **Open-Canopy: Towards Very High Resolution Forest Monitoring**[[paper]](https://openaccess.thecvf.com/content/CVPR2025/papers/Fogel_Open-Canopy_Towards_Very_High_Resolution_Forest_Monitoring_CVPR_2025_paper.pdf)[[code]](https://github.com/fajwel/Open-Canopy)
 3. [2025 CVPR] **Hybrid Global-Local Representation with Augmented Spatial Guidance for Zero-Shot Referring Image Segmentation**[[paper]](https://openaccess.thecvf.com/content/CVPR2025/papers/Liu_Hybrid_Global-Local_Representation_with_Augmented_Spatial_Guidance_for_Zero-Shot_Referring_CVPR_2025_paper.pdf)[[code]](https://github.com/fhgyuanshen/HybridGL)
-4. [2025 ICCV]**LawDIS: Language-Window-based Controllable Dichotomous Image Segmentation**[[paper]](https://openaccess.thecvf.com/content/ICCV2025/papers/Yan_LawDIS_Language-Window-based_Controllable_Dichotomous_Image_Segmentation_ICCV_2025_paper.pdf)[[code]](https://github.com/XinyuYanTJU/LawDIS)
-5. [2025 ICCV]**CoralSRT: Revisiting Coral Reef Semantic Segmentation by Feature Rectification via Self-supervised Guidance**[[paper]](https://coralsrt.hkustvgd.com/papers/CoralSRT.pdf)[[code]](https://github.com/zhengziqiang/CoralSRT)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/CoralSRT.md)
-6. [2025 ICCV]**CLIP-Adapted Region-to-Text Learning for Generative Open-Vocabulary Semantic Segmentation**[[paper]](https://openaccess.thecvf.com/content/ICCV2025/papers/Ge_CLIP-Adapted_Region-to-Text_Learning_for_Generative_Open-Vocabulary_Semantic_Segmentation_ICCV_2025_paper.pdf)
+4. [2025 ICCV] **LawDIS: Language-Window-based Controllable Dichotomous Image Segmentation**[[paper]](https://openaccess.thecvf.com/content/ICCV2025/papers/Yan_LawDIS_Language-Window-based_Controllable_Dichotomous_Image_Segmentation_ICCV_2025_paper.pdf)[[code]](https://github.com/XinyuYanTJU/LawDIS)
+5. [2025 ICCV] **CoralSRT: Revisiting Coral Reef Semantic Segmentation by Feature Rectification via Self-supervised Guidance**[[paper]](https://coralsrt.hkustvgd.com/papers/CoralSRT.pdf)[[code]](https://github.com/zhengziqiang/CoralSRT)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/CoralSRT.md)
+6. [2025 ICCV] **CLIP-Adapted Region-to-Text Learning for Generative Open-Vocabulary Semantic Segmentation**[[paper]](https://openaccess.thecvf.com/content/ICCV2025/papers/Ge_CLIP-Adapted_Region-to-Text_Learning_for_Generative_Open-Vocabulary_Semantic_Segmentation_ICCV_2025_paper.pdf)
+7. [2025 ICCV] **Talking to DINO: Bridging Self-Supervised Vision Backbones with Language for Open-Vocabulary Segmentation** [[paper]](https://arxiv.org/pdf/2411.19331)[[code]](https://github.com/lorebianchi98/Talk2DINO)
 
 <a name="About_Features"></a>  
 ## Features are vital
@@ -66,7 +68,7 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 2. [✨2025 CVPR] **SegEarth-OV: Towards Training-Free Open-Vocabulary Segmentation for Remote Sensing Images** [[paper]](https://openaccess.thecvf.com/content/CVPR2025/papers/Li_SegEarth-OV_Towards_Training-Free_Open-Vocabulary_Segmentation_for_Remote_Sensing_Images_CVPR_2025_paper.pdf) [[code]](https://github.com/likyoo/SegEarth-OV)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SegEarth.md)
 3. [2025 arXiv] **SegEarth-R1: Geospatial Pixel Reasoning via Large Language Model** [[paper]](https://arxiv.org/pdf/2504.09644)[[code]](https://github.com/earth-insights/SegEarth-R1)
 4. [2025 arXiv] **Annotation-Free Open-Vocabulary Segmentation for Remote-Sensing Images**[[paper]](https://arxiv.org/pdf/2508.18067)[[code]](https://github.com/earth-insights/SegEarth-OV-2)[[这篇文章把SegEarth拓展到了SAR图像，两种类型的图像区别是]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SARvsRemoteSensing.md)
-5. [2025 arXiv] **FoBa: A Foreground-Background co-Guided Method and New Benchmark for Remote Sensing Semantic Change Detection** [[paper]](https://arxiv.org/pdf/2509.15788)[[code]](https://github.com/zmoka-zht/FoBa)
+5. [2025 arXiv] **FoBa: A Foreground-Background co-Guided Method and New Benchmark for Remote Sensing Semantic Change Detection** [[paper]](https://arxiv.org/pdf/2509.15788)[[code]](https://github.com/zmoka-zht/FoBa)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/FoBa.pdf)
 6. [2025 Nature MI] **A semantic-enhanced multi-modal remote sensing foundation model for Earth observation**[[paper]](https://www.nature.com/articles/s42256-025-01078-8)[[code]](https://github.com/kang-wu/SkySensePlusPlus)
 7. [2025 TGRS] **A Unified Framework With Multimodal Fine-Tuning for Remote Sensing Semantic Segmentation.** [[paper]](https://ieeexplore.ieee.org/document/11063320) [[code]](https://github.com/sstary/SSRS)
 8. [2025 ICASSP] **Enhancing Remote Sensing Vision-Language Models for Zero-Shot Scene Classification.** [[paper]](https://arXiv.org/abs/2409.00698) [[code]](https://github.com/elkhouryk/RS-TransCLIP)
@@ -112,9 +114,9 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 48. [2025 ISPRS]**Meta Feature Disentanglement under continuous-valued domain modeling for generalizable remote sensing image segmentation on unseen domains**[[paper]](https://www.sciencedirect.com/science/article/pii/S0924271625003879)[[code]](https://github.com/LCB1970/MetaFD)
 
 
-<a name="classification"></a>  
-## Classification
-...
+<a name="Detection"></a>  
+## Change Detection
+1. [2025 arXiv] **FoBa: A Foreground-Background co-Guided Method and New Benchmark for Remote Sensing Semantic Change Detection** [[paper]](https://arxiv.org/pdf/2509.15788)[[code]](https://github.com/zmoka-zht/FoBa)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/FoBa.pdf)
 <a name="segmentation"></a>  
 ## Segmentation
 1. [2025 ICCV] **Adapt Foundational Segmentation Models with Heterogeneous Searching Space**[[paper]](https://openaccess.thecvf.com/content/ICCV2025/papers/Yi_Adapt_Foundational_Segmentation_Models_with_Heterogeneous_Searching_Space_ICCV_2025_paper.pdf)[[code]](https://github.com/llipika/A2A-HSS)
