@@ -3,11 +3,12 @@ The following is the code for reproducing recently read papers and the work curr
 # Content
 1. [[Feature Upsampling](#Upsampling)]
 2. [[上采样在遥感图像中的应用](#上采样与遥感)]
-3. [[OVSS](#OVSS)]
-4. [[Features are vital](#About_Features)]
-5. [[Remote Sensing](#Remote_Sensing)]
-6. [[Classification](#Detection)]
-7. [[Segmentation](#segmentation)]
+3. [[VLM](#VLM)]
+4. [[OVSS](#OVSS)]
+5. [[Features are vital](#About_Features)]
+6. [[Remote Sensing](#Remote_Sensing)]
+7. [[Classification](#Detection)]
+8. [[Segmentation](#segmentation)]
        
 -----------------------------------------------------------------------------------------------
 <a name="Upsampling"></a>  
@@ -46,7 +47,9 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 
 ![Upsampler](https://raw.githubusercontent.com/YanghuiSong/SYH_GoGoGo/main/UploadImage/Upsampler.png)
 
-
+<a name="VLM"></a>  
+## VLM
+1. [2025 arXiv] **SigLIP 2: A better multilingual vision language encoder**[[paper]](https://arxiv.org/pdf/2502.14786)[[code]](https://github.com/huggingface/blog/blob/main/siglip2.md)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SigLIP2.md)[[与VFM融合的思路]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/RewithTalk2Dino.md)
 
 <a name="OVSS"></a>  
 ## OVSS
@@ -56,7 +59,7 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 4. [2025 ICCV] **LawDIS: Language-Window-based Controllable Dichotomous Image Segmentation**[[paper]](https://openaccess.thecvf.com/content/ICCV2025/papers/Yan_LawDIS_Language-Window-based_Controllable_Dichotomous_Image_Segmentation_ICCV_2025_paper.pdf)[[code]](https://github.com/XinyuYanTJU/LawDIS)
 5. [2025 ICCV] **CoralSRT: Revisiting Coral Reef Semantic Segmentation by Feature Rectification via Self-supervised Guidance**[[paper]](https://coralsrt.hkustvgd.com/papers/CoralSRT.pdf)[[code]](https://github.com/zhengziqiang/CoralSRT)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/CoralSRT.md)
 6. [2025 ICCV] **CLIP-Adapted Region-to-Text Learning for Generative Open-Vocabulary Semantic Segmentation**[[paper]](https://openaccess.thecvf.com/content/ICCV2025/papers/Ge_CLIP-Adapted_Region-to-Text_Learning_for_Generative_Open-Vocabulary_Semantic_Segmentation_ICCV_2025_paper.pdf)
-7. [2025 ICCV] **Talking to DINO: Bridging Self-Supervised Vision Backbones with Language for Open-Vocabulary Segmentation** [[paper]](https://arxiv.org/pdf/2411.19331)[[code]](https://github.com/lorebianchi98/Talk2DINO)
+7. [2025 ICCV] **Talking to DINO: Bridging Self-Supervised Vision Backbones with Language for Open-Vocabulary Segmentation** [[paper]](https://arxiv.org/pdf/2411.19331)[[code]](https://github.com/lorebianchi98/Talk2DINO)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/Talk2Dino.md)[[与CASS进行对比]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/CompWithCASS.md)
 
 <a name="About_Features"></a>  
 ## Features are vital
