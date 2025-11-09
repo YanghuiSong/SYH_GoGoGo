@@ -8,7 +8,8 @@ The following is the code for reproducing recently read papers and the work curr
 5. [[Features are vital](#About_Features)]
 6. [[Remote Sensing](#Remote_Sensing)]
 7. [[Classification](#Detection)]
-8. [[Segmentation](#segmentation)]
+8. [[Multi-Modal]](#Multi_Modal)
+9. [[Segmentation](#segmentation)]
        
 -----------------------------------------------------------------------------------------------
 <a name="Upsampling"></a>  
@@ -60,6 +61,8 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 5. [2025 ICCV] **CoralSRT: Revisiting Coral Reef Semantic Segmentation by Feature Rectification via Self-supervised Guidance**[[paper]](https://coralsrt.hkustvgd.com/papers/CoralSRT.pdf)[[code]](https://github.com/zhengziqiang/CoralSRT)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/CoralSRT.md)
 6. [2025 ICCV] **CLIP-Adapted Region-to-Text Learning for Generative Open-Vocabulary Semantic Segmentation**[[paper]](https://openaccess.thecvf.com/content/ICCV2025/papers/Ge_CLIP-Adapted_Region-to-Text_Learning_for_Generative_Open-Vocabulary_Semantic_Segmentation_ICCV_2025_paper.pdf)
 7. [2025 ICCV] **Talking to DINO: Bridging Self-Supervised Vision Backbones with Language for Open-Vocabulary Segmentation** [[paper]](https://arxiv.org/pdf/2411.19331)[[code]](https://github.com/lorebianchi98/Talk2DINO)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/Talk2Dino.md)[[与CASS进行对比]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/CompWithCASS.md)
+8. [2025 ICCV] **CorrCLIP: Reconstructing Patch Correlations in CLIP for OVSS** [[paper]](https://arxiv.org/pdf/2411.10086)[[code]](https://github.com/zdk258/CorrCLIP)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/new/main/Notes/CorrCLIP)
+9. [2024 arXiv] **Self-Calibrated CLIP for Training-Free Open-Vocabulary Segmentation** [[paper]](https://arxiv.org/pdf/2411.15869)[[code]](https://github.com/SuleBai/SC-CLIP)
 
 <a name="About_Features"></a>  
 ## Features are vital
@@ -85,41 +88,51 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 16. [2025 ICCV] **HoliTracer: Holistic Vectorization of Geographic Objects from Large-Size Remote Sensing Imagery.** [[paper]](https://openaccess.thecvf.com/content/ICCV2025/papers/Wang_HoliTracer_Holistic_Vectorization_of_Geographic_Objects_from_Large-Size_Remote_Sensing_ICCV_2025_paper.pdf) [[code]](https://github.com/vvangfaye/HoliTracer)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/HoliTracer.md)
 17. [2025 ICCV] **RS-vHeat: Heat Conduction Guided Efficient Remote Sensing Foundation Model**[[paper]](https://openaccess.thecvf.com/content/ICCV2025/papers/Hu_RS-vHeat_Heat_Conduction_Guided_Efficient_Remote_Sensing_Foundation_Model_ICCV_2025_paper.pdf)该文章无开源代码，但是相同技术的代码链接为[[code]](https://github.com/MzeroMiko/vHeat)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/RS-vHeat.md)
 18. [2025 ICCV] **OpenRSD: Towards Open-prompts for Object Detection in Remote Sensing Images**[[paper]](https://openaccess.thecvf.com/content/ICCV2025/papers/Huang_OpenRSD_Towards_Open-prompts_for_Object_Detection_in_Remote_Sensing_Images_ICCV_2025_paper.pdf)[[code(暂时没有开源代码)]](https://github.com/floatingstarZ/OpenRSD)
-19. [2025 ICME] **LG-CD: Enhancing Language-Guided Change Detection through SAM2 Adaptation** [[paper]](https://arxiv.org/pdf/2509.21894)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/LG.pdf)
-20. [2025 arXiv] **SAR-KnowLIP: Towards Multimodal Foundation Models for Remote Sensing.** [[paper]](https://arxiv.org/pdf/2509.23927) [[code]](https://github.com/yangyifremad/SARKnowLIP)
-21. [2025 AAAI] **ZoRI: Towards discriminative zero-shot remote sensing instance segmentation.** [[paper]](https://arXiv.org/abs/2412.12798) [[code]](https://github.com/HuangShiqi128/ZoRI)
-22. [2024 NIPS] **Segment Any Change.** [[paper]](https://proceedings.NIPS.cc/paper_files/paper/2024/file/9415416201aa201902d1743c7e65787b-Paper-Conference.pdf) [[code]](https://github.com/Z-Zheng/pytorch-change-models)
-23. [2025 NIPS] **InstructSAM: A Training-Free Framework for Instruction-Oriented Remote Sensing Object Recognition** [[paper]](https://arxiv.org/pdf/2505.15818) [[code]](https://github.com/VoyagerXvoyagerx/InstructSAM?tab=readme-ov-file)
-24. [2025 CVPR] **SegEarth-OV: Towards Training-Free Open-Vocabulary Segmentation for Remote Sensing Images.** [[paper]](https://arXiv.org/abs/2410.01768) [[code]](https://github.com/likyoo/SegEarth-OV)
-25. [2025 CVPR] **XLRS-Bench: Could Your Multimodal LLMs Understand Extremely Large Ultra-High-Resolution Remote Sensing Imagery?** [[paper]](https://arXiv.org/abs/2503.23771) [[code]](https://github.com/EvolvingLMMs-Lab/XLRS-Bench)
-26. [2025 CVPR] **Exact: Exploring Space-Time Perceptive Clues for Weakly Supervised Satellite Image Time Series Semantic Segmentation.** [[paper]](https://openaccess.thecvf.com/content/CVPR2025/papers/Zhu_Exact_Exploring_Space-Time_Perceptive_Clues_for_Weakly_Supervised_Satellite_Image_CVPR_2025_paper.pdf) [[code]](https://github.com/MiSsU-HH/Exact)
-27. [2025 Arxiv] **SegEarth-OV-2: Annotation-Free Open-Vocabulary Segmentation for Remote-Sensing Images** [[paper]](https://arxiv.org/abs/2508.18067)  [[code]](https://github.com/earth-insights/SegEarth-OV-2)
-28. [2025 AAAI] **Towards Open-Vocabulary Remote Sensing Image Semantic Segmentation** [[paper]](https://arxiv.org/abs/2412.19492) [[code]](https://github.com/yecy749/GSNet)
-29. [2025 Arxiv] **InstructSAM: A Training-Free Framework for Instruction-Oriented Remote Sensing Object Recognition** [[paper]](https://arxiv.org/pdf/2505.15818) [[code]](https://github.com/VoyagerXvoyagerx/InstructSAM)
-30. [2025 Arxiv] **DescribeEarth: Describe Anything for Remote Sensing Images** [[paper]](https://arxiv.org/pdf/2509.25654v1) [[code]](https://github.com/earth-insights/DescribeEarth)
-31. [2025 NIPS] **GTPBD: A Fine-Grained Global Terraced Parcel and Boundary Dataset** [[paper]](https://arxiv.org/abs/2507.14697) [[code]](https://github.com/Z-ZW-WXQ/GTPBD)
-32. [2025 Arxiv] **RS3DBench: A Comprehensive Benchmark for 3D Spatial Perception in Remote Sensing** [[paper]](https://arxiv.org/abs/2509.18897) [[code]](https://rs3dbench.github.io)
-33. [2025 Arxiv] **DGL-RSIS: Decoupling Global Spatial Context and Local Class Semantics for Training-Free Remote Sensing Image Segmentation** [[paper]](https://arxiv.org/pdf/2509.00598) [[code]](https://github.com/designer1024/DGL-RSIS)
-34. [2025 TGRS] **A Unified SAM-Guided Self-Prompt Learning Framework for Infrared Small Target Detection** [[paper]](https://ieeexplore.ieee.org/document/11172325) [[code]](https://github.com/fuyimin96/SAM-SPL)
-35. [2025 TGRS] **Semantic Prototyping With CLIP for Few-Shot Object Detection in Remote Sensing Images** [[paper]](https://ieeexplore.ieee.org/document/10930588)
-36. [2025 Arxiv] **ATRNet-STAR: A Large Dataset and Benchmark Towards Remote Sensing Object Recognition in the Wild** [[paper]](https://arxiv.org/abs/2501.13354) [[code]](https://github.com/waterdisappear/ATRNet-STAR)
-37. [2025 Arxiv] **RSKT-Seg: Exploring Efficient Open-Vocabulary Segmentation in the Remote Sensing** [[paper]](https://arxiv.org/pdf/2509.12040) [[code]](https://github.com/LiBingyu01/RSKT-Seg)
-38. [2025 ISPRS]  **AdaptVFMs-RSCD: Advancing Remote Sensing Change Detection from binary to semantic with SAM and CLIP** [[paper]](https://doi.org/10.1016/j.isprsjprs.2025.09.010) [[data]](https://github.com/Jiang-CHD-YunNan/RS-VFMs-Fine-tuning-Dataset)
-39. [2025 Arxiv]**PeftCD: Leveraging Vision Foundation Models with Parameter-Efficient Fine-Tuning for Remote Sensing Change Detection** [[paper]](https://arxiv.org/pdf/2509.09572) [[code]](https://github.com/dyzy41/PeftCD)
-40. [2025 Arxiv] **AlignCLIP: Self-Guided Alignment for Remote Sensing Open-Vocabulary Semantic Segmentation** [[paper]](https://openreview.net/forum?id=hpD3tn7Xbp) [[code]](https://openreview.net/attachment?id=hpD3tn7Xbp&name=supplementary_material)
-41. [2025 Arxiv] **Few-Shot Adaptation Benchmark for Remote Sensing Vision-Language Models** [[paper]](https://arxiv.org/pdf/2510.07135) [[code]](https://github.com/elkhouryk/fewshot_RSVLMs)
-42. [2025 RSE] **Strategic sampling for training a semantic segmentation model in operational mapping: Case studies on cropland parcel extraction** [[paper]](https://doi.org/10.1016/j.rse.2025.115034) [[data]](https://doi.org/10.5281/zenodo.16595511) [[code]](https://github.com/Remote-Sensing-of-Land-Resource-Lab/Training-Sample-Selection)
-43. [2025 TIP] **Universal Fine-Grained Visual Categorization by Concept Guided Learning** [[paper]](https://ieeexplore.ieee.org/document/10829548) [[data]](https://drive.google.com/file/d/11hYbdO32hyspucDKp5wwjwvCaD38AEKe/view?usp=sharing) [[code]](https://github.com/BiQiWHU/CGL)
-44. [2025 TIP] **SARATR-X: Towards Building A Foundation Model for SAR Target Recognition** [[paper]](https://ieeexplore.ieee.org/document/10856784) [[code]](https://github.com/waterdisappear/SARATR-X)
-45. [2025 TIP] **HSLabeling: Towards Efficient Labeling for Large-scale Remote Sensing Image Segmentation with Hybrid Sparse Labeling** [[paper]](https://ieeexplore.ieee.org/document/10829548) [[data]](https://drive.google.com/drive/folders/1CiYzJyBn1rV-xsrsYQ6o2HDQjdfnadHl) [[code]](https://github.com/linjiaxing99/HSLabeling)
-46. [2025 CVM] **Remote sensing tuning: A survey** [[paper]](https://ieeexplore.ieee.org/document/11119145) [[code]](https://github.com/DongshuoYin/Remote-Sensing-Tuning-A-Survey/tree/main)
-47. [2025 ISPRS]**Domain generalization for semantic segmentation of remote sensing images via vision foundation model fine-tuning**[[paper]](https://www.sciencedirect.com/science/article/pii/S0924271625003569)[[code]](https://github.com/mmmll23/GeoSA-BaSA)
-48. [2025 ISPRS]**Meta Feature Disentanglement under continuous-valued domain modeling for generalizable remote sensing image segmentation on unseen domains**[[paper]](https://www.sciencedirect.com/science/article/pii/S0924271625003879)[[code]](https://github.com/LCB1970/MetaFD)
+19. [2024 CVPR] **SkySense: A Multi-Modal Remote Sensing Foundation Model Towards Universal Interpretation for Earth Observation Imagery** [[paper]](https://openaccess.thecvf.com/content/CVPR2024/papers/Guo_SkySense_A_Multi-Modal_Remote_Sensing_Foundation_Model_Towards_Universal_Interpretation_CVPR_2024_paper.pdf)[[code]](https://github.com/Jack-bo1220/SkySense?tab=readme-ov-file)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SkySense.md)
+20. [2025 ICCV] **SkySense V2: A Unified Foundation Model for Multi-modal Remote Sensing** [[paper]](https://arxiv.org/pdf/2507.13812)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SkySense2.md)
+21. [2025 ICME] **LG-CD: Enhancing Language-Guided Change Detection through SAM2 Adaptation** [[paper]](https://arxiv.org/pdf/2509.21894)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/LG.pdf)
+22. [2025 arXiv] **SAR-KnowLIP: Towards Multimodal Foundation Models for Remote Sensing.** [[paper]](https://arxiv.org/pdf/2509.23927) [[code]](https://github.com/yangyifremad/SARKnowLIP)
+23. [2025 AAAI] **ZoRI: Towards discriminative zero-shot remote sensing instance segmentation.** [[paper]](https://arXiv.org/abs/2412.12798) [[code]](https://github.com/HuangShiqi128/ZoRI)
+24. [2024 NIPS] **Segment Any Change.** [[paper]](https://proceedings.NIPS.cc/paper_files/paper/2024/file/9415416201aa201902d1743c7e65787b-Paper-Conference.pdf) [[code]](https://github.com/Z-Zheng/pytorch-change-models)
+25. [2025 NIPS] **InstructSAM: A Training-Free Framework for Instruction-Oriented Remote Sensing Object Recognition** [[paper]](https://arxiv.org/pdf/2505.15818) [[code]](https://github.com/VoyagerXvoyagerx/InstructSAM?tab=readme-ov-file)
+26. [2025 NIPS] **Bringing SAM to new heights: Leveraging elevation data for tree crown segmentation from drone imagery** [[paper]](https://arxiv.org/pdf/2506.04970)[[code]]()
+27. [2025 CVPR] **SegEarth-OV: Towards Training-Free Open-Vocabulary Segmentation for Remote Sensing Images.** [[paper]](https://arXiv.org/abs/2410.01768) [[code]](https://github.com/likyoo/SegEarth-OV)
+28. [2025 CVPR] **XLRS-Bench: Could Your Multimodal LLMs Understand Extremely Large Ultra-High-Resolution Remote Sensing Imagery?** [[paper]](https://arXiv.org/abs/2503.23771) [[code]](https://github.com/EvolvingLMMs-Lab/XLRS-Bench)
+29. [2025 CVPR] **Exact: Exploring Space-Time Perceptive Clues for Weakly Supervised Satellite Image Time Series Semantic Segmentation.** [[paper]](https://openaccess.thecvf.com/content/CVPR2025/papers/Zhu_Exact_Exploring_Space-Time_Perceptive_Clues_for_Weakly_Supervised_Satellite_Image_CVPR_2025_paper.pdf) [[code]](https://github.com/MiSsU-HH/Exact)
+30. [2025 Arxiv] **SegEarth-OV-2: Annotation-Free Open-Vocabulary Segmentation for Remote-Sensing Images** [[paper]](https://arxiv.org/abs/2508.18067)  [[code]](https://github.com/earth-insights/SegEarth-OV-2)
+31. [2025 AAAI] **Towards Open-Vocabulary Remote Sensing Image Semantic Segmentation** [[paper]](https://arxiv.org/abs/2412.19492) [[code]](https://github.com/yecy749/GSNet)
+32. [2025 Arxiv] **InstructSAM: A Training-Free Framework for Instruction-Oriented Remote Sensing Object Recognition** [[paper]](https://arxiv.org/pdf/2505.15818) [[code]](https://github.com/VoyagerXvoyagerx/InstructSAM)
+33. [2025 Arxiv] **DescribeEarth: Describe Anything for Remote Sensing Images** [[paper]](https://arxiv.org/pdf/2509.25654v1) [[code]](https://github.com/earth-insights/DescribeEarth)
+34. [2025 NIPS] **GTPBD: A Fine-Grained Global Terraced Parcel and Boundary Dataset** [[paper]](https://arxiv.org/abs/2507.14697) [[code]](https://github.com/Z-ZW-WXQ/GTPBD)
+35. [2025 Arxiv] **RS3DBench: A Comprehensive Benchmark for 3D Spatial Perception in Remote Sensing** [[paper]](https://arxiv.org/abs/2509.18897) [[code]](https://rs3dbench.github.io)
+36. [2025 Arxiv] **DGL-RSIS: Decoupling Global Spatial Context and Local Class Semantics for Training-Free Remote Sensing Image Segmentation** [[paper]](https://arxiv.org/pdf/2509.00598) [[code]](https://github.com/designer1024/DGL-RSIS)
+37. [2025 TGRS] **A Unified SAM-Guided Self-Prompt Learning Framework for Infrared Small Target Detection** [[paper]](https://ieeexplore.ieee.org/document/11172325) [[code]](https://github.com/fuyimin96/SAM-SPL)
+38. [2025 TGRS] **Semantic Prototyping With CLIP for Few-Shot Object Detection in Remote Sensing Images** [[paper]](https://ieeexplore.ieee.org/document/10930588)
+39. [2025 TGRS] **Multimodal Visual-Language Prompt Network for Remote Sensing Few-Shot Segmentation** [[paper]](https://ieeexplore.ieee.org/abstract/document/11071646)[[code]](https://github.com/Gritiii/MVLPNet)
+40. [2025 Arxiv] **ATRNet-STAR: A Large Dataset and Benchmark Towards Remote Sensing Object Recognition in the Wild** [[paper]](https://arxiv.org/abs/2501.13354) [[code]](https://github.com/waterdisappear/ATRNet-STAR)
+41. [2025 Arxiv] **RSKT-Seg: Exploring Efficient Open-Vocabulary Segmentation in the Remote Sensing** [[paper]](https://arxiv.org/pdf/2509.12040) [[code]](https://github.com/LiBingyu01/RSKT-Seg)
+42. [2025 ISPRS]  **AdaptVFMs-RSCD: Advancing Remote Sensing Change Detection from binary to semantic with SAM and CLIP** [[paper]](https://doi.org/10.1016/j.isprsjprs.2025.09.010) [[data]](https://github.com/Jiang-CHD-YunNan/RS-VFMs-Fine-tuning-Dataset)
+43. [2025 Arxiv]**PeftCD: Leveraging Vision Foundation Models with Parameter-Efficient Fine-Tuning for Remote Sensing Change Detection** [[paper]](https://arxiv.org/pdf/2509.09572) [[code]](https://github.com/dyzy41/PeftCD)
+44. [2025 Arxiv] **AlignCLIP: Self-Guided Alignment for Remote Sensing Open-Vocabulary Semantic Segmentation** [[paper]](https://openreview.net/forum?id=hpD3tn7Xbp) [[code]](https://openreview.net/attachment?id=hpD3tn7Xbp&name=supplementary_material)
+45. [2025 Arxiv] **Few-Shot Adaptation Benchmark for Remote Sensing Vision-Language Models** [[paper]](https://arxiv.org/pdf/2510.07135) [[code]](https://github.com/elkhouryk/fewshot_RSVLMs)
+46. [2025 RSE] **Strategic sampling for training a semantic segmentation model in operational mapping: Case studies on cropland parcel extraction** [[paper]](https://doi.org/10.1016/j.rse.2025.115034) [[data]](https://doi.org/10.5281/zenodo.16595511) [[code]](https://github.com/Remote-Sensing-of-Land-Resource-Lab/Training-Sample-Selection)
+47. [2025 TIP] **Universal Fine-Grained Visual Categorization by Concept Guided Learning** [[paper]](https://ieeexplore.ieee.org/document/10829548) [[data]](https://drive.google.com/file/d/11hYbdO32hyspucDKp5wwjwvCaD38AEKe/view?usp=sharing) [[code]](https://github.com/BiQiWHU/CGL)
+48. [2025 TIP] **SARATR-X: Towards Building A Foundation Model for SAR Target Recognition** [[paper]](https://ieeexplore.ieee.org/document/10856784) [[code]](https://github.com/waterdisappear/SARATR-X)
+49. [2025 TIP] **HSLabeling: Towards Efficient Labeling for Large-scale Remote Sensing Image Segmentation with Hybrid Sparse Labeling** [[paper]](https://ieeexplore.ieee.org/document/10829548) [[data]](https://drive.google.com/drive/folders/1CiYzJyBn1rV-xsrsYQ6o2HDQjdfnadHl) [[code]](https://github.com/linjiaxing99/HSLabeling)
+50. [2025 CVM] **Remote sensing tuning: A survey** [[paper]](https://ieeexplore.ieee.org/document/11119145) [[code]](https://github.com/DongshuoYin/Remote-Sensing-Tuning-A-Survey/tree/main)
+51. [2025 ISPRS]**Domain generalization for semantic segmentation of remote sensing images via vision foundation model fine-tuning**[[paper]](https://www.sciencedirect.com/science/article/pii/S0924271625003569)[[code]](https://github.com/mmmll23/GeoSA-BaSA)
+52. [2025 ISPRS]**Meta Feature Disentanglement under continuous-valued domain modeling for generalizable remote sensing image segmentation on unseen domains**[[paper]](https://www.sciencedirect.com/science/article/pii/S0924271625003879)[[code]](https://github.com/LCB1970/MetaFD)
 
 
 <a name="Detection"></a>  
 ## Change Detection
 1. [2025 arXiv] **FoBa: A Foreground-Background co-Guided Method and New Benchmark for Remote Sensing Semantic Change Detection** [[paper]](https://arxiv.org/pdf/2509.15788)[[code]](https://github.com/zmoka-zht/FoBa)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/FoBa.pdf)
+
+<a name="Multi_Modal"></a>  
+## Multi-Modal
+1. [2024 CVPR] **SkySense: A Multi-Modal Remote Sensing Foundation Model Towards Universal Interpretation for Earth Observation Imagery** [[paper]](https://openaccess.thecvf.com/content/CVPR2024/papers/Guo_SkySense_A_Multi-Modal_Remote_Sensing_Foundation_Model_Towards_Universal_Interpretation_CVPR_2024_paper.pdf)[[code]](https://github.com/Jack-bo1220/SkySense?tab=readme-ov-file)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SkySense.md)
+2. [2025 ICCV] **SkySense V2: A Unified Foundation Model for Multi-modal Remote Sensing** [[paper]](https://arxiv.org/pdf/2507.13812)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SkySense2.md)
+
 <a name="segmentation"></a>  
 ## Segmentation
 1. [2025 ICCV] **Adapt Foundational Segmentation Models with Heterogeneous Searching Space**[[paper]](https://openaccess.thecvf.com/content/ICCV2025/papers/Yi_Adapt_Foundational_Segmentation_Models_with_Heterogeneous_Searching_Space_ICCV_2025_paper.pdf)[[code]](https://github.com/llipika/A2A-HSS)
