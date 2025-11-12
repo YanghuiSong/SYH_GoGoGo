@@ -8,7 +8,7 @@ The following is the code for reproducing recently read papers and the work curr
 5. [[Features are vital](#About_Features)]
 6. [[Remote Sensing](#Remote_Sensing)]
 7. [[Classification](#Detection)]
-8. [[Multi-Modal]](#Multi_Modal)
+8. [[Multi-Modal(VLMs)]](#Multi_Modal)
 9. [[Segmentation](#segmentation)]
        
 -----------------------------------------------------------------------------------------------
@@ -131,15 +131,18 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 1. [2025 arXiv] **FoBa: A Foreground-Background co-Guided Method and New Benchmark for Remote Sensing Semantic Change Detection** [[paper]](https://arxiv.org/pdf/2509.15788)[[code]](https://github.com/zmoka-zht/FoBa)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/FoBa.pdf)
 
 <a name="Multi_Modal"></a>  
-## Multi-Modal
+## Multi-Modal(VLMs)
 1. [2024 CVPR] **SkySense: A Multi-Modal Remote Sensing Foundation Model Towards Universal Interpretation for Earth Observation Imagery** [[paper]](https://openaccess.thecvf.com/content/CVPR2024/papers/Guo_SkySense_A_Multi-Modal_Remote_Sensing_Foundation_Model_Towards_Universal_Interpretation_CVPR_2024_paper.pdf)[[code]](https://github.com/Jack-bo1220/SkySense?tab=readme-ov-file)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SkySense.md)
 2. [2025 ICCV] **SkySense V2: A Unified Foundation Model for Multi-modal Remote Sensing** [[paper]](https://arxiv.org/pdf/2507.13812)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SkySense2.md)
+3. [2025 NIPS] **Test-Time Adaptive Object Detection with Foundation Model**[[paper]](https://arxiv.org/pdf/2510.25175)[[code]](https://github.com/gaoyingjay/ttaod_foundation)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/TestTime.md)
 
 <a name="segmentation"></a>  
 ## Segmentation
 1. [2025 ICCV] **Adapt Foundational Segmentation Models with Heterogeneous Searching Space**[[paper]](https://openaccess.thecvf.com/content/ICCV2025/papers/Yi_Adapt_Foundational_Segmentation_Models_with_Heterogeneous_Searching_Space_ICCV_2025_paper.pdf)[[code]](https://github.com/llipika/A2A-HSS)
 2. [2024 CVPR] **EMCAD: Efficient Multi-scale Convolutional Attention Decoding for Medical Image Segmentation**[[paper]](https://openaccess.thecvf.com/content/CVPR2024/papers/Rahman_EMCAD_Efficient_Multi-scale_Convolutional_Attention_Decoding_for_Medical_Image_Segmentation_CVPR_2024_paper.pdf)[[code]](https://github.com/SLDGroup/EMCAD)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/EMCAD.md)
-3. [2024 ariXiv] **SAM 2: Segment Anything in Images and Videos**[[paper]](https://arxiv.org/pdf/2408.00714)[[code]](https://github.com/facebookresearch/sam2)   
+3. [2024 ariXiv] **SAM 2: Segment Anything in Images and Videos**[[paper]](https://arxiv.org/pdf/2408.00714)[[code]](https://github.com/facebookresearch/sam2)
+4. [2025 AAAI] **ZoRI: Towards Discriminative Zero-Shot Remote Sensing Instance Segmentation** [[paper]](https://arxiv.org/pdf/2412.12798)[[code]](https://github.com/HuangShiqi128/ZoRI)
+5. [2025 CVPR] **ROS-SAM: High-Quality Interactive Segmentation for Remote Sensing Moving Object** [[paper]](https://arxiv.org/pdf/2503.12006)[[code]](https://github.com/ShanZard/ROS-SAM)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/ROSSAM.md)  
 
 
 
