@@ -64,6 +64,8 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 7. [2025 ICCV] **Talking to DINO: Bridging Self-Supervised Vision Backbones with Language for Open-Vocabulary Segmentation** [[paper]](https://arxiv.org/pdf/2411.19331)[[code]](https://github.com/lorebianchi98/Talk2DINO)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/Talk2Dino.md)[[与CASS进行对比]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/CompWithCASS.md)
 8. [2025 ICCV] **CorrCLIP: Reconstructing Patch Correlations in CLIP for OVSS** [[paper]](https://arxiv.org/pdf/2411.10086)[[code]](https://github.com/zdk258/CorrCLIP)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/new/main/Notes/CorrCLIP)
 9. [2024 arXiv] **Self-Calibrated CLIP for Training-Free Open-Vocabulary Segmentation** [[paper]](https://arxiv.org/pdf/2411.15869)[[code]](https://github.com/SuleBai/SC-CLIP)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/new/main/Notes/SelfCLIP)
+10. [2026 AAAI] **Exploring Efficient Open-Vocabulary Segmentation in the Remote Sensing** [[paper]](https://arxiv.org/pdf/2509.12040)[[code]](https://github.com/LiBingyu01/RSKT-Seg?tab=readme-ov-file)
+11. [2025 CVPR] ****[[paper]](https://openaccess.thecvf.com/content/CVPR2025/papers/Zhu_SkySense-O_Towards_Open-World_Remote_Sensing_Interpretation_with_Vision-Centric_Visual-Language_Modeling_CVPR_2025_paper.pdf)[[code]](https://github.com/zqcrafts/SkySense-O)
 
 <a name="About_Features"></a>  
 ## Features are vital
@@ -79,7 +81,7 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 6. [2025 Nature MI] **A semantic-enhanced multi-modal remote sensing foundation model for Earth observation**[[paper]](https://www.nature.com/articles/s42256-025-01078-8)[[code]](https://github.com/kang-wu/SkySensePlusPlus)
 7. [2025 TGRS] **A Unified Framework With Multimodal Fine-Tuning for Remote Sensing Semantic Segmentation.** [[paper]](https://ieeexplore.ieee.org/document/11063320) [[code]](https://github.com/sstary/SSRS)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/UnifiedFram.pdf)
 8. [2025 ICASSP] **Enhancing Remote Sensing Vision-Language Models for Zero-Shot Scene Classification.** [[paper]](https://arXiv.org/abs/2409.00698) [[code]](https://github.com/elkhouryk/RS-TransCLIP)
-9. [2025 ICCV] **Active Learning Meets Foundation Models: Fast Remote Sensing Data Annotation for Object Detection.** [[paper]](https://openaccess.thecvf.com/content/ICCV2025/papers/Burges_Active_Learning_Meets_Foundation_Models_Fast_Remote_Sensing_Data_Annotation_ICCV_2025_paper.pdf) [[code]](https://github.com/mburges-cvl/ICCV_AL4FM)
+9. [2025 ICCV] **Active Learning Meets Foundation Models: Fast Remote Sensing Data Annotation for Object Detection.** [[paper]](https://openaccess.thecvf.com/content/ICCV2025/papers/Burges_Active_Learning_Meets_Foundation_Models_Fast_Remote_Sensing_Data_Annotation_ICCV_2025_paper.pdf) [[code]](https://github.com/mburges-cvl/ICCV_AL4FM)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/ActiveLearn.md)
 10. [2025 ICCV] **Dynamic Dictionary Learning for Remote Sensing Image Segmentation.** [[paper]](https://arXiv.org/pdf/2503.06683) [[code]](https://github.com/XavierJiezou/D2LS)
 11. [2025 ICCV] **GEOBench-VLM: Benchmarking Vision-Language Models for Geospatial Tasks.** [[paper]](https://arxiv.org/pdf/2411.19325) [[code]](https://github.com/The-AI-Alliance/GEO-Bench-VLM)
 12. [2025 ICCV] **SCORE: Scene Context Matters in Open-Vocabulary Remote Sensing Instance Segmentation.** [[paper]](https://arXiv.org/abs/2507.12857) [[code]](https://github.com/HuangShiqi128/SCORE)
@@ -129,12 +131,15 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 <a name="Detection"></a>  
 ## Change Detection
 1. [2025 arXiv] **FoBa: A Foreground-Background co-Guided Method and New Benchmark for Remote Sensing Semantic Change Detection** [[paper]](https://arxiv.org/pdf/2509.15788)[[code]](https://github.com/zmoka-zht/FoBa)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/FoBa.pdf)
+2. 
 
 <a name="Multi_Modal"></a>  
 ## Multi-Modal(VLMs)
 1. [2024 CVPR] **SkySense: A Multi-Modal Remote Sensing Foundation Model Towards Universal Interpretation for Earth Observation Imagery** [[paper]](https://openaccess.thecvf.com/content/CVPR2024/papers/Guo_SkySense_A_Multi-Modal_Remote_Sensing_Foundation_Model_Towards_Universal_Interpretation_CVPR_2024_paper.pdf)[[code]](https://github.com/Jack-bo1220/SkySense?tab=readme-ov-file)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SkySense.md)
-2. [2025 ICCV] **SkySense V2: A Unified Foundation Model for Multi-modal Remote Sensing** [[paper]](https://arxiv.org/pdf/2507.13812)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SkySense2.md)
-3. [2025 NIPS] **Test-Time Adaptive Object Detection with Foundation Model**[[paper]](https://arxiv.org/pdf/2510.25175)[[code]](https://github.com/gaoyingjay/ttaod_foundation)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/TestTime.md)
+2. [2025 NMI] **SkySense++:A Semantic-Enhanced Multi-Modal Remote Sensing Foundation Model for Earth Observation** [[paper]](https://www.nature.com/articles/s42256-025-01078-8)[[code]](https://github.com/kang-wu/SkySensePlusPlus)
+3. [2025 ICCV] **SkySense V2: A Unified Foundation Model for Multi-modal Remote Sensing** [[paper]](https://arxiv.org/pdf/2507.13812)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SkySense2.md)
+4. [2024 arXiv] **SkySenseGPT: A Fine-Grained Instruction Tuning Dataset and Model for Remote Sensing Vision-Language Understanding** [[paper]]()[[code]](https://github.com/Luo-Z13/SkySenseGPT/tree/main)
+5. [2025 NIPS] **Test-Time Adaptive Object Detection with Foundation Model**[[paper]](https://arxiv.org/pdf/2510.25175)[[code]](https://github.com/gaoyingjay/ttaod_foundation)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/TestTime.md)
 
 <a name="segmentation"></a>  
 ## Segmentation
