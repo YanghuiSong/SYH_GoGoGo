@@ -8,7 +8,7 @@ The following is the code for reproducing recently read papers and the work curr
 5. [[Features are vital](#About_Features)]
 6. [[Remote Sensing](#Remote_Sensing)]
 7. [[Classification](#Detection)]
-8. [[Multi-Modal(VLMs)]](#Multi_Modal)
+8. [[Multi-Modal(VLMs)](#Multi_Modal)]
 9. [[Segmentation](#segmentation)]
        
 -----------------------------------------------------------------------------------------------
@@ -131,7 +131,7 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 <a name="Detection"></a>  
 ## Change Detection
 1. [2025 arXiv] **FoBa: A Foreground-Background co-Guided Method and New Benchmark for Remote Sensing Semantic Change Detection** [[paper]](https://arxiv.org/pdf/2509.15788)[[code]](https://github.com/zmoka-zht/FoBa)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/FoBa.pdf)
-2. 
+2. [2025 AAAI] **SM3Det: A Unified Model for Multi-Modal Remote Sensing Object Detection** [[paper]](https://arxiv.org/pdf/2412.20665)[[code]](https://github.com/zcablii/SM3Det)[[Datasets]](https://www.kaggle.com/datasets/greatbird/soi-det)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/tree/main/Notes)
 
 <a name="Multi_Modal"></a>  
 ## Multi-Modal(VLMs)
@@ -140,6 +140,7 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 3. [2025 ICCV] **SkySense V2: A Unified Foundation Model for Multi-modal Remote Sensing** [[paper]](https://arxiv.org/pdf/2507.13812)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SkySense2.md)
 4. [2024 arXiv] **SkySenseGPT: A Fine-Grained Instruction Tuning Dataset and Model for Remote Sensing Vision-Language Understanding** [[paper]]()[[code]](https://github.com/Luo-Z13/SkySenseGPT/tree/main)
 5. [2025 NIPS] **Test-Time Adaptive Object Detection with Foundation Model**[[paper]](https://arxiv.org/pdf/2510.25175)[[code]](https://github.com/gaoyingjay/ttaod_foundation)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/TestTime.md)
+6. [2025 ACM Multimedia] **KAID: Knowledge-Aware Interactive Distillation for Vision-Language Models**[[paper]](https://dl.acm.org/doi/pdf/10.1145/3746027.3755008)
 
 <a name="segmentation"></a>  
 ## Segmentation
