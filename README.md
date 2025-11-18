@@ -97,7 +97,7 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 22. [2025 arXiv] **SAR-KnowLIP: Towards Multimodal Foundation Models for Remote Sensing.** [[paper]](https://arxiv.org/pdf/2509.23927) [[code]](https://github.com/yangyifremad/SARKnowLIP)
 23. [2025 AAAI] **ZoRI: Towards discriminative zero-shot remote sensing instance segmentation.** [[paper]](https://arXiv.org/abs/2412.12798) [[code]](https://github.com/HuangShiqi128/ZoRI)
 24. [2024 NIPS] **Segment Any Change.** [[paper]](https://proceedings.NIPS.cc/paper_files/paper/2024/file/9415416201aa201902d1743c7e65787b-Paper-Conference.pdf) [[code]](https://github.com/Z-Zheng/pytorch-change-models)
-25. [✨2025 NIPS] **InstructSAM: A Training-Free Framework for Instruction-Oriented Remote Sensing Object Recognition** [[paper]](https://arxiv.org/pdf/2505.15818) [[code]](https://github.com/VoyagerXvoyagerx/InstructSAM?tab=readme-ov-file)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/InstructSAM.md)
+25. [✨2025 NIPS] **InstructSAM: A Training-Free Framework for Instruction-Oriented Remote Sensing Object Recognition** [[paper]](https://arxiv.org/pdf/2505.15818) [[code]](https://github.com/VoyagerXvoyagerx/InstructSAM?tab=readme-ov-file)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/InstructSAM.md)[[和TTAOD的联系]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/InstructSAMwithTT.md)
 26. [2025 NIPS] **Bringing SAM to new heights: Leveraging elevation data for tree crown segmentation from drone imagery** [[paper]](https://arxiv.org/pdf/2506.04970)
 27. [2025 NIPS] **RSCC: A Large-Scale Remote Sensing Change Caption Dataset for Disaster Events** [[paper]](https://arxiv.org/pdf/2509.01907)[[code]](https://github.com/Bili-Sakura/RSCC)
 28. [2025 CVPR] **SegEarth-OV: Towards Training-Free Open-Vocabulary Segmentation for Remote Sensing Images.** [[paper]](https://arXiv.org/abs/2410.01768) [[code]](https://github.com/likyoo/SegEarth-OV)
@@ -141,6 +141,8 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 4. [2024 arXiv] **SkySenseGPT: A Fine-Grained Instruction Tuning Dataset and Model for Remote Sensing Vision-Language Understanding** [[paper]]()[[code]](https://github.com/Luo-Z13/SkySenseGPT/tree/main)
 5. [2025 NIPS] **Test-Time Adaptive Object Detection with Foundation Model**[[paper]](https://arxiv.org/pdf/2510.25175)[[code]](https://github.com/gaoyingjay/ttaod_foundation)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/TestTime.md)
 6. [2025 ACM Multimedia] **KAID: Knowledge-Aware Interactive Distillation for Vision-Language Models**[[paper]](https://dl.acm.org/doi/pdf/10.1145/3746027.3755008)
+7. [2024 ITGRS]**RS5M and GeoRSCLIP: A Large-Scale Vision- Language Dataset and a Large Vision-Language Model for Remote Sensing**[[paper]](https://ieeexplore.ieee.org/document/10679571)[[code]](https://github.com/om-ai-lab/RS5M)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/RS5M.pdf)
+8. [2024 ITGRS]**Remoteclip: A vision language foundation model for remote sensing**[[paper]](https://ieeexplore.ieee.org/document/10504785)[[code]](https://github.com/ChenDelong1999/RemoteCLIP)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/RemoteCLIP.pdf)
 
 <a name="segmentation"></a>  
 ## Segmentation
