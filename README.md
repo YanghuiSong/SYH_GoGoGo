@@ -151,7 +151,7 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 ## Segmentation
 1. [2025 ICCV] **Adapt Foundational Segmentation Models with Heterogeneous Searching Space**[[paper]](https://openaccess.thecvf.com/content/ICCV2025/papers/Yi_Adapt_Foundational_Segmentation_Models_with_Heterogeneous_Searching_Space_ICCV_2025_paper.pdf)[[code]](https://github.com/llipika/A2A-HSS)
 2. [2024 CVPR] **EMCAD: Efficient Multi-scale Convolutional Attention Decoding for Medical Image Segmentation**[[paper]](https://openaccess.thecvf.com/content/CVPR2024/papers/Rahman_EMCAD_Efficient_Multi-scale_Convolutional_Attention_Decoding_for_Medical_Image_Segmentation_CVPR_2024_paper.pdf)[[code]](https://github.com/SLDGroup/EMCAD)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/EMCAD.md)
-3. [2024 ariXiv] **SAM 2: Segment Anything in Images and Videos**[[paper]](https://arxiv.org/pdf/2408.00714)[[code]](https://github.com/facebookresearch/sam2)
+3. [2024 ariXiv] **SAM 2: Segment Anything in Images and Videos**[[paper]](https://arxiv.org/pdf/2408.00714)[[code]](https://github.com/facebookresearch/sam2)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SAM2.md)
 4. [2025 AAAI] **ZoRI: Towards Discriminative Zero-Shot Remote Sensing Instance Segmentation** [[paper]](https://arxiv.org/pdf/2412.12798)[[code]](https://github.com/HuangShiqi128/ZoRI)
 5. [2025 CVPR] **ROS-SAM: High-Quality Interactive Segmentation for Remote Sensing Moving Object** [[paper]](https://arxiv.org/pdf/2503.12006)[[code]](https://github.com/ShanZard/ROS-SAM)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/ROSSAM.md)  
 
