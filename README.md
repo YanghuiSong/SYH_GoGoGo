@@ -1,4 +1,4 @@
-<img width="591" height="154" alt="image" src="https://github.com/user-attachments/assets/6481c0c3-4f55-4f75-bcb2-842aa33d4707" /># SYH_GoGoGo
+# SYH_GoGoGo
 The following is the code for reproducing recently read papers and the work currently in progress.
 # Content
 1. [[Feature Upsampling](#Upsampling)]
