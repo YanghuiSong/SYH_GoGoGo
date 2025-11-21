@@ -1,4 +1,4 @@
-# SYH_GoGoGo
+<img width="591" height="154" alt="image" src="https://github.com/user-attachments/assets/6481c0c3-4f55-4f75-bcb2-842aa33d4707" /># SYH_GoGoGo
 The following is the code for reproducing recently read papers and the work currently in progress.
 # Content
 1. [[Feature Upsampling](#Upsampling)]
@@ -138,22 +138,25 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 1. [2024 CVPR] **SkySense: A Multi-Modal Remote Sensing Foundation Model Towards Universal Interpretation for Earth Observation Imagery** [[paper]](https://openaccess.thecvf.com/content/CVPR2024/papers/Guo_SkySense_A_Multi-Modal_Remote_Sensing_Foundation_Model_Towards_Universal_Interpretation_CVPR_2024_paper.pdf)[[code]](https://github.com/Jack-bo1220/SkySense?tab=readme-ov-file)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SkySense.md)
 2. [2025 NMI] **SkySense++:A Semantic-Enhanced Multi-Modal Remote Sensing Foundation Model for Earth Observation** [[paper]](https://www.nature.com/articles/s42256-025-01078-8)[[code]](https://github.com/kang-wu/SkySensePlusPlus)
 3. [2025 ICCV] **SkySense V2: A Unified Foundation Model for Multi-modal Remote Sensing** [[paper]](https://arxiv.org/pdf/2507.13812)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SkySense2.md)
-4. [2024 arXiv] **SkySenseGPT: A Fine-Grained Instruction Tuning Dataset and Model for Remote Sensing Vision-Language Understanding** [[paper]]()[[code]](https://github.com/Luo-Z13/SkySenseGPT/tree/main)
-5. [2025 NIPS] **Test-Time Adaptive Object Detection with Foundation Model**[[paper]](https://arxiv.org/pdf/2510.25175)[[code]](https://github.com/gaoyingjay/ttaod_foundation)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/TestTime.md)
-6. [2025 ACM Multimedia] **KAID: Knowledge-Aware Interactive Distillation for Vision-Language Models**[[paper]](https://dl.acm.org/doi/pdf/10.1145/3746027.3755008)
-7. [2024 ITGRS]**RS5M and GeoRSCLIP: A Large-Scale Vision- Language Dataset and a Large Vision-Language Model for Remote Sensing**[[paper]](https://ieeexplore.ieee.org/document/10679571)[[code]](https://github.com/om-ai-lab/RS5M)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/RS5M.pdf)
-8. [2024 ITGRS]**Remoteclip: A vision language foundation model for remote sensing**[[paper]](https://ieeexplore.ieee.org/document/10504785)[[code]](https://github.com/ChenDelong1999/RemoteCLIP)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/RemoteCLIP.pdf)
-9. [⭐ 2024 NIPS]**Boosting Vision-Language Models with Transduction**[[paper]](https://arxiv.org/pdf/2406.01837)[[code]](https://github.com/MaxZanella/transduction-for-vlms)[[TransCLIP的公式算法分析]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/TransCLIP.md)
-10. [2024 arXiv]**Enhancing Remote Sensing Vision-Language Models for Zero-Shot Scene Classification**[[paper]](https://arxiv.org/pdf/2409.00698)[[code]](https://github.com/elkhouryk/RS-TransCLIP)
-11. [2025 NIPS] **Vision Transformers with Self-Distilled Registers**[[paper]](https://arxiv.org/pdf/2505.21501v3)[[code]](https://github.com/0raiser0/PH-Reg)[[解决伪影令牌问腿]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/PH_Reg.md)
+4. [2025 ICCV] **Hybrid-grained Feature Aggregation with Coarse-to-fine Language Guidance for Self-supervised Monocular Depth Estimation**[[paper]](https://arxiv.org/pdf/2510.09320)[[code]](https://github.com/Zhangwenyao1/Hybrid-depth)
+5. [2024 arXiv] **SkySenseGPT: A Fine-Grained Instruction Tuning Dataset and Model for Remote Sensing Vision-Language Understanding** [[paper]]()[[code]](https://github.com/Luo-Z13/SkySenseGPT/tree/main)
+6. [2025 NIPS] **Test-Time Adaptive Object Detection with Foundation Model**[[paper]](https://arxiv.org/pdf/2510.25175)[[code]](https://github.com/gaoyingjay/ttaod_foundation)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/TestTime.md)
+7. [2025 NIPS] **Conditional Representation Learning for Customized Tasks** [[paper]](https://arxiv.org/pdf/2510.04564)[[code]](https://github.com/XLearning-SCU/2025-NeurIPS-CRL)
+8. [2025 ACM Multimedia] **KAID: Knowledge-Aware Interactive Distillation for Vision-Language Models**[[paper]](https://dl.acm.org/doi/pdf/10.1145/3746027.3755008)
+9. [2024 ITGRS]**RS5M and GeoRSCLIP: A Large-Scale Vision- Language Dataset and a Large Vision-Language Model for Remote Sensing**[[paper]](https://ieeexplore.ieee.org/document/10679571)[[code]](https://github.com/om-ai-lab/RS5M)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/RS5M.pdf)
+10. [2024 ITGRS]**Remoteclip: A vision language foundation model for remote sensing**[[paper]](https://ieeexplore.ieee.org/document/10504785)[[code]](https://github.com/ChenDelong1999/RemoteCLIP)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/RemoteCLIP.pdf)
+11. [⭐ 2024 NIPS]**Boosting Vision-Language Models with Transduction**[[paper]](https://arxiv.org/pdf/2406.01837)[[code]](https://github.com/MaxZanella/transduction-for-vlms)[[TransCLIP的公式算法分析]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/TransCLIP.md)
+12. [2024 arXiv]**Enhancing Remote Sensing Vision-Language Models for Zero-Shot Scene Classification**[[paper]](https://arxiv.org/pdf/2409.00698)[[code]](https://github.com/elkhouryk/RS-TransCLIP)
+13. [2025 NIPS] **Vision Transformers with Self-Distilled Registers**[[paper]](https://arxiv.org/pdf/2505.21501v3)[[code]](https://github.com/0raiser0/PH-Reg)[[解决伪影令牌问腿]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/PH_Reg.md)
 
 <a name="segmentation"></a>  
 ## Segmentation
 1. [2025 ICCV] **Adapt Foundational Segmentation Models with Heterogeneous Searching Space**[[paper]](https://openaccess.thecvf.com/content/ICCV2025/papers/Yi_Adapt_Foundational_Segmentation_Models_with_Heterogeneous_Searching_Space_ICCV_2025_paper.pdf)[[code]](https://github.com/llipika/A2A-HSS)
 2. [2024 CVPR] **EMCAD: Efficient Multi-scale Convolutional Attention Decoding for Medical Image Segmentation**[[paper]](https://openaccess.thecvf.com/content/CVPR2024/papers/Rahman_EMCAD_Efficient_Multi-scale_Convolutional_Attention_Decoding_for_Medical_Image_Segmentation_CVPR_2024_paper.pdf)[[code]](https://github.com/SLDGroup/EMCAD)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/EMCAD.md)
-3. [2024 ariXiv] **SAM 2: Segment Anything in Images and Videos**[[paper]](https://arxiv.org/pdf/2408.00714)[[code]](https://github.com/facebookresearch/sam2)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SAM2.md)
-4. [2025 AAAI] **ZoRI: Towards Discriminative Zero-Shot Remote Sensing Instance Segmentation** [[paper]](https://arxiv.org/pdf/2412.12798)[[code]](https://github.com/HuangShiqi128/ZoRI)
-5. [2025 CVPR] **ROS-SAM: High-Quality Interactive Segmentation for Remote Sensing Moving Object** [[paper]](https://arxiv.org/pdf/2503.12006)[[code]](https://github.com/ShanZard/ROS-SAM)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/ROSSAM.md)  
+3. [2024 Meta] **SAM 2: Segment Anything in Images and Videos**[[paper]](https://arxiv.org/pdf/2408.00714)[[code]](https://github.com/facebookresearch/sam2)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SAM2.md)
+4. [⭐ 2025 Meta] **SAM 3: Segment Anything with Concepts** [[paper]](https://openreview.net/pdf?id=r35clVtGzw)[[code]](https://github.com/facebookresearch/sam3)[[SAM 3模型的改进思路]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SAM3.md)
+5. [2025 AAAI] **ZoRI: Towards Discriminative Zero-Shot Remote Sensing Instance Segmentation** [[paper]](https://arxiv.org/pdf/2412.12798)[[code]](https://github.com/HuangShiqi128/ZoRI)
+6. [2025 CVPR] **ROS-SAM: High-Quality Interactive Segmentation for Remote Sensing Moving Object** [[paper]](https://arxiv.org/pdf/2503.12006)[[code]](https://github.com/ShanZard/ROS-SAM)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/ROSSAM.md)  
 
 
 
