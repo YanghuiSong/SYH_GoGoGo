@@ -4,12 +4,13 @@ The following is the code for reproducing recently read papers and the work curr
 1. [[Feature Upsampling](#Upsampling)]
 2. [[上采样在遥感图像中的应用](#上采样与遥感)]
 3. [[VLM](#VLM)]
-4. [[OVSS](#OVSS)]
-5. [[Features are vital](#About_Features)]
-6. [[Remote Sensing](#Remote_Sensing)]
-7. [[Classification](#Detection)]
-8. [[Multi-Modal(VLMs)](#Multi_Modal)]
-9. [[Segmentation](#segmentation)]
+4. [[VFM](#VFM)]
+5. [[OVSS](#OVSS)]
+6. [[Features are vital](#About_Features)]
+7. [[Remote Sensing](#Remote_Sensing)]
+8. [[Classification](#Detection)]
+9. [[Multi-Modal(VLMs)](#Multi_Modal)]
+10. [[Segmentation](#segmentation)]
        
 -----------------------------------------------------------------------------------------------
 <a name="Upsampling"></a>  
@@ -23,6 +24,7 @@ The following is the code for reproducing recently read papers and the work curr
 7. [2025 arXiv] **BasicAVSR: Arbitrary-Scale Video Super-Resolution via Image Priors and Enhanced Motion Compensation** [[paper]](https://arxiv.org/pdf/2510.26149)[[code]](https://github.com/shangwei5/BasicAVSR)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/BasicAVSR.md)
 8. [2025 NeurIPS] **JAFAR: Jack up Any Feature at Any Resolution** [[paper]](https://arxiv.org/pdf/2506.11136) [[code]](https://github.com/PaulCouairon/JAFAR)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/JAFAR.md)
 9. [2025 NeurIPS] **DGSolver: Diffusion Generalist Solver with Universal Posterior Sampling for Image Restoration**[[paper]](https://arxiv.org/pdf/2504.21487)[[code]](https://github.com/MiliLab/DGSolver?tab=readme-ov-file)
+10. [2025 arXiv] **Upsample Anything: A Simple and Hard to Beat Baseline for Feature Upsampling** [[paper]](https://arxiv.org/pdf/2511.16301)[[code]](https://github.com/seominseok0429/Upsample-Anything-A-Simple-and-Hard-to-Beat-Baseline-for-Feature-Upsampling)[[简单又强大的特征上采样基线]]()
  
 <a name="上采样与遥感"></a>  
 ## 上采样在遥感图像中的应用
@@ -52,6 +54,13 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 <a name="VLM"></a>  
 ## VLM
 1. [2025 arXiv] **SigLIP 2: A better multilingual vision language encoder**[[paper]](https://arxiv.org/pdf/2502.14786)[[code]](https://github.com/huggingface/blog/blob/main/siglip2.md)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SigLIP2.md)[[与VFM融合的思路]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/RewithTalk2Dino.md)
+2. [⭐ 2024 NIPS]**Boosting Vision-Language Models with Transduction**[[paper]](https://arxiv.org/pdf/2406.01837)[[code]](https://github.com/MaxZanella/transduction-for-vlms)[[TransCLIP的公式算法分析]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/TransCLIP.md)
+3. [2025 NIPS] **Vision Transformers with Self-Distilled Registers**[[paper]](https://arxiv.org/pdf/2505.21501v3)[[code]](https://github.com/0raiser0/PH-Reg)[[解决伪影令牌问腿]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/PH_Reg.md)
+
+
+<a name="VFM"></a>  
+## VFM
+1. [2025 Meta] **DINOv3**[[paper]](https://arxiv.org/pdf/2508.10104)[[code]](https://github.com/facebookresearch/dinov3)[[DINOv3 通过引入 Gram锚定训练机制，成功解决了大规模自监督学习中密集特征退化的问题，构建了一个无需微调即可在分类、分割、检测、深度估计等多样化任务上达到最先进性能的通用视觉编码器]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/DINOv3.md)
 
 <a name="OVSS"></a>  
 ## OVSS
@@ -145,10 +154,8 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 8. [2025 ACM Multimedia] **KAID: Knowledge-Aware Interactive Distillation for Vision-Language Models**[[paper]](https://dl.acm.org/doi/pdf/10.1145/3746027.3755008)
 9. [2024 ITGRS]**RS5M and GeoRSCLIP: A Large-Scale Vision- Language Dataset and a Large Vision-Language Model for Remote Sensing**[[paper]](https://ieeexplore.ieee.org/document/10679571)[[code]](https://github.com/om-ai-lab/RS5M)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/RS5M.pdf)
 10. [2024 ITGRS]**Remoteclip: A vision language foundation model for remote sensing**[[paper]](https://ieeexplore.ieee.org/document/10504785)[[code]](https://github.com/ChenDelong1999/RemoteCLIP)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/RemoteCLIP.pdf)
-11. [⭐ 2024 NIPS]**Boosting Vision-Language Models with Transduction**[[paper]](https://arxiv.org/pdf/2406.01837)[[code]](https://github.com/MaxZanella/transduction-for-vlms)[[TransCLIP的公式算法分析]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/TransCLIP.md)
+11. [2025 arXiv] **ZoomEarth: Active Perception for Ultra-High-Resolution Geospatial Vision-Language Tasks** [[paper]](https://arxiv.org/pdf/2511.12267)[[code]](https://github.com/earth-insights/ZoomEarth)[[面向超高分辨率遥感图像的主动感知]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/ZoomEarth.md)
 12. [2024 arXiv]**Enhancing Remote Sensing Vision-Language Models for Zero-Shot Scene Classification**[[paper]](https://arxiv.org/pdf/2409.00698)[[code]](https://github.com/elkhouryk/RS-TransCLIP)
-13. [2025 NIPS] **Vision Transformers with Self-Distilled Registers**[[paper]](https://arxiv.org/pdf/2505.21501v3)[[code]](https://github.com/0raiser0/PH-Reg)[[解决伪影令牌问腿]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/PH_Reg.md)
-14. [2025 arXiv] **ZoomEarth: Active Perception for Ultra-High-Resolution Geospatial Vision-Language Tasks** [[paper]](https://arxiv.org/pdf/2511.12267)[[code]](https://github.com/earth-insights/ZoomEarth)[[面向超高分辨率遥感图像的主动感知]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/ZoomEarth.md)
 
 <a name="segmentation"></a>  
 ## Segmentation
