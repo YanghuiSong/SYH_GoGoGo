@@ -225,7 +225,7 @@ class CropZoomTool:
 
 **目标函数**：
 ```math
-\mathcal{L}_{SFT} = -\sum_{t=1}^{T} \log P(o_t | o_{<t}, q, I_{global})
+$$\mathcal{L}_{SFT} = -\sum_{t=1}^{T} \log P(o_t | o_{\text{<}t}, q, I_{global})$$
 ```
 其中：
 - `o_t` 是第t个输出token
@@ -263,8 +263,8 @@ def construct_sft_example(image, question, bbox, answer, reasoning_steps):
 
 2. **裁剪优势函数**：
 ```math
-\hat{A}_{i,j}^* = \min\left[ \frac{\pi_\theta(o_{i,j}|q,o_{i,<j})}{\pi_{\theta_{\text{sel}}}(o_{i,j}|q,o_{i,<j})} \hat{A}_{i,j},\ 
-\text{clip}\left( \frac{\pi_\theta}{\pi_{\theta_{\text{sel}}}}, 1-\epsilon, 1+\epsilon \right) \hat{A}_{i,j} \right]
+$$\hat{A}_{i,j}^* = \min\left[ \frac{\pi_\theta(o_{i,j}|q,o_{i,\text{<}j})}{\pi_{\theta_{\text{sel}}}(o_{i,j}|q,o_{i,\text{<}j})} \hat{A}_{i,j},\ 
+\text{clip}\left( \frac{\pi_\theta(o_{i,j}|q,o_{i,\text{<}j})}{\pi_{\theta_{\text{sel}}}(o_{i,j}|q,o_{i,\text{<}j})}, 1-\epsilon, 1+\epsilon \right) \hat{A}_{i,j} \right]$$
 ```
 
 3. **KL散度惩罚项**：
