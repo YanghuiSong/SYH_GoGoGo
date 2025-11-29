@@ -279,3 +279,272 @@ print(f"最佳掩码分数: {single_score:.3f}")
 4. **灵活性**：可以通过 `multimask_output` 参数控制这个行为
 
 这种设计使得 SAM 在处理真实世界的复杂场景时更加鲁棒和实用。
+
+# SAM 掩码生成的数学推导
+
+## 1. 图像编码器数学推导
+
+### 1.1 图像分块与线性投影
+
+输入图像 $I \in \mathbb{R}^{H \times W \times 3}$ 分割为 $N$ 个 $P \times P$ 块：
+
+$$
+N = \frac{H}{P} \times \frac{W}{P}
+$$
+
+每个块展平为向量：
+$$
+\mathbf{x}_p^i \in \mathbb{R}^{P^2 \cdot 3}, \quad i = 1, \dots, N
+$$
+
+线性投影：
+$$
+\mathbf{z}_0^i = \mathbf{x}_p^i \mathbf{W}, \quad \mathbf{W} \in \mathbb{R}^{(P^2 \cdot 3) \times D}
+$$
+
+添加 [class] token 和位置编码：
+$$
+\mathbf{Z}_0 = [\mathbf{z}_{\text{class}}; \mathbf{z}_0^1; \dots; \mathbf{z}_0^N] + \mathbf{E}_{\text{pos}}
+$$
+
+### 1.2 Transformer 层前向传播
+
+第 $l$ 层计算：
+$$
+\mathbf{Z}_l' = \text{LN}(\mathbf{Z}_{l-1}) + \text{MSA}(\text{LN}(\mathbf{Z}_{l-1}))
+$$
+$$
+\mathbf{Z}_l = \mathbf{Z}_l' + \text{MLP}(\text{LN}(\mathbf{Z}_l'))
+$$
+
+其中多头自注意力：
+$$
+\text{MSA}(\mathbf{X}) = \text{Concat}(\text{head}_1, \dots, \text{head}_h)\mathbf{W}^O
+$$
+$$
+\text{head}_i = \text{Attention}(\mathbf{X}\mathbf{W}_i^Q, \mathbf{X}\mathbf{W}_i^K, \mathbf{X}\mathbf{W}_i^V)
+$$
+$$
+\text{Attention}(\mathbf{Q}, \mathbf{K}, \mathbf{V}) = \text{softmax}\left(\frac{\mathbf{Q}\mathbf{K}^\top}{\sqrt{d_k}}\right)\mathbf{V}
+$$
+
+## 2. 提示编码器数学推导
+
+### 2.1 正弦位置编码
+
+对于位置 $pos$ 和维度 $i$：
+$$
+\text{PE}(pos, 2i) = \sin\left(\frac{pos}{10000^{2i/D}}\right)
+$$
+$$
+\text{PE}(pos, 2i+1) = \cos\left(\frac{pos}{10000^{2i/D}}\right)
+$$
+
+### 2.2 点提示编码
+
+点 $p = (x, y)$ 编码：
+$$
+\mathbf{e}_{\text{point}} = \text{MLP}(\text{PE}(x) \oplus \text{PE}(y)) + \mathbf{e}_{\text{type}}
+$$
+
+### 2.3 框提示编码
+
+框 $b = (x_1, y_1, x_2, y_2)$ 编码：
+$$
+\mathbf{e}_{\text{box}} = \text{MLP}(\text{PE}(x_1) \oplus \text{PE}(y_1)) + \text{MLP}(\text{PE}(x_2) \oplus \text{PE}(y_2)) + \mathbf{e}_{\text{box\_type}}
+$$
+
+## 3. 掩码解码器数学推导
+
+### 3.1 输入构造
+
+掩码解码器输入：
+$$
+\mathbf{X} = [\mathbf{e}_{\text{mask}}^1, \mathbf{e}_{\text{mask}}^2, \mathbf{e}_{\text{mask}}^3, \mathbf{e}_{\text{prompt}}, \mathbf{e}_{\text{iou}}] \in \mathbb{R}^{N_{\text{tokens}} \times D}
+$$
+
+### 3.2 交叉注意力机制
+
+查询来自提示，键值来自图像特征：
+$$
+\mathbf{Q} = \mathbf{X}\mathbf{W}^Q, \quad \mathbf{K} = \mathbf{F}_{\text{img}}\mathbf{W}^K, \quad \mathbf{V} = \mathbf{F}_{\text{img}}\mathbf{W}^V
+$$
+
+交叉注意力：
+$$
+\text{CrossAttn}(\mathbf{X}, \mathbf{F}_{\text{img}}) = \text{softmax}\left(\frac{\mathbf{Q}\mathbf{K}^\top}{\sqrt{d_k}}\right)\mathbf{V}
+$$
+
+### 3.3 掩码生成公式
+
+对于第 $i$ 个掩码 token 的隐藏状态 $\mathbf{h}_i$：
+
+特征调制：
+$$
+\mathbf{f}_{\text{mask}} = \text{Linear}(\mathbf{h}_i) \in \mathbb{R}^D
+$$
+$$
+\mathbf{f}_{\text{modulated}} = \mathbf{f}_{\text{mask}} \odot \mathbf{F}_{\text{img}}
+$$
+
+上采样和卷积：
+$$
+\mathbf{f}_{\text{upsampled}} = \text{Upsample}(\mathbf{f}_{\text{modulated}})
+$$
+$$
+\mathbf{M}_i = \sigma(\text{Conv2D}(\mathbf{f}_{\text{upsampled}}))
+$$
+
+其中 $\sigma$ 是 sigmoid 函数。
+
+## 4. IoU 预测数学推导
+
+### 4.1 IoU 预测头
+
+$$
+\text{IoU}_i = \sigma(\mathbf{w}_{\text{iou}}^\top \mathbf{h}_i + b_{\text{iou}})
+$$
+
+### 4.2 真实 IoU 计算
+
+预测掩码 $\mathbf{M}_{\text{pred}}$ 和真实掩码 $\mathbf{M}_{\text{gt}}$ 的 IoU：
+$$
+\text{IoU} = \frac{\sum_{i,j} \mathbb{I}[\mathbf{M}_{\text{pred}}(i,j) > 0.5] \cdot \mathbb{I}[\mathbf{M}_{\text{gt}}(i,j) = 1]}{\sum_{i,j} \mathbb{I}[\mathbf{M}_{\text{pred}}(i,j) > 0.5 \ \text{or} \ \mathbf{M}_{\text{gt}}(i,j) = 1]}
+$$
+
+等价于：
+$$
+\text{IoU} = \frac{|\mathbf{M}_{\text{pred}} \cap \mathbf{M}_{\text{gt}}|}{|\mathbf{M}_{\text{pred}} \cup \mathbf{M}_{\text{gt}}|}
+$$
+
+## 5. 损失函数数学推导
+
+### 5.1 组合损失
+
+$$
+\mathcal{L}_{\text{total}} = \mathcal{L}_{\text{mask}} + \lambda_1 \mathcal{L}_{\text{iou}} + \lambda_2 \mathcal{L}_{\text{consistency}}
+$$
+
+### 5.2 Focal Loss
+
+对于二分类问题，设 $p_t$ 为：
+$$
+p_t = \begin{cases}
+p & \text{if } y = 1 \\
+1-p & \text{otherwise}
+\end{cases}
+$$
+
+Focal Loss：
+$$
+\mathcal{L}_{\text{focal}} = -\alpha_t (1 - p_t)^\gamma \log(p_t)
+$$
+
+### 5.3 Dice Loss
+
+$$
+\mathcal{L}_{\text{dice}} = 1 - \frac{2\sum_{i,j} p_{i,j}y_{i,j} + \epsilon}{\sum_{i,j} p_{i,j} + \sum_{i,j} y_{i,j} + \epsilon}
+$$
+
+### 5.4 IoU 回归损失
+
+$$
+\mathcal{L}_{\text{iou}} = \frac{1}{N} \sum_{i=1}^N (\text{IoU}_{\text{pred}}^i - \text{IoU}_{\text{gt}}^i)^2
+$$
+
+## 6. 匈牙利匹配数学推导
+
+### 6.1 匹配代价矩阵
+
+对于 $N$ 个预测和 $M$ 个目标，代价矩阵 $\mathbf{C} \in \mathbb{R}^{N \times M}$：
+$$
+\mathbf{C}_{ij} = \mathcal{L}_{\text{mask}}(\mathbf{M}_{\text{pred}}^i, \mathbf{M}_{\text{gt}}^j) + \lambda \mathcal{L}_{\text{iou}}(\text{IoU}_{\text{pred}}^i, \text{IoU}_{\text{gt}}^j)
+$$
+
+### 6.2 最优分配
+
+寻找排列 $\pi^* \in \Pi_N$：
+$$
+\pi^* = \underset{\pi \in \Pi_N}{\arg\min} \sum_{i=1}^N \mathbf{C}_{i,\pi(i)}
+$$
+
+## 7. 多尺度目标生成
+
+### 7.1 腐蚀操作
+
+结构元素 $B$ 的腐蚀：
+$$
+\mathbf{M}_{\text{eroded}} = \mathbf{M} \ominus B = \{(x,y) | B_{xy} \subseteq \mathbf{M}\}
+$$
+
+离散形式：
+$$
+\mathbf{M}_{\text{eroded}}[i,j] = \min_{(m,n) \in B} \mathbf{M}[i+m, j+n]
+$$
+
+### 7.2 多尺度目标
+
+$$
+\mathbf{M}_{\text{full}} = \mathbf{M}_{\text{gt}}
+$$
+$$
+\mathbf{M}_{\text{medium}} = \mathbf{M}_{\text{gt}} \ominus B_{k_{\text{medium}}}
+$$
+$$
+\mathbf{M}_{\text{small}} = \mathbf{M}_{\text{gt}} \ominus B_{k_{\text{small}}}
+$$
+
+## 8. 自动掩码生成算法
+
+### 8.1 网格点采样
+
+对于图像尺寸 $H \times W$，网格点：
+$$
+\mathcal{P} = \left\{ \left(i \cdot \frac{W}{N_x}, j \cdot \frac{H}{N_y}\right) \middle| i=0,\dots,N_x-1; j=0,\dots,N_y-1 \right\}
+$$
+
+### 8.2 尺度变换
+
+尺度 $s$ 下的图像：
+$$
+I_s = \text{resize}(I, s \cdot H, s \cdot W)
+$$
+
+点坐标变换：
+$$
+p_s = \frac{p}{s}
+$$
+
+### 8.3 非极大值抑制
+
+掩码 IoU 计算：
+$$
+\text{IoU}(\mathbf{M}_i, \mathbf{M}_j) = \frac{|\mathbf{M}_i \cap \mathbf{M}_j|}{|\mathbf{M}_i \cup \mathbf{M}_j|}
+$$
+
+NMS 算法：
+$$
+\mathcal{S}_{\text{keep}} = \text{NMS}(\{\mathbf{M}_i\}, \{s_i\}, \tau_{\text{iou}})
+$$
+
+保持分数最高的掩码，移除与其 IoU > $\tau_{\text{iou}}$ 的掩码。
+
+## 9. 稳定性分数
+
+在 $K$ 次 dropout 运行中：
+$$
+\text{stability} = \frac{1}{K} \sum_{k=1}^K \text{IoU}(\mathbf{M}, \mathbf{M}_k)
+$$
+
+其中 $\mathbf{M}_k$ 是第 $k$ 次运行的预测掩码。
+
+## 10. 概率解释
+
+SAM 建模条件分布：
+$$
+p(\mathbf{M} | I, P) = \prod_{i=1}^H \prod_{j=1}^W \text{Bernoulli}(\mathbf{M}[i,j] | \sigma(f(I, P)[i,j]))
+$$
+
+其中 $f(I, P)$ 是整个网络的前向传播，$\sigma$ 是 sigmoid 函数。
+
+这个推导完整展示了 SAM 从输入图像和提示到输出掩码的完整数学过程，涵盖了图像编码、提示编码、掩码解码、损失函数和推理算法的所有关键公式。
