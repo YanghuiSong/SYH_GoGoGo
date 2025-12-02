@@ -135,6 +135,7 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 51. [2025 CVM] **Remote sensing tuning: A survey** [[paper]](https://ieeexplore.ieee.org/document/11119145) [[code]](https://github.com/DongshuoYin/Remote-Sensing-Tuning-A-Survey/tree/main)
 52. [2025 ISPRS]**Domain generalization for semantic segmentation of remote sensing images via vision foundation model fine-tuning**[[paper]](https://www.sciencedirect.com/science/article/pii/S0924271625003569)[[code]](https://github.com/mmmll23/GeoSA-BaSA)
 53. [2025 ISPRS]**Meta Feature Disentanglement under continuous-valued domain modeling for generalizable remote sensing image segmentation on unseen domains**[[paper]](https://www.sciencedirect.com/science/article/pii/S0924271625003879)[[code]](https://github.com/LCB1970/MetaFD)
+54. [2026 AAAI] **LWGANet: Addressing Spatial and Channel Redundancy in Remote Sensing Visual Tasks with Light-Weight Grouped Attention** [[paper]](https://arxiv.org/pdf/2501.10040)[[code]](https://github.com/AeroVILab-AHU/LWGANet)[[轻量化去除空间冗余和通道冗余]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/LWGA.md)
 
 
 <a name="Detection"></a>  
@@ -167,7 +168,7 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 6. [2025 AAAI] **ZoRI: Towards Discriminative Zero-Shot Remote Sensing Instance Segmentation** [[paper]](https://arxiv.org/pdf/2412.12798)[[code]](https://github.com/HuangShiqi128/ZoRI)
 7. [2025 CVPR] **ROS-SAM: High-Quality Interactive Segmentation for Remote Sensing Moving Object** [[paper]](https://arxiv.org/pdf/2503.12006)[[code]](https://github.com/ShanZard/ROS-SAM)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/ROSSAM.md)
 8. [2025 NIPS] **UniPixel: Unified Object Referring and Segmentation for Pixel-Level Visual Reasoning** [[paper]](https://arxiv.org/pdf/2509.18094)[[code]](https://github.com/PolyU-ChenLab/UniPixel)[[内统一对象指代（Referring）和分割（Segmentation）两大能力]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/UniPixel.md)
-9. [2025 NIPS] **Seg2Any: Open-set Segmentation-Mask-to-Image Generation with Precise Shape and Semantic Control**[[paper]](https://arxiv.org/pdf/2506.00596)[[code]](https://github.com/0xLDF/Seg2Any)[[基于多模态扩散变换器的分割掩码到图像生成框架]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/Seg2Any.md)
+9. [2025 NIPS] **Seg2Any: Open-set Segmentation-Mask-to-Image Generation with Precise Shape and Semantic Control**[[paper]](https://arxiv.org/pdf/2506.00596)[[code]](https://github.com/0xLDF/Seg2Any)[[这是一个掩码到图像的逆过程基于多模态扩散变换器的分割掩码到图像生成框架]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/Seg2Any.md)
 
 
 
