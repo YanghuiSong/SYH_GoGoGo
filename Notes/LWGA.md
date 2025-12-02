@@ -2,7 +2,7 @@
 ## 模型架构图
 要详细解析图2（LWGA模块及其子模块），需从**整体流程、子模块功能、TGFI模块细节、注意力模式可视化**四个维度展开，以下是逐层拆解： 
 
-![fig2](https://raw.githubusercontent.com/YanghuiSong/SYH_GoGoGo/blob/main/UploadImage/LWGAifig2.png)
+![fig2](https://raw.githubusercontent.com/YanghuiSong/SYH_GoGoGo/main/UploadImage/LWGAifig2.png)
 
 
 ### 一、整体架构：输入→通道分裂→子模块处理→通道合并→输出 
@@ -83,7 +83,7 @@ LWGA通过**“通道分裂→多样化子模块（局部密集+全局稀疏+关
 ### **一、整体网络结构：四阶段层次化设计**  
 LWGANet采用**4个层级阶段（Stage 1-4）**的结构，通过**下采样（Downsampling）**实现特征图的空间尺寸缩减，同时通道数按比例扩张，形成多尺度特征提取能力。数据流如下：  
 
-![fig4](https://raw.githubusercontent.com/YanghuiSong/SYH_GoGoGo/blob/main/UploadImage/LWGAifig4.png)
+![fig4](https://raw.githubusercontent.com/YanghuiSong/SYH_GoGoGo/main/UploadImage/LWGAifig4.png)
 
 
 #### 1. 输入与Stem模块  
