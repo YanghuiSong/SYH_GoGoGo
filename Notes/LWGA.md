@@ -83,7 +83,7 @@ LWGA通过**“通道分裂→多样化子模块（局部密集+全局稀疏+关
 ### **一、整体网络结构：四阶段层次化设计**  
 LWGANet采用**4个层级阶段（Stage 1-4）**的结构，通过**下采样（Downsampling）**实现特征图的空间尺寸缩减，同时通道数按比例扩张，形成多尺度特征提取能力。数据流如下：  
 
-![fig4](https://raw.githubusercontent.com/YanghuiSong/SYH_GoGoGo/main/UploadImage/LWGAifig4.png)
+![fig4](https://raw.githubusercontent.com/YanghuiSong/SYH_GoGoGo/main/UploadImage/LWGAfig4.png)
 
 
 #### 1. 输入与Stem模块  
