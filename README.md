@@ -5,12 +5,13 @@ The following is the code for reproducing recently read papers and the work curr
 2. [[上采样在遥感图像中的应用](#上采样与遥感)]
 3. [[VLM](#VLM)]
 4. [[VFM](#VFM)]
-5. [[OVSS](#OVSS)]
-6. [[Features are vital](#About_Features)]
-7. [[Remote Sensing](#Remote_Sensing)]
-8. [[Classification](#Detection)]
-9. [[Multi-Modal(VLMs)](#Multi_Modal)]
-10. [[Segmentation](#segmentation)]
+5. [[SAM](#SAM)]
+6. [[OVSS](#OVSS)]
+7. [[Features are vital](#About_Features)]
+8. [[Remote Sensing](#Remote_Sensing)]
+9. [[Classification](#Detection)]
+10. [[Multi-Modal(VLMs)](#Multi_Modal)]
+11. [[Segmentation](#segmentation)]
        
 -----------------------------------------------------------------------------------------------
 <a name="Upsampling"></a>  
@@ -61,6 +62,15 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 <a name="VFM"></a>  
 ## VFM
 1. [2025 Meta] **DINOv3**[[paper]](https://arxiv.org/pdf/2508.10104)[[code]](https://github.com/facebookresearch/dinov3)[[DINOv3 通过引入 Gram锚定训练机制，成功解决了大规模自监督学习中密集特征退化的问题，构建了一个无需微调即可在分类、分割、检测、深度估计等多样化任务上达到最先进性能的通用视觉编码器]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/DINOv3.md)
+
+<a name="SAM"></a>  
+## SAM
+1. [⭐ 2023 Meta] **Segment Anything**[[paper]](https://openaccess.thecvf.com/content/ICCV2023/papers/Kirillov_Segment_Anything_ICCV_2023_paper.pdf)[[code]](https://github.com/facebookresearch/segment-anything)[[SAM系列的对比]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SAMCompare.md)[[SAM掩码生成详解]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SAMmask.md)[[SAM图解码器]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SAMCodeLearn/SAMimage_encoder.md)[[SAM提示编码器详解]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SAMCodeLearn/prompt_encoder.md)[[SAM掩码Decoder详解]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SAMCodeLearn/SAMmask_decoder.md)[[SAM三个模块的联系]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SAMCodeLearn/sam.md)[[自动掩码生成器详解]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SAMCodeLearn/AMG.md)[[SAM的双向Transformer]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SAMCodeLearn/TwoWayTransformer.md)
+2. [2024 Meta] **SAM 2: Segment Anything in Images and Videos**[[paper]](https://arxiv.org/pdf/2408.00714)[[code]](https://github.com/facebookresearch/sam2)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SAM2.md)
+3. [⭐ 2025 Meta] **SAM 3: Segment Anything with Concepts** [[paper]](https://openreview.net/pdf?id=r35clVtGzw)[[code]](https://github.com/facebookresearch/sam3)[[SAM 3模型的改进思路]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SAM3.md)[[SAM3的复现效果]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/ExSAM3.md)[[patch间固有问题对于存在性token可能的影响]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/IssueSAM1.md)[[实例编码器与图像编码器之间可能存在的gap]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/IssueSAM2.md)[[SAM3各层解析]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SAM3Layers.md)
+4. [2025 arXiv] **SAM3-Adapter: Efficient Adaptation of Segment Anything 3 for Camouflage Object Segmentation** [[paper]](https://arxiv.org/pdf/2511.19425)[[code]](https://github.com/tianrun-chen/SAM-Adapter-PyTorch)[[使用适配器解锁SAM3极精细边界的能力]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SAM3_Adapter.md)
+
+
 
 <a name="OVSS"></a>  
 ## OVSS
@@ -157,6 +167,8 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 10. [2024 ITGRS]**Remoteclip: A vision language foundation model for remote sensing**[[paper]](https://ieeexplore.ieee.org/document/10504785)[[code]](https://github.com/ChenDelong1999/RemoteCLIP)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/RemoteCLIP.pdf)
 11. [2025 arXiv] **ZoomEarth: Active Perception for Ultra-High-Resolution Geospatial Vision-Language Tasks** [[paper]](https://arxiv.org/pdf/2511.12267)[[code]](https://github.com/earth-insights/ZoomEarth)[[面向超高分辨率遥感图像的主动感知]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/ZoomEarth.md)
 12. [2024 arXiv]**Enhancing Remote Sensing Vision-Language Models for Zero-Shot Scene Classification**[[paper]](https://arxiv.org/pdf/2409.00698)[[code]](https://github.com/elkhouryk/RS-TransCLIP)
+13. [2024 TGRS] **Exploring Fine-Grained Image-Text Alignment for Referring Remote Sensing Image Segmentation** [[paper]](https://arxiv.org/pdf/2409.13637)[[code]](https://github.com/Shaosifan/FIANet)[[通过图像-文本对齐捕捉到区分性的多模态特征]]()
+14. [2025 TGRS] **A Unified Framework With Multimodal Fine-Tuning for Remote Sensing Semantic Segmentation** [[paper]](https://ieeexplore.ieee.org/document/11063320)[[code]](https://github.com/sstary/SSRS)[[融合 MMAdapterMMLoRA，让 SAM 在 DSM 数据上高效落地遥感语义分割]]()
 
 <a name="segmentation"></a>  
 ## Segmentation
