@@ -931,7 +931,6 @@ def encode_point_prompt(self, point_coords, point_labels, image_features):
 ```
 
 ### 维度对齐的关键步骤
-
 ```
 所有特征统一到256维的原因:
 1. 计算效率: 统一的维度减少矩阵运算的复杂度
@@ -947,6 +946,26 @@ def encode_point_prompt(self, point_coords, point_labels, image_features):
 ## 6.2 早期融合：文本语义注入视觉特征
 
 ### 具体操作步骤详解
+**采用的是一个序列级联操作**
+```python
+        if encode_text:
+            prompt = torch.cat([txt_feats, geo_feats, visual_prompt_embed], dim=0)
+            prompt_mask = torch.cat([txt_masks, geo_masks, visual_prompt_mask], dim=1)
+        else:
+            prompt = torch.cat([geo_feats, visual_prompt_embed], dim=0)
+            prompt_mask = torch.cat([geo_masks, visual_prompt_mask], dim=1)
+```
+这一步将不同类型的提示特征在序列维度上连接起来：
+
+文本特征: [txt_seq_len, batch_size, 256]
+
+几何特征: [geo_seq_len, batch_size, 256]
+
+视觉提示特征: [vis_seq_len, batch_size, 256]
+
+连接后形成统一的提示序列: [txt_seq_len + geo_seq_len + vis_seq_len, batch_size, 256]
+
+**广播操作从代码分析中可以看出是关闭的，可能并未启用**
 
 ```
 输入: 
