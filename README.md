@@ -146,6 +146,7 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 52. [2025 ISPRS]**Domain generalization for semantic segmentation of remote sensing images via vision foundation model fine-tuning**[[paper]](https://www.sciencedirect.com/science/article/pii/S0924271625003569)[[code]](https://github.com/mmmll23/GeoSA-BaSA)
 53. [2025 ISPRS]**Meta Feature Disentanglement under continuous-valued domain modeling for generalizable remote sensing image segmentation on unseen domains**[[paper]](https://www.sciencedirect.com/science/article/pii/S0924271625003879)[[code]](https://github.com/LCB1970/MetaFD)
 54. [2026 AAAI] **LWGANet: Addressing Spatial and Channel Redundancy in Remote Sensing Visual Tasks with Light-Weight Grouped Attention** [[paper]](https://arxiv.org/pdf/2501.10040)[[code]](https://github.com/AeroVILab-AHU/LWGANet)[[轻量化去除空间冗余和通道冗余]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/LWGA.md)
+55. [2026 AAAI] **MaRS: A Multi-Modality Very-High-Resolution Remote Sensing Foundation Model with Cross-Granularity Meta-Modality Learning** [[paper]](https://rsidea.whu.edu.cn/mars.pdf) [[code]](https://github.com/WanderRainy/MaRS)[[融合patch级、image级和patch-to-global三粒度超高分辨率SAR-光学多模态遥感基础模型]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/MARS.md)
 
 
 <a name="Detection"></a>  
@@ -168,7 +169,7 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 11. [2025 arXiv] **ZoomEarth: Active Perception for Ultra-High-Resolution Geospatial Vision-Language Tasks** [[paper]](https://arxiv.org/pdf/2511.12267)[[code]](https://github.com/earth-insights/ZoomEarth)[[面向超高分辨率遥感图像的主动感知]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/ZoomEarth.md)
 12. [2024 arXiv]**Enhancing Remote Sensing Vision-Language Models for Zero-Shot Scene Classification**[[paper]](https://arxiv.org/pdf/2409.00698)[[code]](https://github.com/elkhouryk/RS-TransCLIP)
 13. [2024 TGRS] **Exploring Fine-Grained Image-Text Alignment for Referring Remote Sensing Image Segmentation** [[paper]](https://arxiv.org/pdf/2409.13637)[[code]](https://github.com/Shaosifan/FIANet)[[通过图像-文本对齐捕捉到区分性的多模态特征]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/FIANet.md)
-14. [2025 TGRS] **A Unified Framework With Multimodal Fine-Tuning for Remote Sensing Semantic Segmentation** [[paper]](https://ieeexplore.ieee.org/document/11063320)[[code]](https://github.com/sstary/SSRS)[[融合 MMAdapterMMLoRA，让 SAM 在 DSM 数据上高效落地遥感语义分割]]()
+14. [2025 TGRS] **A Unified Framework With Multimodal Fine-Tuning for Remote Sensing Semantic Segmentation** [[paper]](https://ieeexplore.ieee.org/document/11063320)[[code]](https://github.com/sstary/SSRS)[[融合 MMAdapterMMLoRA，让 SAM 在 DSM 数据上高效落地遥感语义分割]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/UFMT.md)
 
 <a name="segmentation"></a>  
 ## Segmentation
