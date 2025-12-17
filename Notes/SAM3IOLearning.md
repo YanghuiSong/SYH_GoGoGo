@@ -62,9 +62,12 @@
   - 位置编码: [1, 256, 72, 72]
 ```
 
+
+
 ## 4. Transformer编码器 (Fusion Encoder)
 
 ### 4.1 特征准备阶段
+
 在进入编码器之前，特征需要进行预处理：
 
 ```
@@ -74,45 +77,144 @@
 处理过程:
   - 展平空间维度: 72×72=5184
   - 转换为序列优先格式
+  - 添加层级嵌入（如果有多个特征层级）
 输出:
   - 图像特征: [5184, 1, 256] (序列优先)
   - 位置编码: [5184, 1, 256] (序列优先)
 ```
 
+在代码中，这个过程由[_prepare_multilevel_features](file:///d:/CodeReading/sam3/sam3/model/encoder.py#L328-L369)方法实现：
+
+```python
+# 展平特征和位置编码
+src = src.flatten(2).transpose(1, 2)  # bs, hw, c -> [1, 5184, 256]
+pos_embed = pos_embed.flatten(2).transpose(1, 2)  # bs, hw, c -> [1, 5184, 256]
+
+# 添加层级嵌入（如果有多个特征层级）
+if self.level_embed is not None:
+    lvl_pos_embed = pos_embed + self.level_embed[lvl].view(1, 1, -1)
+else:
+    lvl_pos_embed = pos_embed
+```
+
+**位置编码和图像特征之间的操作**：
+1. 位置编码首先被展平并与图像特征保持相同的维度格式
+2. 如果有多个特征层级（level_embed不为None），则将层级嵌入添加到位置编码中
+3. 位置编码在注意力计算中会与查询和键向量相加，而不是直接与图像特征相加
+
+在SAM3模型中，位置编码特别重要，因为：
+
+视觉特征的空间布局：图像补丁在二维空间中的排列包含重要信息，位置编码帮助模型理解这些空间关系。
+
+多尺度特征处理：由于SAM3使用了多层级特征，位置编码还需要与层级嵌入结合，帮助模型区分不同尺度的特征。
+
+跨模态对齐：在图像和文本的交叉注意力中，位置编码有助于模型在两种模态之间建立更好的对应关系。
+
+总的来说，位置编码是Transformer架构中不可或缺的组成部分，它弥补了自注意力机制在序列顺序感知方面的不足，使模型能够充分利用序列数据中的位置信息。
+
 ### 4.2 编码器层处理 (共6层)
+
 每层编码器包含以下组件：
 
 #### 4.2.1 自注意力机制 (Self-Attention)
+
 ```
 输入: [5184, 1, 256]
 处理过程:
   - 通过线性变换生成Q, K, V矩阵
-  - Q: [5184, 1, 256] → [5184, 1, 8, 32] (8个注意力头)
-  - K: [5184, 1, 256] → [5184, 1, 8, 32]
-  - V: [5184, 1, 256] → [5184, 1, 8, 32]
-  - 计算注意力分数: Q @ K^T → [5184, 1, 8, 5184]
+  - Q: [5184, 1, 256] → [1, 5184, 8, 32] (8个注意力头，batch_first=True)
+  - K: [5184, 1, 256] → [1, 5184, 8, 32]
+  - V: [5184, 1, 256] → [1, 5184, 8, 32]
+  - 计算注意力分数: Q @ K^T → [1, 8, 5184, 5184]
   - 应用softmax得到注意力权重
-  - 加权V得到输出: [5184, 1, 256]
+  - 加权V得到输出: [1, 5184, 256]
+  - 转换回序列优先格式: [5184, 1, 256]
 输出: [5184, 1, 256]
 ```
 
+在代码中，自注意力机制由以下部分实现：
+
+```python
+# 在TransformerEncoderLayer.forward_pre方法中
+tgt2 = self.norm1(tgt)
+q = k = tgt2 + query_pos if self.pos_enc_at_attn else tgt2
+tgt2 = self.self_attn(
+    q, k, value=tgt2, attn_mask=tgt_mask, key_padding_mask=tgt_key_padding_mask
+)[0]
+```
+
+注意：这里的[self_attn](file://d:\CodeReading\sam3\sam3\model\encoder.py#L0-L0)是配置为`batch_first=True`的[MultiheadAttention](file:///d:/CodeReading/sam3/sam3/model/model_misc.py#L25-L25)，所以输入输出都是batch-first格式，最后再转换为sequence-first格式。
+
 #### 4.2.2 交叉注意力机制 (Cross-Attention to Text)
+
 ```
 输入:
   - Query (视觉特征): [5184, 1, 256]
   - Key/Value (文本特征): [32, 1, 256]
 处理过程:
+  - 文本特征转置: [32, 1, 256] → [1, 32, 256]
   - 通过线性变换生成Q, K, V矩阵
-  - Q: [5184, 1, 256] → [5184, 1, 8, 32]
-  - K: [32, 1, 256] → [32, 1, 8, 32]
-  - V: [32, 1, 256] → [32, 1, 8, 32]
-  - 计算注意力分数: Q @ K^T → [5184, 1, 8, 32]
+  - Q: [5184, 1, 256] → [1, 5184, 8, 32]
+  - K: [32, 1, 256] → [1, 32, 8, 32]
+  - V: [32, 1, 256] → [1, 32, 8, 32]
+  - 计算注意力分数: Q @ K^T → [1, 8, 5184, 32]
   - 应用softmax得到注意力权重
-  - 加权V得到输出: [5184, 1, 256]
+  - 加权V得到输出: [1, 5184, 256]
+  - 转换回序列优先格式: [5184, 1, 256]
 输出: [5184, 1, 256]
 ```
 
+在交叉注意力之前，文本特征会进行转置操作：
+
+```python
+# 在TransformerEncoderFusion.forward方法中
+prompt.transpose(0, 1)  # [32, 1, 256] → [1, 32, 256]
+```
+
+然后在交叉注意力中处理：
+
+```python
+# 在TransformerEncoderLayer.forward_pre方法中
+tgt2 = self.norm2(tgt)
+tgt2 = self.cross_attn_image(
+    query=tgt2 + query_pos if self.pos_enc_at_cross_attn_queries else tgt2,
+    key=memory + pos if self.pos_enc_at_cross_attn_keys else memory,
+    value=memory,
+    attn_mask=memory_mask,
+    key_padding_mask=memory_key_padding_mask,
+)[0]
+```
+
+**图像和文本交叉注意力之前的其他操作**：
+1. 文本特征从序列优先格式([32, 1, 256])转置为批优先格式([1, 32, 256])
+2. 如果启用了位置编码，位置编码会添加到键(key)和查询(query)中
+3. 在TransformerEncoderFusion中，如果启用了[add_pooled_text_to_img_feat](file://d:\CodeReading\sam3\sam3\model\encoder.py#L0-L0)，还会进行文本池化操作并将其添加到图像特征中：
+
+```python
+if self.add_pooled_text_to_img_feat:
+    # Fusion: Add mean pooled text to image features
+    pooled_text = pool_text_feat(
+        prompt, prompt_key_padding_mask, self.pool_text_with_mask
+    )
+    pooled_text = self.text_pooling_proj(pooled_text)[
+        ..., None, None
+    ]  # prompt is seq first
+    src = [x.add_(pooled_text) for x in src]
+```
+
+但在默认配置中，这个早期融合机制是被禁用的：
+
+```python
+# 在model_builder.py中
+encoder = TransformerEncoderFusion(
+    # ... 其他参数 ...
+    add_pooled_text_to_img_feat=False,  # 默认关闭
+    # ...
+)
+```
+
 #### 4.2.3 前馈网络 (Feed-Forward Network)
+
 ```
 输入: [5184, 1, 256]
 处理过程:
@@ -122,7 +224,19 @@
 输出: [5184, 1, 256]
 ```
 
+在代码中，前馈网络由以下部分实现：
+
+```python
+# 在TransformerEncoderLayer.forward_pre方法中
+tgt2 = self.norm3(tgt)
+tgt2 = self.linear2(self.dropout(self.activation(self.linear1(tgt2))))
+tgt = tgt + self.dropout3(tgt2)
+```
+
+其中，[linear1](file:///d:/CodeReading/sam3/sam3/model/ops/modules/ms_deform_attn.py#L73-L73)将维度从256扩展到2048，[linear2](file:///d:/CodeReading/sam3/sam3/model/ops/modules/ms_deform_attn.py#L74-L74)将维度从2048压缩回256。
+
 ### 4.3 编码器输出
+
 ```
 输入:
   - 初始视觉特征: [5184, 1, 256]
@@ -134,6 +248,21 @@
   - 条件化视觉特征: [5184, 1, 256]
 说明: 每个视觉位置都融入了文本提示的语义信息
 ```
+
+编码器的最终输出在[TransformerEncoderFusion.forward](file:///d:/CodeReading/sam3/sam3/model/encoder.py#L500-L570)方法中返回：
+
+```python
+return {
+    "memory": out,  # [5184, 1, 256]
+    "padding_mask": key_padding_masks_flatten,
+    "pos_embed": lvl_pos_embed_flatten,
+    "level_start_index": level_start_index,
+    "spatial_shapes": spatial_shapes,
+    "valid_ratios": valid_ratios,
+}
+```
+
+这个输出将被传递给解码器进行后续处理。
 
 ## 5. Transformer解码器 (Decoder)
 
