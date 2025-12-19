@@ -1,3 +1,211 @@
+
+# SegEarth-OV-3与SAM3输入输出的对应关系
+
+## 1. SAM3的输入
+
+### 1.1 图像输入
+- **输入格式**：任意尺寸的彩色图像
+- **SegEarth-OV-3处理**：
+  - 对于大尺寸图像，使用滑动窗口策略进行分块处理
+  - 对于每个图像块，调整到1008×1008的标准尺寸以适配SAM3
+
+```python
+# 在SegEarthOV3Segmentation.predict方法中
+image = Image.open(image_path).convert('RGB')
+# 如果图像太大，则使用滑动窗口处理
+if self.slide_crop > 0 and (self.slide_crop < image.size[0] or self.slide_crop < image.size[1]):
+    seg_logits = self.slide_inference(image, self.slide_stride, self.slide_crop)
+else:
+    seg_logits = self._inference_single_view(image)
+```
+
+### 1.2 文本提示输入
+- **输入格式**：自然语言文本提示（如"建筑物"、"道路"等）
+- **SegEarth-OV-3处理**：
+  - 从配置文件中读取类别定义
+  - 支持同义词（逗号分隔）
+  - 逐一处理每个文本提示
+
+```python
+# 在_get_cls_idx函数中处理类别定义文件
+def get_cls_idx(path):
+    with open(path, 'r') as f:
+        name_sets = f.readlines()
+    num_cls = len(name_sets)
+
+    class_names, class_indices = [], []
+    for idx in range(num_cls):
+        names_i = name_sets[idx].split(',')  # 支持同义词
+        names_i = [i.strip() for i in names_i]
+        class_names += names_i
+        class_indices += [idx for _ in range(len(names_i))]
+    class_names = [item.replace('\n', '') for item in class_names]
+    return class_names, class_indices
+```
+
+## 2. SAM3的输出与SegEarth-OV-3处理的对应关系
+
+### 2.1 实例级输出（来自Transformer解码器）
+
+#### SAM3输出：
+- `masks_logits`：实例掩码逻辑值，形状为[N, H, W]，N为实例数量
+- `object_score`：每个实例的对象得分，形状为[N]
+
+#### SegEarth-OV-3处理：
+```python
+# 在_inference_single_view方法中处理实例级输出
+if self.use_transformer_decoder:
+    if inference_state['masks_logits'].shape[0] > 0:
+        inst_len = inference_state['masks_logits'].shape[0]
+        for inst_id in range(inst_len):
+            instance_logits = inference_state['masks_logits'][inst_id].squeeze()
+            instance_score = inference_state['object_score'][inst_id]
+            # 实例聚合：使用置信度加权并聚合多个实例预测
+            seg_logits[query_idx] = torch.max(seg_logits[query_idx], instance_logits * instance_score)
+```
+
+**对应关系说明**：
+- `inference_state['masks_logits']` 对应SAM3的实例掩码输出
+- `inference_state['object_score']` 对应SAM3的实例置信度得分
+- 通过循环处理每个实例，将置信度得分应用于对应的掩码，然后使用max操作聚合所有实例预测
+
+### 2.2 语义级输出（来自语义头）
+
+#### SAM3输出：
+- `semantic_mask_logits`：语义分割逻辑值，形状为[H, W]
+
+#### SegEarth-OV-3处理：
+```python
+# 在_inference_single_view方法中处理语义级输出
+if self.use_sem_seg:
+    semantic_logits = inference_state['semantic_mask_logits']
+    # 双头融合：将语义级输出与实例级输出融合
+    seg_logits[query_idx] = torch.max(seg_logits[query_idx], semantic_logits)
+```
+
+**对应关系说明**：
+- `inference_state['semantic_mask_logits']` 对应SAM3的语义分割输出
+- 通过max操作将其与实例级输出融合，实现双头融合策略
+
+### 2.3 存在性得分（来自存在性头）
+
+#### SAM3输出：
+- `presence_score`：类别存在性得分，标量值
+
+#### SegEarth-OV-3处理：
+```python
+# 在_inference_single_view方法中处理存在性得分
+if self.use_presence_score:
+    # 存在性引导过滤：使用存在性得分对最终结果进行加权
+    seg_logits[query_idx] = seg_logits[query_idx] * inference_state["presence_score"]
+```
+
+**对应关系说明**：
+- `inference_state["presence_score"]` 对应SAM3的存在性得分输出
+- 通过乘法操作对最终分割结果进行加权，实现存在性引导过滤
+
+## 3. 完整的输入输出处理流程
+
+### 3.1 输入处理流程
+
+1. **图像预处理**：
+   - 大图像 → 滑动窗口分块 → 每块调整为1008×1008
+   - 小图像 → 直接调整为1008×1008
+
+2. **文本提示处理**：
+   - 从配置文件读取类别定义
+   - 解析同义词
+   - 逐一处理每个文本提示
+
+### 3.2 SAM3内部处理流程
+
+1. **图像编码**：
+   - 1008×1008图像 → ViT主干网络 → 72×72特征图
+   - 特征金字塔网络 → 多尺度特征（252×252, 126×126, 63×63, 32×32）
+
+2. **文本编码**：
+   - 文本提示 → BPE分词 → 77个tokens
+   - 文本编码器 → 77×256特征向量
+
+3. **多模态融合**：
+   - 视觉特征 + 文本特征 → VLCombiner → 跨模态注意力融合
+
+4. **解码处理**：
+   - 200个可学习查询 → Transformer解码器 → 精化的对象查询
+
+### 3.3 输出生成流程
+
+1. **实例级输出生成**：
+   - 对象查询 × 像素特征 → 实例掩码（点积操作）
+   - 伴随每个实例的置信度得分
+
+2. **语义级输出生成**：
+   - 语义头处理 → 全局语义分割图
+
+3. **存在性得分生成**：
+   - 存在性头处理 → 类别存在概率
+
+### 3.4 SegEarth-OV-3后处理流程
+
+1. **实例聚合**：
+   - 多个实例预测 → 置信度加权 → max操作聚合
+
+2. **双头融合**：
+   - 实例级输出 + 语义级输出 → max操作融合
+
+3. **存在性过滤**：
+   - 融合结果 × 存在性得分 → 最终加权结果
+
+4. **结果调整**：
+   - 插值调整到原始图像尺寸
+   - 同义词类别合并
+   - 概率阈值过滤
+
+## 4. 具体示例说明
+
+假设我们有一个卫星图像和文本提示"建筑物"：
+
+### 输入阶段：
+1. **图像**：10000×10000的卫星图像
+2. **文本**："建筑物"
+
+### SegEarth-OV-3处理：
+1. **图像分块**：将10000×10000图像切分为多个512×512的重叠块
+2. **尺寸调整**：每个块调整为1008×1008以适配SAM3
+
+### SAM3处理每个图像块：
+1. **图像编码**：
+   - 输入：1008×1008 RGB图像
+   - 输出：多尺度视觉特征
+
+2. **文本编码**：
+   - 输入："建筑物"
+   - 输出：文本特征向量
+
+3. **多模态融合**：
+   - 输入：视觉特征 + 文本特征
+   - 输出：融合后的特征表示
+
+4. **解码输出**：
+   - 实例级：10个建筑物实例，每个有掩码和得分
+   - 语义级：整张图像的建筑物似然图
+   - 存在性：建筑物存在概率为0.95
+
+### SegEarth-OV-3融合处理：
+1. **实例聚合**：
+   - 10个实例掩码 × 对应得分 → 聚合为一个高质量建筑物预测
+
+2. **双头融合**：
+   - 聚合结果 + 语义级结果 → 更完整的建筑物覆盖
+
+3. **存在性加权**：
+   - 融合结果 × 0.95 → 最终建筑物分割图
+
+4. **结果合并**：
+   - 所有图像块的结果 → 合并为10000×10000的完整分割图
+
+这就是SegEarth-OV-3如何将SAM3的输入输出与自己的处理流程一一对应起来的完整过程。
+
 # SAM3架构与SegEarth-OV-3改进详尽分析
 
 ## 1. 系统架构解析
