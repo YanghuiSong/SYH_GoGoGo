@@ -1,3 +1,243 @@
+# FIANet 模型架构详解笔记
+
+## 1. 模型概述
+
+FIANet（Fine-grained Image-Text Alignment Network）是专为遥感图像指代表达分割任务设计的深度学习模型。该模型通过细粒度的图像-文本对齐机制，实现在复杂背景中精确定位由自然语言描述的目标区域。
+
+### 1.1 核心设计理念
+- **早期跨模态交互**：在视觉编码的每个阶段后插入细粒度图像-文本对齐模块（FIAM）
+- **细粒度文本分解**：将文本分解为上下文、地物和空间三类特征分别对齐
+- **文本引导的多尺度融合**：通过文本感知多尺度增强模块（TMEM）实现特征融合
+
+## 2. 模型架构总览
+
+```
+输入: 图像 (B, 3, 480, 480) + 文本描述
+       │
+       ├── 视觉编码器 (Swin Transformer)
+       │     ├── Stage 1 → FIAM_1 → (B, 256, 60, 60)
+       │     ├── Stage 2 → FIAM_2 → (B, 512, 30, 30)
+       │     ├── Stage 3 → FIAM_3 → (B, 1024, 15, 15)
+       │     └── Stage 4 → FIAM_4 → (B, 1024, 15, 15)
+       │
+       ├── 文本编码器 (BERT)
+       │     ├── 上下文特征: (B, 768, N_l)
+       │     ├── 地物特征: (B, 768, N_g)
+       │     └── 空间特征: (B, 768, N_s)
+       │
+       ├── 多尺度融合 (TMEM)
+       │     └── 输出: [(B, 256, 60, 60), (B, 512, 30, 30), (B, 1024, 15, 15), (B, 1024, 15, 15)]
+       │
+       └── 分割解码器
+             └── 输出: 分割掩码 (B, 2, 480, 480)
+```
+
+## 3. 核心模块详解
+
+### 3.1 细粒度图像-文本对齐模块 (FIAM)
+
+FIAM模块嵌入在每个视觉编码阶段之后，实现早期跨模态交互。
+
+#### 3.1.1 模块结构
+```
+视觉特征 (B, H*W, C) 
+    │
+    ├── 上下文像素注意力 (PWAM)
+    │     ├── Query生成: 视觉特征 → (B, H*W, key_channels)
+    │     ├── Key/Value生成: 文本特征 → (B, N_l, key_channels)/(B, N_l, value_channels)
+    │     ├── 多头注意力计算
+    │     └── 输出: (B, H*W, C)
+    │
+    ├── 对象-位置对齐 (OPAB)
+    │     ├── 地物分支: 视觉特征 + 地物文本 → (B, H*W, C)
+    │     ├── 空间分支: 视觉特征 + 空间文本 → (B, H*W, 1)
+    │     └── 特征融合: 地物特征 ⊙ 空间注意力
+    │
+    ├── 通道调制
+    │     ├── 全局平均池化: (B, H*W, C) → (B, C)
+    │     ├── FC层: (B, C) → (B, C/8) → (B, C)
+    │     └── Sigmoid激活: 生成通道注意力权重
+    │
+    └── 残差连接: 原始特征 + 调制后特征
+```
+
+#### 3.1.2 关键技术细节
+
+##### 多头注意力机制
+```python
+# Query, Key, Value 重塑
+query = query.reshape(B, HW, num_heads, key_channels//num_heads).permute(0, 2, 1, 3)
+key = key.reshape(B, num_heads, key_channels//num_heads, N_l)
+value = value.reshape(B, num_heads, value_channels//num_heads, N_l)
+
+# 注意力分数计算
+sim_map = torch.matmul(query, key) / sqrt(key_channels)
+sim_map = sim_map + (1e4 * mask - 1e4)  # 掩码处理
+sim_map = softmax(sim_map)  # 归一化
+
+# 加权聚合
+out = torch.matmul(sim_map, value.permute(0, 1, 3, 2))
+```
+
+##### 门控机制
+```python
+# Tanh门控
+tanh_gate = tanh(FC2(ReLU(FC1(x))))
+gated_feature = tanh_gate * feature
+
+# 通道注意力
+channel_weights = sigmoid(FC2(ReLU(FC1(global_avg_pool(feature)))))
+modulated_feature = feature * channel_weights.unsqueeze(-1)
+```
+
+### 3.2 文本感知多尺度增强模块 (TMEM)
+
+TMEM模块负责融合多尺度视觉特征，并引入文本信息指导融合过程。
+
+#### 3.2.1 模块结构
+```
+多尺度特征: [(B, 256, 60, 60), (B, 512, 30, 30), (B, 1024, 15, 15), (B, 1024, 15, 15)]
+    │
+    ├── 金字塔池化聚合
+    │     ├── 所有特征下采样到最小尺寸 (15×15)
+    │     └── 通道拼接: (B, 2304, 15, 15)
+    │
+    ├── 通道降维: (B, 2304, 15, 15) → (B, 576, 15, 15)
+    │
+    ├── 文本感知变换 (TMEMBlock)
+    │     ├── LayerNorm + 文本注意力
+    │     └── LayerNorm + 前馈网络
+    │
+    ├── 通道升维: (B, 576, 15, 15) → (B, 2304, 15, 15)
+    │
+    ├── 特征拆分: [(B, 256, 15, 15), (B, 512, 15, 15), (B, 1024, 15, 15), (B, 1024, 15, 15)]
+    │
+    └── 尺度感知门控融合
+          ├── 增强特征上采样到原始尺寸
+          ├── 局部/全局特征嵌入
+          ├── 空间注意力计算
+          └── 门控融合: σ(G(A)) ⊙ A + (1-σ(G(A))) ⊙ B
+```
+
+#### 3.2.2 关键技术细节
+
+##### 空间注意力机制
+```python
+# 双注意力: 平均池化 + 最大池化
+avg_feat = mean(feature, dim=1, keepdim=True)  # (B, 1, H, W)
+max_feat, _ = max(feature, dim=1, keepdim=True)  # (B, 1, H, W)
+
+# 特征拼接和卷积
+concat_feat = cat([avg_feat, max_feat], dim=1)  # (B, 2, H, W)
+attention_map = sigmoid(Conv1x1(concat_feat))   # (B, 1, H, W)
+```
+
+##### 尺度感知门控
+```python
+# 局部和全局特征嵌入
+local_feat = BN1(Conv1x1(local_input))
+global_feat = BN2(Conv1x1(global_input))
+global_feat = interpolate(global_feat, size=local_size)  # 上采样
+
+# 门控信号生成
+gate_signal = BN3(Conv1x1(global_input))
+gate_signal = interpolate(sigmoid(gate_signal), size=local_size)
+
+# 门控融合
+output = local_feat * gate_signal + global_feat
+```
+
+### 3.3 分割解码器
+
+分割解码器采用类似FPN的结构，融合多尺度特征生成最终分割结果。
+
+#### 3.3.1 特征融合流程
+```
+Stage 4: (B, 1024, 15, 15) ──Upsample──┐
+                                          ├── Concat → (B, 2048, 30, 30) ──Conv──→ (B, 512, 30, 30)
+Stage 3: (B, 1024, 15, 15) ──────────────┘
+       │
+       ├── Upsample ──┐
+                      ├── Concat → (B, 1024, 60, 60) ──Conv──→ (B, 256, 60, 60)
+Stage 2: (B, 512, 30, 30) ─┘
+       │
+       ├── 直接拼接 → (B, 512, 60, 60) ──Conv──→ (B, 128, 60, 60)
+Stage 1: (B, 256, 60, 60) ─┘
+       │
+       └── Conv1x1 → (B, 2, 60, 60) ──Upsample──→ (B, 2, 480, 480)
+```
+
+## 4. 文本处理机制
+
+### 4.1 文本分解策略
+输入文本被分解为三类特征：
+- **上下文特征 (l)**: 完整句子描述，用于全局语义理解
+- **地物特征 (t)**: 描述目标类别词汇，用于对象识别
+- **空间特征 (p)**: 描述位置关系词汇，用于空间定位
+
+### 4.2 BERT编码处理
+```python
+# 三类特征分别通过BERT编码
+l_feats = BERT(text, attention_mask=l_mask)  # (B, N_l, 768)
+t_feats = BERT(text, attention_mask=t_mask)  # (B, N_t, 768)
+p_feats = BERT(text, attention_mask=p_mask)  # (B, N_p, 768)
+
+# 转换维度以适配注意力模块
+l_feats = l_feats.permute(0, 2, 1)  # (B, 768, N_l)
+t_feats = t_feats.permute(0, 2, 1)  # (B, 768, N_t)
+p_feats = p_feats.permute(0, 2, 1)  # (B, 768, N_p)
+```
+
+## 5. 模型特点与优势
+
+### 5.1 早期跨模态交互
+- 在每个视觉编码阶段后插入FIAM模块
+- 文本信息早期介入视觉特征提取过程
+- 相比后期融合，能更有效地引导视觉特征学习
+
+### 5.2 细粒度文本分解
+- 将文本分解为多个子任务分别处理
+- 不同类型特征针对性地参与不同对齐过程
+- 提升图像-文本对齐的精度和鲁棒性
+
+### 5.3 文本引导的多尺度融合
+- 利用文本信息动态调整各尺度特征的重要性
+- 通过注意力机制实现自适应特征融合
+- 更好地适应不同文本描述的分割需求
+
+### 5.4 深层特征保持机制
+- Stage 3和Stage 4均输出15×15特征图
+- 维持高维特征表示（1024通道）
+- 控制计算复杂度的同时保留丰富语义信息
+
+## 6. 训练与推理
+
+### 6.1 训练配置
+- **输入尺寸**: 480×480
+- **优化器**: AdamW
+- **损失函数**: Dice Loss + Binary Cross Entropy
+- **学习率**: 5e-5 (RefSegRS) / 3e-5 (RRSIS-D)
+- **训练轮数**: 60 (RefSegRS) / 40 (RRSIS-D)
+
+### 6.2 推理流程
+1. 图像和文本输入预处理
+2. 通过视觉和文本编码器提取特征
+3. 多阶段FIAM模块进行特征对齐
+4. TMEM模块融合多尺度特征
+5. 分割解码器生成最终掩码
+6. 上采样至原始图像尺寸输出
+
+## 7. 总结
+
+FIANet通过精心设计的跨模态对齐机制，在遥感图像指代表达分割任务中实现了卓越性能。其核心创新包括：
+
+1. **层次化的对齐策略**：在多个层级实现图像-文本对齐
+2. **细粒度的文本理解**：将文本分解为多个子任务分别处理
+3. **动态的特征融合**：利用文本信息指导多尺度特征融合
+4. **高效的架构设计**：平衡性能和计算复杂度
+
+这些设计使得FIANet能够准确理解复杂的文本描述，并在复杂遥感场景中精确定位目标区域，为遥感图像分析提供了有力工具。
+
 # FIANet 模型架构详解：Backbone改进位置与原理分析
 
 ## 一、整体架构概览
