@@ -1,5 +1,9 @@
 # SAM3架构数据流与机制详尽分析笔记
 
+## SAM3可能存在的解决方案
+### [SC-CLIP解决异常patch token](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SC-CLIPCode.md#sam3-sc-clip%E8%9E%8D%E5%90%88%E7%9A%84%E5%85%A8%E9%9D%A2%E5%88%86%E6%9E%90)
+
+
 ## 概述
 
 本文档对SAM3模型从输入到输出的完整数据流和机制进行详尽分析，涵盖各个网络组件的处理过程、数据形状变化以及关键技术机制。通过此分析，读者可以深入理解SAM3如何实现高质量的开放词汇分割。
