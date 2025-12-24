@@ -1670,67 +1670,6 @@ Mask Head:
 这个设计在计算效率和模型性能之间取得了良好的平衡，既减少了计算负担，又保持了较高的分割精度。
 
 
-查看TransformerEncoderFusion类的实现，了解特征融合的具体操作
-
-```toolCall::read_file::call_39c18f989b7341edb22fa6e2::INIT
-```
-
-查看TransformerEncoderLayer类的实现，了解特征融合的具体操作
-
-```toolCall::read_file::call_2337767e66fc4a4d89442e02::INIT
-```
-
-查看TransformerEncoderLayer类的完整forward方法
-
-```toolCall::read_file::call_0ef26112b8514091ac5e2ec9::INIT
-```
-
-查看TransformerDecoder类的实现，了解解码器操作
-
-```toolCall::read_file::call_4c2e00a992cf4a07bd11886f::INIT
-```
-
-查看DecoderLayer类的实现，了解解码器层的具体操作
-
-```toolCall::read_file::call_e7aa772af23b43758b94b1e9::INIT
-```
-
-继续查看DecoderLayer类的forward_pre方法
-
-```toolCall::read_file::call_2f0132309f984a69bb8dcf19::INIT
-```
-
-查看MultiScaleDeformableAttention类的实现，了解多尺度可变形注意力机制
-
-```toolCall::read_file::call_c1ba6d3b3ae94c13908c626e::INIT
-```
-
-查找多尺度可变形注意力相关文件
-
-```toolCall::search_file::call_e924e9e12f164512b1d4bd3b::INIT
-```
-
-查找注意力机制相关文件
-
-```toolCall::search_file::call_205364cb58dd4199911f897e::INIT
-```
-
-查看model_misc.py文件，了解注意力机制实现
-
-```toolCall::read_file::call_3d1e3392f3564bd7a14b2ac7::INIT
-```
-
-查看maskformer_segmentation.py文件，了解掩码生成过程
-
-```toolCall::read_file::call_58176235d5fc4f1eba706b08::INIT
-```
-
-继续查看UniversalSegmentationHead类的forward方法
-
-```toolCall::read_file::call_91b7653059054785900bd842::INIT
-```
-
-基于对SAM3代码的深入分析，现在我将详细解释特征融合步骤中的具体操作，以及融合之后在解码器中如何进行操作并生成掩码的过程。
 
 ## 特征融合步骤中的具体操作
 
