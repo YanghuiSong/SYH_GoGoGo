@@ -179,6 +179,7 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 13. [2025 arXiv] **GeoZero: Incentivizing Reasoning from Scratch on Geospatial Scenes**[[paper]](https://www.arxiv.org/pdf/2511.22645)[[code]](https://github.com/MiliLab/GeoZero)[[让模型在没有预先标注的思维链（Chain-of-Thought, CoT） 监督下，能够自主进行地理空间推理]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/GeoZero.md)
 14. [2024 TGRS] **Exploring Fine-Grained Image-Text Alignment for Referring Remote Sensing Image Segmentation** [[paper]](https://arxiv.org/pdf/2409.13637)[[code]](https://github.com/Shaosifan/FIANet)[[通过图像-文本对齐捕捉到区分性的多模态特征]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/FIANet.md)
 15. [2025 TGRS] **A Unified Framework With Multimodal Fine-Tuning for Remote Sensing Semantic Segmentation** [[paper]](https://ieeexplore.ieee.org/document/11063320)[[code]](https://github.com/sstary/SSRS)[[融合 MMAdapterMMLoRA，让 SAM 在 DSM 数据上高效落地遥感语义分割]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/UFMT.md)
+16. [2025 ACM MM] **GeoMag:AVision-Language Model for Pixel-level Fine-Grained Remote Sensing Image Parsing** [[paper]](https://arxiv.org/pdf/2507.05887)[[GeoMag通过端到端多粒度统一框架实现从图像级到像素级的无缝解析]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/GeoMag.md)
 
 <a name="segmentation"></a>  
 ## Segmentation
