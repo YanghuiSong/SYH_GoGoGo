@@ -79,6 +79,7 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 11. [2025 TGRS] **SAM-Assisted Remote Sensing Imagery Semantic Segmentation With Object and Boundary Constraints**[[paper]](https://ieeexplore.ieee.org/document/10636322)[[code]](https://github.com/sstary/SSRS)[[利用Segment Anything Model (SAM) 的原始输出来增强遥感图像语义分割性能的简单而有效的框架]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SAM-Assisted.md)
 12. [2025 arXiv] **Evolving, Not Training: Zero-Shot Reasoning Segmentation via Evolutionary Prompting** [[paper]](https://arxiv.org/pdf/2512.24702)[[code]](https://github.com/AHideoKuzeA/Evol-SAM3)[[将MLLM的推理能力用于导航复杂的语义空间，同时保留SAM 3的稳健几何先验，避免了微调的灾难性遗忘风险]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/EVOL-SAM3.md)
 13. [2025 arXiv] **SAM3-I: Segment Anything with Instructions** [[paper]](https://arxiv.org/pdf/2512.04585)[[code]](https://github.com/debby-0527/SAM3-I) [[一种"指令感知级联适配器"，用于直接处理复杂自然语言指令，无需外部多模态模型]]（https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SAM3-I.md)
+14. [2026 arXiv] **OmniOVCD: Streamlining Open-Vocabulary Change Detection with SAM 3** [[paper]](https://arxiv.org/pdf/2601.13895v1)[[一种名为OmniOVCD的单一框架，用于开放词汇变化检测（Open-Vocabulary Change Detection, OVCD）]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/OmniOVCD.md)
 
 
 
@@ -167,6 +168,7 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 ## Change Detection
 1. [2025 arXiv] **FoBa: A Foreground-Background co-Guided Method and New Benchmark for Remote Sensing Semantic Change Detection** [[paper]](https://arxiv.org/pdf/2509.15788)[[code]](https://github.com/zmoka-zht/FoBa)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/FoBa.pdf)
 2. [2025 AAAI] **SM3Det: A Unified Model for Multi-Modal Remote Sensing Object Detection** [[paper]](https://arxiv.org/pdf/2412.20665)[[code]](https://github.com/zcablii/SM3Det)[[Datasets]](https://www.kaggle.com/datasets/greatbird/soi-det)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/tree/main/Notes)
+3. [2025 TGRS] **OCA: Object-Based Change Augmentation for Few-Shot Building Change Detection in Very High-Resolution Remote Sensing Images** [[paper]](https://ieeexplore.ieee.org/document/11059355)[[OCA通过将变化图像增强任务分解为少样本对象分类和前景-背景粘贴两个子任务]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/OCA.md)
 
 <a name="Multi_Modal"></a>  
 ## Multi-Modal(VLMs)
@@ -198,6 +200,7 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 7. [2025 CVPR] **ROS-SAM: High-Quality Interactive Segmentation for Remote Sensing Moving Object** [[paper]](https://arxiv.org/pdf/2503.12006)[[code]](https://github.com/ShanZard/ROS-SAM)[[Notes]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/ROSSAM.md)
 8. [2025 NIPS] **UniPixel: Unified Object Referring and Segmentation for Pixel-Level Visual Reasoning** [[paper]](https://arxiv.org/pdf/2509.18094)[[code]](https://github.com/PolyU-ChenLab/UniPixel)[[内统一对象指代（Referring）和分割（Segmentation）两大能力]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/UniPixel.md)
 9. [2025 NIPS] **Seg2Any: Open-set Segmentation-Mask-to-Image Generation with Precise Shape and Semantic Control**[[paper]](https://arxiv.org/pdf/2506.00596)[[code]](https://github.com/0xLDF/Seg2Any)[[这是一个掩码到图像的逆过程基于多模态扩散变换器的分割掩码到图像生成框架]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/Seg2Any.md)
+10. [2025 TGRS] **Shape Activated CAM Learning for Weakly Supervised Remote Sensing Semantic Segmentation** [[paper]](https://ieeexplore.ieee.org/document/11029207)[[针对遥感(RS)图像语义分割中的弱监督学习(WSSS)问题提出了创新性解决方案]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SACL.md)
 
 
 <a name="Object Detection"></a>  
