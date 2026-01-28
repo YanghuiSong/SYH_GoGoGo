@@ -5,13 +5,14 @@ The following is the code for reproducing recently read papers and the work curr
 2. [[上采样在遥感图像中的应用](#上采样与遥感)]
 3. [[VLM](#VLM)]
 4. [[VFM](#VFM)]
-5. [[SAM](#SAM)]
-6. [[OVSS](#OVSS)]
-7. [[Features are vital](#About_Features)]
-8. [[Remote Sensing](#Remote_Sensing)]
-9. [[Classification](#Detection)]
-10. [[Multi-Modal(VLMs)](#Multi_Modal)]
-11. [[Segmentation](#segmentation)]
+5. [[统一多传感器的遥感可扩展基础模型](#TerraFM)]
+6. [[SAM](#SAM)]
+7. [[OVSS](#OVSS)]
+8. [[Features are vital](#About_Features)]
+9. [[Remote Sensing](#Remote_Sensing)]
+10. [[Classification](#Detection)]
+11. [[Multi-Modal(VLMs)](#Multi_Modal)]
+12. [[Segmentation](#segmentation)]
        
 -----------------------------------------------------------------------------------------------
 <a name="Upsampling"></a>  
@@ -63,6 +64,10 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 <a name="VFM"></a>  
 ## VFM
 1. [2025 Meta] **DINOv3**[[paper]](https://arxiv.org/pdf/2508.10104)[[code]](https://github.com/facebookresearch/dinov3)[[DINOv3 通过引入 Gram锚定训练机制，成功解决了大规模自监督学习中密集特征退化的问题，构建了一个无需微调即可在分类、分割、检测、深度估计等多样化任务上达到最先进性能的通用视觉编码器]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/DINOv3.md)
+
+<a name="TerraFM"></a>  
+## 统一多传感器的遥感可扩展基础模型
+1. [2025 arXiv] **TerraFM: A Scalable Foundation Model for Unified Multisensor Earth Observation** [[paper]](https://arxiv.org/pdf/2506.06281)[[coder]](https://github.com/mbzuai-oryx/TerraFM)[[TerraFM是一种可扩展的自监督学习模型]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/TerraFM.md)
 
 <a name="SAM"></a>  
 ## SAM
@@ -206,6 +211,8 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 <a name="Object Detection"></a>  
 ## Object Detection
 1. [2025 ITGRS] **Dual-Stream Spectral Decoupling Distillation for Remote Sensing Object Detection** [[paper]](https://arxiv.org/pdf/2512.04413)[[code]](https://github.com/PolarAid/DS2D2?tab=readme-ov-file)[[一种新的知识蒸馏方法，专门用于遥感图像中的目标检测任务,以及在冻结SAM3骨干的前提下进行微调可能的方法]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/DS2D2.md)
+2. [2025 ISPRS] **Crowd detection using Very-Fine-Resolution satellite imagery** [[paper]](https://doi.org/10.1016/j.isprsjprs.2026.01.001)[[code]](https://github.com/Tong-777777/CrowdSat-Net)[[CrowdSat：首个VFR卫星人群检测数据集
+数据构建亮点]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/CrowdSAT.md)
 
 
 
