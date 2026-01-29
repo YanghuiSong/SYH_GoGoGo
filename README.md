@@ -13,6 +13,7 @@ The following is the code for reproducing recently read papers and the work curr
 10. [[Classification](#Detection)]
 11. [[Multi-Modal(VLMs)](#Multi_Modal)]
 12. [[Segmentation](#segmentation)]
+13. [[Agriculture RS Images](#Agriculture)]
        
 -----------------------------------------------------------------------------------------------
 <a name="Upsampling"></a>  
@@ -214,7 +215,7 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 2. [2025 ISPRS] **Crowd detection using Very-Fine-Resolution satellite imagery** [[paper]](https://doi.org/10.1016/j.isprsjprs.2026.01.001)[[code]](https://github.com/Tong-777777/CrowdSat-Net)[[CrowdSat：首个VFR卫星人群检测数据集
 数据构建亮点]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/CrowdSAT.md)
 
-
-
-
+<a name="Agriculture"></a>  
+## Agriculture Remote Sensing Images
+1. [2025 TGRS] **Detection of Tea Leaf Blight in Low-Resolution UAV Remote Sensing Images** [[paper]](https://ieeexplore.ieee.org/document/10345618)[[基于低分辨率无人机遥感图像的茶叶叶斑病检测]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/TLB.md)
 
