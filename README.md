@@ -219,4 +219,5 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 <a name="Agriculture"></a>  
 ## Agriculture Remote Sensing Images
 1. [2025 TGRS] **Detection of Tea Leaf Blight in Low-Resolution UAV Remote Sensing Images** [[paper]](https://ieeexplore.ieee.org/document/10345618)[[基于低分辨率无人机遥感图像的茶叶叶斑病检测]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/TLB.md)
+2. [2024 arXiv] **PlantSeg: A Large-Scale In-the-wild Dataset for Plant Disease Segmentation** [[paper]](https://arxiv.org/pdf/2409.04038)[[code]](https://github.com/tqwei05/PlantSeg)
 
