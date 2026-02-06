@@ -87,6 +87,8 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 13. [2025 arXiv] **SAM3-I: Segment Anything with Instructions** [[paper]](https://arxiv.org/pdf/2512.04585)[[code]](https://github.com/debby-0527/SAM3-I) [[一种"指令感知级联适配器"，用于直接处理复杂自然语言指令，无需外部多模态模型]]（https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SAM3-I.md)
 14. [2026 arXiv] **OmniOVCD: Streamlining Open-Vocabulary Change Detection with SAM 3** [[paper]](https://arxiv.org/pdf/2601.13895v1)[[一种名为OmniOVCD的单一框架，用于开放词汇变化检测（Open-Vocabulary Change Detection, OVCD）]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/OmniOVCD.md)
 15. [2025 arXiv] **TextRegion: Text-Aligned Region Tokens from Frozen Image-Text Models** [[paper]](https://arxiv.org/pdf/2505.23769)[[code]](https://github.com/avaxiao/TextRegion)[[提出了一种简单、有效且无需训练的框架，将图像-文本模型与SAM2结合，生成文本对齐的区域标记]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/TextRegion.md)[[文本对齐区域令牌生成框架]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/TextRegionCode.md)
+16. [2025 arXiv] **TopoLoRA-SAM: Topology-Aware Parameter-Efficient Adaptation of Foundation Segmenters for Thin-Structure and Cross-Domain Binary Semantic Segmentation** [[paper]](https://scholar.google.com/scholar?hl=zh-CN&as_sdt=0%2C5&q=TopoLoRA-SAM%3A+Topology-Aware+Parameter-Efficient+Adaptation+of+Foundation+Segmenters+for+Thin-Structure+and+Cross-Domain+Binary+Semantic+Segmentation&btnG=)[[code]](https://github.com/salimkhazem/Seglab)[[拓扑感知的参数高效适应方法用于细结构和跨域二元语义分割]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/TopoLoRA-SAM.md)
+17. [2025 ACM MM] **Remotesam: Towards segment anything for earth observation** [[paper]](https://scholar.google.com/scholar?hl=zh-CN&as_sdt=0%2C5&q=RemoteSAM%3A+Towards+Segment+Anything+for+Earth+Observation&btnG=) [[code]](https://github.com/1e12Leon/RemoteSAM) 
 
 
 
@@ -212,9 +214,13 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 
 <a name="Object Detection"></a>  
 ## Object Detection
-1. [2025 ITGRS] **Dual-Stream Spectral Decoupling Distillation for Remote Sensing Object Detection** [[paper]](https://arxiv.org/pdf/2512.04413)[[code]](https://github.com/PolarAid/DS2D2?tab=readme-ov-file)[[一种新的知识蒸馏方法，专门用于遥感图像中的目标检测任务,以及在冻结SAM3骨干的前提下进行微调可能的方法]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/DS2D2.md)
-2. [2025 ISPRS] **Crowd detection using Very-Fine-Resolution satellite imagery** [[paper]](https://doi.org/10.1016/j.isprsjprs.2026.01.001)[[code]](https://github.com/Tong-777777/CrowdSat-Net)[[CrowdSat：首个VFR卫星人群检测数据集
+1. [2025 TGRS] **Dual-Stream Spectral Decoupling Distillation for Remote Sensing Object Detection** [[paper]](https://arxiv.org/pdf/2512.04413)[[code]](https://github.com/PolarAid/DS2D2?tab=readme-ov-file)[[一种新的知识蒸馏方法，专门用于遥感图像中的目标检测任务,以及在冻结SAM3骨干的前提下进行微调可能的方法]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/DS2D2.md)
+2. [2025 TGRS] **RemoteDPL: A Semi-supervised Object Detector with Dense Pseudo-Labels for Remote Sensing** [[paper]](https://scholar.google.com/scholar?hl=zh-CN&as_sdt=0%2C5&q=RemoteDPL%3A+A+Semi-supervised+Object+Detector+with+Dense+Pseudo-Labels+for+Remote+Sensing&btnG=) [[code]](https://github.com/SYLan2019/RemoteDPL) [[一种基于密集伪标签的遥感图像半监督目标检测方法]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/RemoteDPL.md)
+3. [2025 ISPRS] **Crowd detection using Very-Fine-Resolution satellite imagery** [[paper]](https://doi.org/10.1016/j.isprsjprs.2026.01.001)[[code]](https://github.com/Tong-777777/CrowdSat-Net)[[CrowdSat：首个VFR卫星人群检测数据集
 数据构建亮点]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/CrowdSAT.md)
+
+
+
 
 <a name="Agriculture"></a>  
 ## Agriculture Remote Sensing Images
