@@ -1,6 +1,6 @@
 # 分析Concept Bank的代码
 ## 运行Concept Bank得到的新的概念库文件
-四个遥感数据均是按照https://github.com/likyoo/SegEarth-OV/blob/main/dataset_prepare.md所给的数据处理文件和教程完成的处理
+四个遥感数据均是按照[SegEarth](https://github.com/likyoo/SegEarth-OV/blob/main/dataset_prepare.md)所给的数据处理文件和教程完成的处理
 
 ```python
 python sam3_concept_bank.py   --users "loveda=configs/cfg_loveda.py,potsdam=configs/cfg_potsdam.py,vaihingen=configs/cfg_vaihingen.py,isaid=configs/cfg_isaid.py"   --split train   --checkpoint_path /data/public/sam3/sam3.pt   --bpe_path /data/public/sam3/assets/bpe_simple_vocab_16e6.txt.gz   --pad_ratio 0.05   --tau_w 0.15   --bg_thr_mode dice   --output_pt "./configs/concept_bank/new_cb_sam3_rs.pt"
@@ -49,6 +49,7 @@ isaid:Select(r0): 100%|███████████████████
 [PROFILE][ALL USERS] Total build time: 7.54m
 ```
 ## 使用新的概念库完成评估
+以下是我重新完成概念库的训练得到的结果
 ```python
 =============== Evaluation Summary ===============
 Dataset           aAcc         mIoU         mAcc       
@@ -56,12 +57,13 @@ Dataset           aAcc         mIoU         mAcc
 loveda           62.7000      47.9100      64.3900     
 potsdam          74.1300      57.5600      73.7200     
 vaihingen        82.7000      63.6400      80.4700     
-isaid            95.5300      6.6100       53.5800     
+isaid            96.2100      32.3200      56.3400     
 --------------------------------------------------
-MEAN             78.7650      43.9300      68.0400     
+MEAN             78.9350      50.3575      68.7300          
 ```
 不难看出自行训练得到的概念库与原始的概念库在除了vaihingen数据集之外性能之间差异明显
 
+以下是原作者的结果
 ```python
 =============== Evaluation Summary ===============
 Dataset           aAcc         mIoU         mAcc       
