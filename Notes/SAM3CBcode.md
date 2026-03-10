@@ -285,3 +285,527 @@ User count difference: 0
 Detailed differences would require examining the specific user data shown above.
 PS D:\CodeReading\ConceptBank> 
 ```
+
+# 一种可能有用的思路
+下面是一份**面向代码修改/重构的完整提示词（Prompt）**。
+它的目标是：**在不进行训练的情况下，仅在推理阶段实现所有模块**，并将你之前设计的：
+
+* **GT/点提示先验**
+* **多义文本扩展**
+* **visual-text prototype bank**
+* **prototype attention**
+* **pixel-prototype matching**
+
+全部整合进 **SAM3 推理 pipeline**。
+
+这份提示词可以直接给 **代码生成模型或开发者**用于实现代码修改。
+
+---
+
+# SAM3 推理阶段增强模块代码实现提示词
+
+## 目标
+
+对现有 **SAM3 语义分割推理代码**进行修改，实现一个 **完全 training-free 的推理增强框架**：
+
+**Point-Prior Prototype Prompting for SAM3**
+
+要求：
+
+1. **所有模块仅在推理阶段运行**
+2. **不修改 SAM3 encoder 权重**
+3. **仅新增推理模块**
+4. **兼容输入尺寸 1008×1008**
+5. **利用扩展同义词文件构建文本语义空间**
+
+---
+
+# 一、需要读取的配置文件
+
+基础类别文件：
+
+```
+D:\CodeReading\SAM3-TEXTOP\configs\cls_vaihingen.txt
+```
+
+内容：
+
+```
+road
+building
+grass
+tree
+car
+clutter
+```
+
+扩展同义词文件：
+
+```
+D:\CodeReading\SAM3-TEXTOP\configs\cls_vaihingen_ex.txt
+```
+
+示例：
+
+```
+road,highway, street, avenue, lane, path, trail, driveway, expressway, boulevard
+building,house, office, factory, warehouse, skyscraper, apartment, residential building, commercial structure, industrial building
+grass,lawn, meadow, pasture, grassland, turf, herbaceous cover, green vegetation, open field
+tree,trees, forest, woodland, grove, canopy, shrub, timber, arboreal cover
+car,vehicle, automobile, sedan, passenger car, compact car, truck, bus, commercial vehicle, motorcycle
+clutter,unclassified, background, void, noise, unknown region, non-feature, disorganized pixels, unclassified area
+```
+
+解析规则：
+
+* 第一项为 **主类别**
+* 后续为 **同义词集合**
+
+构建结构：
+
+```
+{
+ road: [road, highway, street ...],
+ building: [...]
+}
+```
+
+---
+
+# 二、整体系统结构
+
+在现有 SAM3 推理代码中新增模块：
+
+```
+sam3_textop/
+│
+├── sam3_model
+│
+├── prototype
+│   ├── prototype_builder.py
+│   ├── prototype_bank.py
+│
+├── text
+│   ├── synonym_parser.py
+│   ├── text_encoder.py
+│
+├── prompt
+│   ├── point_sampler.py
+│
+├── inference
+│   ├── prototype_attention.py
+│   ├── pixel_proto_match.py
+│
+└── sam3_enhanced_segmentor.py
+```
+
+最终入口：
+
+```
+EnhancedSAM3Segmentor
+```
+
+---
+
+# 三、模块1：同义词解析模块
+
+文件：
+
+```
+synonym_parser.py
+```
+
+功能：
+
+读取 `cls_vaihingen_ex.txt` 并构建同义词字典。
+
+实现逻辑：
+
+```
+读取文件
+按行解析
+按逗号分割
+strip空格
+构建 dict
+```
+
+返回结构：
+
+```
+class_synonyms = {
+ "road": ["road","highway","street"...],
+ "building":[...]
+}
+```
+
+---
+
+# 四、模块2：文本 embedding 构建
+
+文件：
+
+```
+text_encoder.py
+```
+
+使用：
+
+```
+CLIP text encoder
+```
+
+流程：
+
+```
+for class in class_synonyms:
+
+    for synonym in synonyms:
+
+        embedding = text_encoder(synonym)
+
+    class_text_embedding = mean(all_synonym_embeddings)
+```
+
+得到：
+
+```
+text_prototypes
+```
+
+结构：
+
+```
+text_prototypes =
+
+C × D
+```
+
+其中：
+
+```
+C = 类别数
+D = embedding dim
+```
+
+---
+
+# 五、模块3：点提示生成（推理阶段）
+
+文件：
+
+```
+point_sampler.py
+```
+
+目标：
+
+利用 **GT mask** 生成 **点提示**。
+
+规则：
+
+1. 对每个类别 mask
+2. 进行 **mask erosion**
+3. 在内部采样 **K 个点**
+
+推荐：
+
+```
+K = 5
+```
+
+算法：
+
+```
+mask -> erode
+mask_pixels -> random sampling
+```
+
+输出：
+
+```
+points =
+
+{
+ class_id :
+    [(x1,y1),(x2,y2)...]
+}
+```
+
+---
+
+# 六、模块4：SAM3 区域视觉 prototype 提取
+
+文件：
+
+```
+prototype_builder.py
+```
+
+流程：
+
+1. 输入：
+
+```
+image
+points
+```
+
+2. 调用 SAM3：
+
+```
+SAM3(image, point_prompt)
+```
+
+3. 获取：
+
+```
+pixel_embedding
+mask
+```
+
+4. 计算区域特征：
+
+```
+visual_proto = mean(pixel_embedding[mask])
+```
+
+输出：
+
+```
+visual_prototypes
+```
+
+结构：
+
+```
+C × D
+```
+
+---
+
+# 七、模块5：visual-text prototype 融合
+
+文件：
+
+```
+prototype_bank.py
+```
+
+融合方式：
+
+```
+p_c = α * visual_proto + (1-α) * text_proto
+```
+
+推荐：
+
+```
+α = 0.7
+```
+
+输出：
+
+```
+prototype_bank
+
+C × D
+```
+
+---
+
+# 八、模块6：Prototype Attention
+
+文件：
+
+```
+prototype_attention.py
+```
+
+目的：
+
+利用 prototype 强化 pixel embedding。
+
+输入：
+
+```
+pixel_embedding
+
+B × C × H × W
+```
+
+处理：
+
+```
+reshape -> N × D
+```
+
+计算 attention：
+
+```
+A = softmax(pixel @ prototype^T)
+```
+
+更新 pixel：
+
+```
+pixel_refined = pixel + A @ prototype
+```
+
+恢复：
+
+```
+B × C × H × W
+```
+
+---
+
+# 九、模块7：Pixel-Prototype Matching
+
+文件：
+
+```
+pixel_proto_match.py
+```
+
+输入：
+
+```
+pixel_embedding
+prototype_bank
+```
+
+计算：
+
+```
+score_c = cosine(pixel , prototype_c)
+```
+
+输出：
+
+```
+logits
+
+C × H × W
+```
+
+最终：
+
+```
+seg_map = argmax(logits)
+```
+
+---
+
+# 十、增强 SAM3 Segmentor
+
+文件：
+
+```
+sam3_enhanced_segmentor.py
+```
+
+新增 pipeline：
+
+```
+def inference(image, gt_mask=None):
+
+    1 parse synonyms
+    2 build text prototypes
+
+    if gt_mask exists:
+
+        3 sample points
+        4 build visual prototypes
+
+    5 fuse prototype bank
+
+    6 SAM3 image encoder
+
+    7 prototype attention
+
+    8 pixel-prototype matching
+
+    9 output segmentation
+```
+
+---
+
+# 十一、推理阶段完整流程
+
+```
+image
+ │
+ │
+SAM3 encoder
+ │
+pixel embedding
+ │
+ │
+prototype attention
+ │
+ │
+pixel ↔ prototype similarity
+ │
+ │
+argmax
+ │
+ │
+semantic segmentation
+```
+
+---
+
+# 十二、重要约束
+
+实现时必须遵守：
+
+1️⃣ **所有计算仅在推理阶段进行**
+
+禁止：
+
+```
+backpropagation
+optimizer
+training loop
+```
+
+2️⃣ **SAM3 backbone 权重保持冻结**
+
+3️⃣ **输入图像固定**
+
+```
+1008 × 1008
+```
+
+4️⃣ **prototype bank 在推理时动态构建**
+
+5️⃣ **同义词仅来自**
+
+```
+cls_vaihingen_ex.txt
+```
+
+---
+
+# 十三、最终目标
+
+构建一个增强的 SAM3 推理框架：
+
+```
+Enhanced SAM3
+
+= SAM3 encoder
++ point prompt prior
++ visual-text prototype bank
++ prototype attention
++ pixel-prototype matching
+```
+
+用于：
+
+```
+training-free
+open-vocabulary
+semantic segmentation
+```
+
