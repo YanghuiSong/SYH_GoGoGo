@@ -16,6 +16,7 @@ The following is the code for reproducing recently read papers and the work curr
 13. [[Multi-Modal](#Multi_Modal)]
 14. [[Segmentation](#segmentation)]
 15. [[Agriculture RS Images](#Agriculture)]
+16. [[Lightweight](#Lightweight)]
        
 -----------------------------------------------------------------------------------------------
 <a name="Upsampling"></a>  
@@ -266,3 +267,7 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 3. [2026 ISPRS] **TasselNetV4: A vision foundation model for cross-scene, cross-scale, and cross-species plant counting** [[paper]](https://scholar.google.com/scholar?hl=zh-CN&as_sdt=0%2C5&q=TasselNetV4%3A+A+vision+foundation+model+for+cross-scene%2C+cross-scale%2C+and+cross-species+plant+counting&btnG=)[[code]](https://github.com/tiny-smart/tasselnetv4) [[通用的植物计数基础模型]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/TasselNetV4.md)
 4. [2024 TGRS] **A CNN-transformer network with multiscale context aggregation for fine-grained cropland change detection** [[paper]](https://scholar.google.com/scholar?hl=zh-CN&as_sdt=0%2C5&q=A+CNN-transformer+network+with+multiscale+context+aggregation+for+fine-grained+cropland+change+detection&btnG=) [[code]](https://github.com/liumency/CropLand-CD) [[DATASETS]](https://pan.baidu.com/s/1Un-bVxUm1N9IHiDOXLLHlg?pwd=miu2)[[针对农田非农业化变化检测问题，提出了一种CNN-Transformer混合网络（MSCANet）]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/MSCANet.md)
 
+
+<a name="Lightweight"></a>  
+## Lightweight
+1. [2026 ICLR] **FlashVID: Efficient Video Large Language Models via Training-free Tree-based Spatiotemporal Token Merging** [[paper]](https://scholar.google.com/scholar?hl=zh-CN&as_sdt=0%2C5&q=FlashVID%3A+Efficient+Video+Large+Language+Models+via+Training-free+Tree-based+Spatiotemporal+Token+Merging&btnG=)[[code]](https://github.com/Fanziyang-v/FlashVID)[[TSTM是FlashVID实现高效token轻量化的核心算法，它的设计动机在于更精准地捕捉视频的动态变化。]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/FlashVID.md)
