@@ -11,12 +11,13 @@ The following is the code for reproducing recently read papers and the work curr
 8. [[OVSS](#OVSS)]
 9. [[Test-Time Adaptation](#TTA)]
 10. [[Features are vital](#About_Features)]
-11. [[Remote Sensing](#Remote_Sensing)]
-12. [[Detection](#Detection)]
-13. [[Multi-Modal](#Multi_Modal)]
-14. [[Segmentation](#segmentation)]
-15. [[Agriculture RS Images](#Agriculture)]
-16. [[Lightweight](#Lightweight)]
+11. [[Prompt](#About_Prompt)
+12. [[Remote Sensing](#Remote_Sensing)]
+13. [[Detection](#Detection)]
+14. [[Multi-Modal](#Multi_Modal)]
+15. [[Segmentation](#segmentation)]
+16. [[Agriculture RS Images](#Agriculture)]
+17. [[Lightweight](#Lightweight)]
        
 -----------------------------------------------------------------------------------------------
 <a name="Upsampling"></a>  
@@ -134,6 +135,10 @@ FeatUp则是一种基于深度神经网络的图像上采样方法，它通过�
 <a name="About_Features"></a>  
 ## Features are vital
 1. [2025 CVPR] **DFM:Differentiable Feature Matching for Anomaly Detection**[[paper]](https://openaccess.thecvf.com/content/CVPR2025/papers/Wu_DFM_Differentiable_Feature_Matching_for_Anomaly_Detection_CVPR_2025_paper.pdf)
+
+< a name="About_Prompt"></a>
+## Prompt
+[[2026 CVPR]] **Vocabulary Scaling Law: Tuning Open-vocabulary Predictors for Their Openness** [[paper]](https://openaccess.thecvf.com/content/CVPR2026/papers/Chen_Vocabulary_Scaling_Law_Tuning_Open-vocabulary_Predictors_for_Their_Openness_CVPR_2026_paper.pdf) [[解决模型在微调后，面对现实开放世界中词汇表动态扩展时，零样本泛化能力下降以及已知类抗干扰能力下降的问题]](https://github.com/YanghuiSong/SYH_GoGoGo/blob/main/Notes/SVFT.md)
 
 <a name="Remote_Sensing"></a>  
 ## Remote Sensing
