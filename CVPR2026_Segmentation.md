@@ -194,7 +194,7 @@
         </ul>
       </td>
       <td align="center"><a href="https://openaccess.thecvf.com/content/CVPR2026/papers/Wu_SkySense-VITA_Towards_Universal_In-context_Segmentation_of_Multi-modal_Remote_Sensing_Imagery_CVPR_2026_paper.pdf">PDF</a></td>
-      <td align="center"><sub>暂未公开</sub></td>
+      <td align="center"><a href="https://kang-wu.github.io/SkySense-VITA/">GitHub</a></td>
     </tr>
     <tr valign="top">
       <td align="center">14</td>
